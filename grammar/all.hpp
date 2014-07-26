@@ -1,3 +1,4 @@
+#include "grammar/grammar.hpp"
 #include "grammar/literal.hpp"
 #include "grammar/non_terminal.hpp"
 #include "grammar/production.hpp"

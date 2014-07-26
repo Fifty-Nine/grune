@@ -1,4 +1,5 @@
 add_library(grammar 
+    grammar.cpp
     literal.cpp
     non_terminal.cpp
     production.cpp
