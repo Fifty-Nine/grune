@@ -3,10 +3,11 @@
 
 #include <list>
 
-#include "grammar/non_terminal.hpp"
-
 namespace grammar 
 {
+
+class non_terminal;
+class symbol;
 
 class production
 {
@@ -21,6 +22,6 @@ private:
     std::list<symbol*> m_to;
 };
 
-};
+}
 
 #endif /* GRAMMAR_PRODUCTION_HPP */
