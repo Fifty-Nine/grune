@@ -3,6 +3,7 @@ add_library(grammar
     symbol.cpp 
     terminal.cpp 
     non_terminal.cpp
+    production.cpp
 )
 
 target_compile_options(grammar PUBLIC "-std=c++11")
