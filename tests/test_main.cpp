@@ -4,8 +4,20 @@
 
 using namespace CppUnit;
 
-int main() {
-    TextUi::TestRunner runner;
+CompilerOutputter *getOutputter(TestResultCollector& collector)
+{
+    CompilerOutputter *result = 
+        new CompilerOutputter(&collector, std::cerr);
+
+    result->setLocationFormat("%p:%l:");
+
+    return result;
+}
+
+int main() 
+{
+    TextTestRunner runner;
     runner.addTest(TestFactoryRegistry::getRegistry().makeTest());
-    return !runner.run();
+    runner.setOutputter(getOutputter(runner.result()));
+    return !runner.run("", false, true, false);
 }
