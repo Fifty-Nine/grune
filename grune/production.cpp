@@ -23,7 +23,7 @@ production::production() :
 production::production(
     non_terminal *from, 
     const std::list<sequence>& to) : 
-    m_from { from }, m_to(to)
+    m_from({ from }), m_to(to)
 {
 }
 
