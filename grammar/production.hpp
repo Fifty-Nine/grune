@@ -12,7 +12,7 @@ class production
 {
 public:
     production();
-    production(non_terminal* from, std::initializer_list<symbol*> to);
+    production(non_terminal* from, std::initializer_list<symbol*> to = {});
 
     bool initialized() const;
 
