@@ -1,5 +1,6 @@
 #include "grammar/production.hpp"
 
+#include <algorithm>
 #include <sstream>
 
 #include "grammar/non_terminal.hpp"
@@ -64,5 +65,19 @@ std::string production::to_string() const
     }
 
     return result.str();
+}
+
+/*
+ * Test whether the right-hand side of this production is always a sentence.
+ * Note that even if this is true, applying this production to a sequence
+ * may result in a sequence with non-terminals, since the whole input will
+ * probably not be replaced.
+ */
+bool production::is_terminal() const
+{
+    return all_of(
+        m_to.begin(), m_to.end(), 
+        [](const sequence& s) { return grammar::is_terminal(s); }
+    );
 }
 

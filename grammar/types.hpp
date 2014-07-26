@@ -22,6 +22,7 @@ std::string to_string(const production& p);
 bool is_terminal(const sequence& s);
 bool is_terminal(const sentence& s);
 bool is_terminal(const symbol& s);
+bool is_terminal(const production& p);
 
 }
 

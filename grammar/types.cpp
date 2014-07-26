@@ -61,3 +61,7 @@ bool grammar::is_terminal(const symbol& s)
     return s.is_terminal();
 }
 
+bool grammar::is_terminal(const production& p)
+{
+    return p.is_terminal();
+}

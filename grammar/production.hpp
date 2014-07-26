@@ -22,6 +22,7 @@ public:
     bool initialized() const;
 
     std::string to_string() const;
+    bool is_terminal() const;
 
 private:
     sequence m_from;
