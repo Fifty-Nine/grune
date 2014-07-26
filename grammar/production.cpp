@@ -1,7 +1,10 @@
 #include "grammar/production.hpp"
 
-namespace grammar
-{
+#include <sstream>
+
+#include "grammar/non_terminal.hpp"
+
+using namespace grammar;
 
 /*
  * Create a null production.
@@ -30,4 +33,24 @@ bool production::initialized() const
     return m_from != nullptr;
 }
 
+/*
+ * Pretty print the production.
+ */
+std::string production::to_string() const
+{
+    std::ostringstream result;
+    result << m_from->to_string();
+    result << " = ";
+
+    auto it = m_to.begin();
+
+    while (true)
+    {
+        result << (*it)->to_string();
+        if (++it == m_to.end()) break;
+        result << " ";
+    }
+
+    return result.str();
 }
+

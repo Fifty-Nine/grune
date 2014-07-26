@@ -2,6 +2,7 @@
 #define GRAMMAR_PRODUCTION_HPP
 
 #include <list>
+#include <string>
 
 namespace grammar 
 {
@@ -16,6 +17,8 @@ public:
     production(non_terminal* from, std::initializer_list<symbol*> to = {});
 
     bool initialized() const;
+
+    std::string to_string() const;
 
 private:
     non_terminal* m_from;
