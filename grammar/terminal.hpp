@@ -8,6 +8,8 @@ namespace grammar
 
 class terminal : public symbol
 {
+public:
+    virtual bool is_terminal() const { return true; }
 };
 
 }

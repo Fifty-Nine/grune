@@ -42,3 +42,22 @@ std::string grammar::to_string(const production& p)
 {
     return p.to_string();
 }
+
+bool grammar::is_terminal(const sequence& s)
+{
+    return all_of(
+        s.begin(), s.end(), 
+        [](symbol* sym) { return is_terminal(*sym); }
+    );
+}
+
+bool grammar::is_terminal(const sentence& s)
+{
+    return true;
+}
+
+bool grammar::is_terminal(const symbol& s)
+{
+    return s.is_terminal();
+}
+

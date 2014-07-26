@@ -1,6 +1,7 @@
 add_executable(tests 
     test_main.cpp
     literal_tests.cpp
+    misc_tests.cpp
     non_terminal_tests.cpp
     production_tests.cpp
 )

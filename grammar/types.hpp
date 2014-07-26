@@ -19,6 +19,10 @@ std::string to_string(const sentence& s);
 std::string to_string(const symbol& s);
 std::string to_string(const production& p);
 
+bool is_terminal(const sequence& s);
+bool is_terminal(const sentence& s);
+bool is_terminal(const symbol& s);
+
 }
 
 #endif /* GRAMMAR_TYPES_H */
