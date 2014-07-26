@@ -1,9 +1,9 @@
-#ifndef GRAMMAR_NON_TERMINAL_HPP
-#define GRAMMAR_NON_TERMINAL_HPP
+#ifndef GRUNE_NON_TERMINAL_HPP
+#define GRUNE_NON_TERMINAL_HPP
 
-#include "grammar/symbol.hpp"
+#include "grune/symbol.hpp"
 
-namespace grammar 
+namespace grune 
 {
 
 class non_terminal : public symbol
@@ -20,4 +20,4 @@ private:
 
 } 
 
-#endif /* GRAMMAR_NON_TERMINAL_HPP */
+#endif /* GRUNE_NON_TERMINAL_HPP */

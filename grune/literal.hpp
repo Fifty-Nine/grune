@@ -1,11 +1,11 @@
-#ifndef LITERAL_H
-#define LITERAL_H
+#ifndef GRUNE_LITERAL_H
+#define GRUNE_LITERAL_H
 
 #include <string>
 
-#include "grammar/terminal.hpp"
+#include "grune/terminal.hpp"
 
-namespace grammar
+namespace grune
 {
 
 class literal : public terminal
@@ -22,4 +22,4 @@ private:
 
 }
 
-#endif /* LITERAL_H */
+#endif /* GRUNE_LITERAL_H */

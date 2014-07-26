@@ -1,12 +1,12 @@
-#include "grammar/production.hpp"
+#include "grune/production.hpp"
 
 #include <algorithm>
 #include <sstream>
 
-#include "grammar/non_terminal.hpp"
-#include "grammar/types.hpp"
+#include "grune/non_terminal.hpp"
+#include "grune/types.hpp"
 
-using namespace grammar;
+using namespace grune;
 
 /*
  * Create a null production.
@@ -52,14 +52,14 @@ bool production::initialized() const
 std::string production::to_string() const
 {
     std::ostringstream result;
-    result << grammar::to_string(m_from);
+    result << grune::to_string(m_from);
     result << " = ";
 
     auto it = m_to.begin();
 
     while (true)
     {
-        result << grammar::to_string(*it);
+        result << grune::to_string(*it);
         if (++it == m_to.end()) break;
         result << " | ";
     }
@@ -77,7 +77,7 @@ bool production::is_terminal() const
 {
     return all_of(
         m_to.begin(), m_to.end(), 
-        [](const sequence& s) { return grammar::is_terminal(s); }
+        [](const sequence& s) { return grune::is_terminal(s); }
     );
 }
 

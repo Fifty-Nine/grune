@@ -1,10 +1,10 @@
-#ifndef GRAMMAR_GRAMMAR_H
-#define GRAMMAR_GRAMMAR_H
+#ifndef GRUNE_GRAMMAR_H
+#define GRUNE_GRAMMAR_H
 
 #include <list>
 #include <string>
 
-namespace grammar
+namespace grune
 {
 
 class production;
@@ -23,4 +23,4 @@ private:
 
 }
 
-#endif /* GRAMMAR_GRAMMAR_H */
+#endif /* GRUNE_GRAMMAR_H */

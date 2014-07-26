@@ -1,7 +1,7 @@
 #include "tests/tests.hpp"
-#include "grammar/literal.hpp"
+#include "grune/literal.hpp"
 
-using namespace grammar;
+using namespace grune;
 
 class literal_tests : public CppUnit::TestFixture 
 {

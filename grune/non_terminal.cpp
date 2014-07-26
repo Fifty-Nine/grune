@@ -1,6 +1,6 @@
 #include "non_terminal.hpp"
 
-using namespace grammar;
+using namespace grune;
 
 non_terminal::non_terminal(const std::string &identifier) : 
     m_identifier(identifier)

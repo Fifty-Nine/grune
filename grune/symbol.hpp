@@ -1,9 +1,9 @@
-#ifndef GRAMMAR_SYMBOL_HPP
-#define GRAMMAR_SYMBOL_HPP
+#ifndef GRUNE_SYMBOL_HPP
+#define GRUNE_SYMBOL_HPP
 
 #include <string>
 
-namespace grammar 
+namespace grune 
 {
 
 class symbol 
@@ -22,4 +22,4 @@ public:
 
 };
 
-#endif /* GRAMMAR_SYMBOL_HPP */
+#endif /* GRUNE_SYMBOL_HPP */

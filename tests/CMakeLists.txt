@@ -6,11 +6,11 @@ add_executable(tests
     production_tests.cpp
 )
 
-link_directories(${GRAMMAR_BINARY_DIR}/grammar)
-target_link_libraries(tests grammar cppunit)
+link_directories(${Grune_BINARY_DIR}/grune)
+target_link_libraries(tests grune cppunit)
 
 add_custom_command(
     TARGET tests 
     POST_BUILD
-    COMMAND ${GRAMMAR_BINARY_DIR}/tests/tests
+    COMMAND ${Grune_BINARY_DIR}/tests/tests
 )

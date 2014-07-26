@@ -1,9 +1,9 @@
-#ifndef GRAMMAR_TERMINAL_HPP
-#define GRAMMAR_TERMINAL_HPP
+#ifndef GRUNE_TERMINAL_HPP
+#define GRUNE_TERMINAL_HPP
 
-#include "grammar/symbol.hpp"
+#include "grune/symbol.hpp"
 
-namespace grammar
+namespace grune
 {
 
 class terminal : public symbol
@@ -14,4 +14,4 @@ public:
 
 }
 
-#endif /* GRAMMAR_TERMINAL_HPP */
+#endif /* GRUNE_TERMINAL_HPP */

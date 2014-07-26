@@ -1,6 +1,6 @@
-#include "grammar/literal.hpp"
+#include "grune/literal.hpp"
 
-using namespace grammar;
+using namespace grune;
 
 literal::literal(const std::string &text) : 
     m_text(text)

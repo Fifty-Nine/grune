@@ -1,7 +1,7 @@
 #include "tests/tests.hpp"
-#include "grammar/non_terminal.hpp"
+#include "grune/non_terminal.hpp"
 
-using namespace grammar;
+using namespace grune;
 
 class non_terminal_tests : public CppUnit::TestFixture 
 {

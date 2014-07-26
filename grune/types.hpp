@@ -1,10 +1,10 @@
-#ifndef GRAMMAR_TYPES_H
-#define GRAMMAR_TYPES_H
+#ifndef GRUNE_TYPES_H
+#define GRUNE_TYPES_H
 
 #include <list>
 #include <string>
 
-namespace grammar
+namespace grune
 {
 
 class symbol;
@@ -26,4 +26,4 @@ bool is_terminal(const production& p);
 
 }
 
-#endif /* GRAMMAR_TYPES_H */
+#endif /* GRUNE_TYPES_H */

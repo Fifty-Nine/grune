@@ -1,12 +1,12 @@
-#ifndef GRAMMAR_PRODUCTION_HPP
-#define GRAMMAR_PRODUCTION_HPP
+#ifndef GRUNE_PRODUCTION_HPP
+#define GRUNE_PRODUCTION_HPP
 
 #include <list>
 #include <string>
 
-#include "grammar/types.hpp"
+#include "grune/types.hpp"
 
-namespace grammar 
+namespace grune 
 {
 
 class non_terminal;
@@ -31,4 +31,4 @@ private:
 
 }
 
-#endif /* GRAMMAR_PRODUCTION_HPP */
+#endif /* GRUNE_PRODUCTION_HPP */
