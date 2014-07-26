@@ -14,5 +14,5 @@ std::string literal::text() const
 
 std::string literal::to_string() const
 {
-    return m_text;
+    return "\"" + m_text + "\"";
 }
