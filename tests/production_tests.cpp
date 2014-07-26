@@ -32,6 +32,16 @@ public:
 
         std::string expected = "left = right, \"1\", \"2\"";
         CPPUNIT_ASSERT_EQUAL(expected, p.to_string());
+
+        production p2(&right, 
+            {
+                { &l1, &l2 },
+                { &left, &left }
+            }
+        );
+
+        expected = "right = \"1\", \"2\" | left, left";
+        CPPUNIT_ASSERT_EQUAL(expected, p2.to_string());
     }
 };
 
