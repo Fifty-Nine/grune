@@ -42,6 +42,17 @@ public:
 
         expected = "right = \"1\", \"2\" | left, left";
         CPPUNIT_ASSERT_EQUAL(expected, p2.to_string());
+
+        production p3(
+            { &left, &right },
+            {
+                { &l1, &right },
+                { &left, &l2 }
+            }
+        );
+
+        expected = "left, right = \"1\", right | left, \"2\"";
+        CPPUNIT_ASSERT_EQUAL(expected, p3.to_string());
     }
 };
 

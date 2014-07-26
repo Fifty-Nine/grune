@@ -11,7 +11,7 @@ using namespace grammar;
  * Create a null production.
  */
 production::production() :
-    m_from(nullptr), m_to()
+    m_from(), m_to()
 {
 }
 
@@ -22,6 +22,17 @@ production::production() :
 production::production(
     non_terminal *from, 
     const std::list<sequence>& to) : 
+    m_from { from }, m_to(to)
+{
+}
+
+/*
+ * Create a production from the given sequence to the given
+ * set of symbols.
+ */
+production::production(
+    const sequence& from, 
+    const std::list<sequence>& to) : 
     m_from(from), m_to(to)
 {
 }
@@ -31,7 +42,7 @@ production::production(
  */
 bool production::initialized() const 
 {
-    return m_from != nullptr;
+    return !m_from.empty();
 }
 
 /*
@@ -40,7 +51,7 @@ bool production::initialized() const
 std::string production::to_string() const
 {
     std::ostringstream result;
-    result << m_from->to_string();
+    result << grammar::to_string(m_from);
     result << " = ";
 
     auto it = m_to.begin();
