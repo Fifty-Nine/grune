@@ -13,7 +13,7 @@ class production_test : public CppUnit::TestFixture
 public:
     void testInitialized()
     {
-        non_terminal nt;
+        non_terminal nt("S");
         production uninit;
         production init(&nt);
 
