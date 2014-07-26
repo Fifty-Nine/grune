@@ -4,6 +4,8 @@
 #include <list>
 #include <string>
 
+#include "grammar/types.hpp"
+
 namespace grammar 
 {
 
@@ -14,7 +16,7 @@ class production
 {
 public:
     production();
-    production(non_terminal* from, std::initializer_list<symbol*> to = {});
+    production(non_terminal* from, const std::list<sequence>& to = {});
 
     bool initialized() const;
 
@@ -22,7 +24,7 @@ public:
 
 private:
     non_terminal* m_from;
-    std::list<symbol*> m_to;
+    std::list<sequence> m_to;
 };
 
 }

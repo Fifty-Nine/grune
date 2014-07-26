@@ -28,7 +28,7 @@ public:
         literal l1("1");
         literal l2("2");
 
-        production p(&left, {&right, &l1, &l2});
+        production p(&left, {{&right, &l1, &l2}});
 
         std::string expected = "left = right, \"1\", \"2\"";
         CPPUNIT_ASSERT_EQUAL(expected, p.to_string());

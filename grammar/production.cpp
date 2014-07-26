@@ -3,6 +3,7 @@
 #include <sstream>
 
 #include "grammar/non_terminal.hpp"
+#include "grammar/types.hpp"
 
 using namespace grammar;
 
@@ -20,7 +21,7 @@ production::production() :
  */
 production::production(
     non_terminal *from, 
-    std::initializer_list<symbol*> to) : 
+    const std::list<sequence>& to) : 
     m_from(from), m_to(to)
 {
 }
@@ -46,9 +47,9 @@ std::string production::to_string() const
 
     while (true)
     {
-        result << (*it)->to_string();
+        result << grammar::to_string(*it);
         if (++it == m_to.end()) break;
-        result << ", ";
+        result << " | ";
     }
 
     return result.str();
