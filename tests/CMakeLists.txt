@@ -7,3 +7,9 @@ add_executable(tests
 
 link_directories(${GRAMMAR_BINARY_DIR}/grammar)
 target_link_libraries(tests grammar cppunit)
+
+add_custom_command(
+    TARGET tests 
+    POST_BUILD
+    COMMAND ${GRAMMAR_BINARY_DIR}/tests/tests
+)
