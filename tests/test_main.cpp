@@ -1,5 +1,11 @@
 #include "grammar/all.hpp"
 
+#include "tests/tests.hpp"
+
+using namespace CppUnit;
+
 int main() {
-    return 0;
+    TextUi::TestRunner runner;
+    runner.addTest(TestFactoryRegistry::getRegistry().makeTest());
+    return !runner.run();
 }
