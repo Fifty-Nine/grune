@@ -48,7 +48,7 @@ std::string production::to_string() const
     {
         result << (*it)->to_string();
         if (++it == m_to.end()) break;
-        result << " ";
+        result << ", ";
     }
 
     return result.str();
