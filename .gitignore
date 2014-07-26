@@ -1,0 +1,9 @@
+Makefile
+CMakeFiles
+CMakeCache.txt
+*.cmake
+*.a
+*.so
+*.o
+*.ninja
+.ninja*

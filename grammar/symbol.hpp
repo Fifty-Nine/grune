@@ -1,0 +1,4 @@
+#ifndef GRAMMAR_SYMBOL_HPP
+#define GRAMMAR_SYMBOL_HPP
+
+#endif /* GRAMMAR_SYMBOL_HPP */
