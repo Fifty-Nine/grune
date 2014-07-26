@@ -1,4 +1,5 @@
 #include "tests/tests.hpp"
+#include "grammar/non_terminal.hpp"
 #include "grammar/production.hpp"
 
 using namespace grammar;
