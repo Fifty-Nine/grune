@@ -4,15 +4,16 @@
 #include <list>
 #include <string>
 
+#include "grune/grune_fwd.hpp"
+#include "grune/sequence.hpp"
+#include "grune/sentence.hpp"
+
 namespace grune
 {
 
 class symbol;
 class terminal;
 class production;
-
-typedef std::list<symbol*> sequence;
-typedef std::list<terminal*> sentence;
 
 std::string to_string(const sequence& s);
 std::string to_string(const sentence& s);

@@ -3,6 +3,8 @@ add_library(grune
     literal.cpp
     non_terminal.cpp
     production.cpp
+    sequence.cpp
+    sentence.cpp
     symbol.cpp 
     terminal.cpp 
     types.cpp

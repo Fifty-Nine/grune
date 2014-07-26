@@ -15,9 +15,14 @@ typedef std::shared_ptr<literal> literal_ptr;
 class non_terminal;
 typedef std::shared_ptr<non_terminal> non_terminal_ptr;
 
+class terminal;
+typedef std::shared_ptr<terminal> terminal_ptr;
+
 class production;
 typedef std::shared_ptr<production> production_ptr;
 
+class symbol;
+typedef std::shared_ptr<symbol> symbol_ptr;
 
 } 
 
