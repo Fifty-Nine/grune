@@ -1,6 +1,5 @@
 #include "grune/types.hpp"
 
-#include <boost/iterator/transform_iterator.hpp>
 #include <boost/algorithm/string/join.hpp>
 #include <functional>
 
@@ -17,16 +16,16 @@ std::string list_to_string(const std::list<T*>& l, const std::string& sep)
         return "\"\"";
     }
 
-    typedef std::function<std::string(T*)> Converter;
-    typedef boost::transform_iterator<Converter, decltype(l.begin())> It;
+    std::list<std::string> elems;
+    for (auto s : l)
+    {
+        if (!is_empty(*s))
+        {
+            elems.push_back(s->to_string());
+        }
+    }
 
-    Converter cvt = [](T* v) { return to_string(*v); };
-    auto range = std::make_pair(
-        It(l.begin(), cvt), 
-        It(l.end(), cvt)
-    );
-
-    return boost::algorithm::join(range, sep);
+    return boost::algorithm::join(elems, sep);
 }
 
 std::string grune::to_string(const sequence& s)

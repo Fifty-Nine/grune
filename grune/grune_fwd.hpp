@@ -24,6 +24,19 @@ typedef std::shared_ptr<production> production_ptr;
 class symbol;
 typedef std::shared_ptr<symbol> symbol_ptr;
 
+template<class T>
+auto get_ref(T t)
+    -> typename T::element_type&
+{
+    return *t.get();
+}
+
+template<class T>
+T& get_ref(T* t)
+{
+    return *t;
+}
+
 } 
 
 #endif /* GRUNE_FWD_H */

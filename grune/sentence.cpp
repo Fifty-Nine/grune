@@ -9,33 +9,36 @@ using namespace grune;
 namespace
 {
 
-void convert(const std::list<terminal_ptr>& in, sentence& out)
+template<class C>
+void filter(const C& c, sentence& out)
 {
-    std::transform(
-        in.begin(), in.end(), 
-        std::back_inserter(out),
-        [](terminal_ptr s) { return s.get(); }
-    );
+    for (auto s : c)
+    {
+        if (!get_ref(s).is_empty())
+        {
+            out.push_back(&get_ref(s));
+        }
+    }
 }
 
 }
 
-sentence::sentence(const std::list<terminal*>& seq) : 
-    base(seq)
+sentence::sentence(const std::list<terminal*>& seq)
 {
+    filter(seq, *this);
 }
 
 sentence::sentence(const std::list<terminal_ptr>& seq)
 {
-    convert(seq, *this);
+    filter(seq, *this);
 }
 
-sentence::sentence(const std::initializer_list<terminal*>& seq) : 
-    base(seq)
+sentence::sentence(const std::initializer_list<terminal*>& seq)
 {
+    filter(seq, *this);
 }
 
 sentence::sentence(const std::initializer_list<terminal_ptr>& seq)
 {
-    convert(seq, *this);
+    filter(seq, *this);
 }

@@ -15,15 +15,15 @@ class sentence_tests : public CppUnit::TestFixture
 public:
     void test_to_string()
     {
-        auto A = literal::create("a");
-        auto B = literal::create("b");
+        auto a = literal::create("a");
+        auto b = literal::create("b");
         auto c = literal::create("c");
 
-        std::list<terminal*> l1 { A.get(), B.get(), c.get() };
-        std::list<terminal_ptr> l2 { A, B, c };
+        std::list<terminal*> l1 { a.get(), b.get(), c.get() };
+        std::list<terminal_ptr> l2 { a, b, c };
 
-        sentence s1 { A, B, c };
-        sentence s2 { A.get(), B.get(), c.get() };
+        sentence s1 { a, b, c };
+        sentence s2 { a.get(), b.get(), c.get() };
         sentence s3(l1);
         sentence s4(l2);
 
@@ -33,8 +33,13 @@ public:
         CPPUNIT_ASSERT_EQUAL(expected, to_string(s3));
         CPPUNIT_ASSERT_EQUAL(expected, to_string(s4));
 
+        auto empty = literal::create();
+        sentence empty1;
+        sentence empty2 { empty };
+
         expected = "\"\"";
-        CPPUNIT_ASSERT_EQUAL(expected, to_string(sequence()));
+        CPPUNIT_ASSERT_EQUAL(expected, to_string(empty1));
+        CPPUNIT_ASSERT_EQUAL(expected, to_string(empty2));
     }
     
 };

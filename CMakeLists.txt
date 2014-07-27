@@ -14,3 +14,7 @@ add_compile_options("-std=c++11")
 add_subdirectory(grune)
 add_subdirectory(tests)
 
+add_custom_target(check
+    COMMAND ${Grune_BINARY_DIR}/tests/tests
+    DEPENDS ${Grune_BINARY_DIR}/tests/tests
+)

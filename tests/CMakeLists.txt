@@ -17,3 +17,4 @@ add_custom_command(
     POST_BUILD
     COMMAND ${Grune_BINARY_DIR}/tests/tests
 )
+

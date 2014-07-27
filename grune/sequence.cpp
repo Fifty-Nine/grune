@@ -11,33 +11,36 @@ using namespace grune;
 namespace
 {
 
-void convert(const std::list<symbol_ptr>& in, sequence& out)
+template<class C>
+void filter(const C& c, sequence& out)
 {
-    std::transform(
-        in.begin(), in.end(), 
-        std::back_inserter(out),
-        [](symbol_ptr s) { return s.get(); }
-    );
+    for (auto s : c)
+    {
+        if (!get_ref(s).is_empty())
+        {
+            out.push_back(&get_ref(s));
+        }
+    }
 }
 
 }
 
-sequence::sequence(const std::list<symbol*>& seq) : 
-   base(seq)
+sequence::sequence(const std::list<symbol*>& seq)
 {
+    filter(seq, *this);
 }
 
 sequence::sequence(const std::list<symbol_ptr>& seq)
 {
-    convert(seq, *this);
+    filter(seq, *this);
 }
     
-sequence::sequence(const std::initializer_list<symbol*>& seq) :
-    base(seq)
+sequence::sequence(const std::initializer_list<symbol*>& seq)
 {
+    filter(seq, *this);
 }
 
 sequence::sequence(const std::initializer_list<symbol_ptr>& seq) 
 {
-    convert(seq, *this);
+    filter(seq, *this);
 }
