@@ -4,22 +4,18 @@
 #include <list>
 #include <string>
 
-#include "grune/types.hpp"
+#include "grune/symbol.hpp"
 
 namespace grune 
 {
 
 class non_terminal;
-class symbol;
-
 class production
 {
 public:
     production();
-    production(non_terminal* from, const sequence_list& to = {});
+    production(const non_terminal& from, const sequence_list& to = {});
     production(const sequence& from, const sequence_list& to = {});
-    template<class... Args>
-    static production_ptr create(Args&&...);
 
     bool initialized() const;
 
@@ -31,11 +27,7 @@ private:
     sequence_list m_to;
 };
 
-template<class... Args>
-production_ptr production::create(Args&&... args)
-{
-    return std::make_shared<production>(args...);
-}
+typedef std::list<production> production_list;
 
 }
 

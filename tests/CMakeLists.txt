@@ -6,7 +6,6 @@ add_executable(tests
     non_terminal_tests.cpp
     production_tests.cpp
     sequence_tests.cpp
-    sentence_tests.cpp
 )
 
 link_directories(${Grune_BINARY_DIR}/grune)

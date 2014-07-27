@@ -14,9 +14,9 @@ class grammar
 {
 public:
     grammar(
-        const std::list<non_terminal_ptr>& non_terminals,
-        const std::list<terminal_ptr>& terminals,
-        const std::list<production_ptr>& productions,
+        const std::list<non_terminal>& non_terminals,
+        const std::list<terminal>& terminals,
+        const std::list<production>& productions,
         non_terminal *start
     );
     grammar();
@@ -25,9 +25,9 @@ public:
     std::string to_string() const;
 
 private:
-    std::list<non_terminal_ptr> m_nonterm;
-    std::list<terminal_ptr> m_term;
-    std::list<production_ptr> m_rules;
+    std::list<non_terminal> m_nonterm;
+    std::list<terminal> m_term;
+    std::list<production> m_rules;
     non_terminal *m_start;
 };
 

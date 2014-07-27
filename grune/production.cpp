@@ -21,7 +21,7 @@ production::production() :
  * set of symbols.
  */
 production::production(
-    non_terminal *from, 
+    const non_terminal& from, 
     const sequence_list& to) : 
     m_from { from }, m_to(to)
 {

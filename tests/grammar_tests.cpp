@@ -11,29 +11,29 @@ class grammar_tests : public CppUnit::TestFixture
 
     grammar test_grammar() const
     {
-        auto A = non_terminal::create("A");
-        auto B = non_terminal::create("B");
-        auto C = non_terminal::create("C");
+        non_terminal A("A");
+        non_terminal B("B");
+        non_terminal C("C");
 
-        auto a = literal::create("a");
-        auto b = literal::create("b");
-        auto c = literal::create("c");
+        literal a("a");
+        literal b("b");
+        literal c("c");
 
-        auto p1 = production::create(
-            A.get(), sequence_list { { a, B } }
+        production p1(
+            A, { { a, B } }
         );        
-        auto p2 = production::create(
-            B.get(), sequence_list { { b, C } }
+        production p2(
+            B, { { b, C } }
         );
-        auto p3 = production::create(
-            C.get(), sequence_list { { c }, { } }
+        production p3(
+            C, { { c }, { } }
         );
 
         return grammar(
             { A, B, C },
             { a, b, c },
             { p1, p2, p3 },
-            A.get()
+            &A
         );
     }
 

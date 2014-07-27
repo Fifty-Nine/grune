@@ -15,7 +15,7 @@ public:
     {
         non_terminal nt("S");
         production uninit;
-        production init(&nt);
+        production init(nt);
 
         CPPUNIT_ASSERT(!uninit.initialized());
         CPPUNIT_ASSERT(init.initialized());
@@ -28,15 +28,15 @@ public:
         literal l1("1");
         literal l2("2");
 
-        production p(&left, {{&right, &l1, &l2}});
+        production p(left, {{right, l1, l2}});
 
         std::string expected = "left = right, \"1\", \"2\"";
         CPPUNIT_ASSERT_EQUAL(expected, p.to_string());
 
-        production p2(&right, 
+        production p2(right, 
             {
-                { &l1, &l2 },
-                { &left, &left }
+                { l1, l2 },
+                { left, left }
             }
         );
 
@@ -44,10 +44,10 @@ public:
         CPPUNIT_ASSERT_EQUAL(expected, p2.to_string());
 
         production p3(
-            { &left, &right },
+            { left, right },
             {
-                { &l1, &right },
-                { &left, &l2 }
+                { l1, right },
+                { left, l2 }
             }
         );
 

@@ -1,6 +1,7 @@
 #ifndef GRUNE_SYMBOL_HPP
 #define GRUNE_SYMBOL_HPP
 
+#include <list>
 #include <memory>
 #include <string>
 
@@ -68,6 +69,36 @@ private:
     std::unique_ptr<model> m_model;
 };
 
-};
+typedef std::list<symbol> sequence;
+typedef std::list<sequence> sequence_list;
+
+template<class T>
+std::string to_string(const T& value)
+{
+    return value.to_string();
+}
+template<>
+std::string to_string<sequence>(const sequence& s);
+template<>
+std::string to_string<sequence_list>(const sequence_list& s);
+
+template<class T>
+bool is_terminal(const T& value)
+{
+    return value.is_terminal();
+}
+template<>
+bool is_terminal<sequence>(const sequence& s);
+
+template<class T>
+bool is_empty(const T& value)
+{
+    return value.is_empty();
+}
+
+template<>
+bool is_empty<sequence>(const sequence& s);
+
+}
 
 #endif /* GRUNE_SYMBOL_HPP */

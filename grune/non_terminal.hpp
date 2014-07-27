@@ -7,14 +7,15 @@
 namespace grune 
 {
 
-class non_terminal : public symbol
+class non_terminal
 {
 public:
     non_terminal(const std::string& identifier);
-    static non_terminal_ptr create(const std::string& identifier);
 
     std::string identifier() const;
-    virtual std::string to_string() const;
+    std::string to_string() const;
+    bool is_terminal() const { return false; }
+    bool is_empty() const { return false; }
 
 private:
     std::string m_identifier;

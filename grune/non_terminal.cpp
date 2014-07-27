@@ -7,11 +7,6 @@ non_terminal::non_terminal(const std::string &identifier) :
 {
 }
 
-non_terminal_ptr non_terminal::create(const std::string& identifier)
-{
-    return std::make_shared<non_terminal>(identifier);
-}
-
 std::string non_terminal::identifier() const 
 {
     return m_identifier;

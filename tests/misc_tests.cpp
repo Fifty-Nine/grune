@@ -16,9 +16,9 @@ public:
         literal lit("l");
         literal empty;
         non_terminal nt("nt");
-        sequence nt_seq { &lit, &nt };
-        sequence t_seq { &lit, &lit };
-        sentence s { &lit, &lit };
+        sequence nt_seq { lit, nt };
+        sequence t_seq { lit, lit };
+        sequence s { lit, lit };
 
         CPPUNIT_ASSERT(is_terminal(lit));
         CPPUNIT_ASSERT(is_terminal(empty));
@@ -27,8 +27,8 @@ public:
         CPPUNIT_ASSERT(is_terminal(t_seq));
         CPPUNIT_ASSERT(is_terminal(s));
 
-        production ntp { &nt, { nt_seq, t_seq } };
-        production tp { &nt, { t_seq } };
+        production ntp { nt, { nt_seq, t_seq } };
+        production tp { nt, { t_seq } };
 
         CPPUNIT_ASSERT(!is_terminal(ntp));
         CPPUNIT_ASSERT(is_terminal(tp));
