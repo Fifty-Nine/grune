@@ -23,6 +23,13 @@ public:
 
         expected = "\"\"";
         CPPUNIT_ASSERT_EQUAL(expected, to_string(sequence()));
+
+        sequence_list sl { s, { A, c, B } };
+        expected = "A, B, \"c\" | A, \"c\", B";
+        CPPUNIT_ASSERT_EQUAL(expected, to_string(sl));
+
+        expected = "\"\"";
+        CPPUNIT_ASSERT_EQUAL(expected, to_string(sequence_list()));
     }
     
 };

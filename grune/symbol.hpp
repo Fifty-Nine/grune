@@ -5,6 +5,8 @@
 #include <memory>
 #include <string>
 
+#include "grune/symbol_traits.hpp"
+
 namespace grune 
 {
 
@@ -103,32 +105,11 @@ struct symbol::model_impl<std::string> : model
 typedef std::list<symbol> sequence;
 typedef std::list<sequence> sequence_list;
 
-template<class T>
-std::string to_string(const T& value)
+template<>
+struct symbol_traits<sequence_list> : public symbol_list_traits<sequence_list>
 {
-    return value.to_string();
-}
-template<>
-std::string to_string<sequence>(const sequence& s);
-template<>
-std::string to_string<sequence_list>(const sequence_list& s);
-
-template<class T>
-bool is_terminal(const T& value)
-{
-    return value.is_terminal();
-}
-template<>
-bool is_terminal<sequence>(const sequence& s);
-
-template<class T>
-bool is_empty(const T& value)
-{
-    return value.is_empty();
-}
-
-template<>
-bool is_empty<sequence>(const sequence& s);
+    static std::string separator() { return " | "; }
+};
 
 }
 
