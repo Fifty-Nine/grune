@@ -1,6 +1,6 @@
 #include "grune/all.hpp"
 
-#include "tests/tests.hpp"
+#include "unit_tests/tests.hpp"
 
 using namespace CppUnit;
 

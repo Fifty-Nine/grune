@@ -1,4 +1,4 @@
-add_executable(tests 
+add_executable(unit_tests
     test_main.cpp
     grammar_tests.cpp
     literal_tests.cpp
@@ -9,11 +9,11 @@ add_executable(tests
 )
 
 link_directories(${Grune_BINARY_DIR}/grune)
-target_link_libraries(tests grune cppunit)
+target_link_libraries(unit_tests grune cppunit)
 
 add_custom_command(
-    TARGET tests 
+    TARGET unit_tests 
     POST_BUILD
-    COMMAND tests
+    COMMAND unit_tests 
 )
 

@@ -12,9 +12,8 @@ include_directories(${Grune_SOURCE_DIR} ${Boost_INCLUDE_DIRS})
 add_compile_options("-std=c++11")
 
 add_subdirectory(grune)
-add_subdirectory(tests)
+add_subdirectory(unit_tests)
 
 add_custom_target(check
-    COMMAND ${Grune_BINARY_DIR}/tests/tests
-    DEPENDS ${Grune_BINARY_DIR}/tests/tests
+    COMMAND unit_tests
 )

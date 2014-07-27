@@ -1,4 +1,4 @@
-#include "tests/tests.hpp"
+#include "unit_tests/tests.hpp"
 #include "grune/non_terminal.hpp"
 
 using namespace grune;
