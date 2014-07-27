@@ -29,6 +29,7 @@ bool is_terminal(const sentence& s);
 bool is_terminal(const symbol& s);
 bool is_terminal(const production& p);
 
+bool is_empty(const symbol& s);
 }
 
 #endif /* GRUNE_TYPES_H */

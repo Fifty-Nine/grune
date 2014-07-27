@@ -21,3 +21,8 @@ std::string literal::to_string() const
 {
     return "\"" + m_text + "\"";
 }
+
+bool literal::is_empty() const
+{
+    return m_text.empty();
+}

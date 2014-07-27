@@ -18,6 +18,11 @@ public:
      * Test whether this symbol is terminal.
      */
     virtual bool is_terminal() const { return false; }
+
+    /* 
+     * Test whether this symbol is the empty string.
+     */
+    virtual bool is_empty() const { return false; }
 };
 
 };

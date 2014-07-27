@@ -71,3 +71,8 @@ bool grune::is_terminal(const production& p)
 {
     return p.is_terminal();
 }
+
+bool grune::is_empty(const symbol& s)
+{
+    return s.is_empty();
+}
