@@ -77,9 +77,9 @@ private:
             m_value(value)
         { }
 
-        bool is_terminal() const { return m_value.is_terminal(); }
-        bool is_empty() const { return m_value.is_empty(); }
-        std::string to_string() const { return m_value.to_string(); }
+        bool is_terminal() const { return grune::is_terminal(m_value); }
+        bool is_empty() const { return grune::is_empty(m_value); } 
+        std::string to_string() const { return grune::to_string(m_value); } 
         model* copy() const { return new model_impl<T>(*this); }
 
         T m_value;
