@@ -1,6 +1,7 @@
 #ifndef GRUNE_SENTENCE_ITERATOR
 #define GRUNE_SENTENCE_ITERATOR
 
+#include <boost/operators.hpp>
 #include <queue>
 
 #include "grune/symbol.hpp"
@@ -12,14 +13,15 @@ class sentence_iterator :
     public std::iterator<
         std::input_iterator_tag,
         sequence
-    >
+    >, 
+    boost::equality_comparable<sentence_iterator>
 {
     void advance()
     {
         while (!m_q.empty())
         {
             sequence s = m_q.back();
-            m_q.pop();
+            m_q.pop_back();
 
             if (is_terminal(s))
             {
@@ -33,7 +35,7 @@ class sentence_iterator :
 
     void apply_all_productions(const sequence& s)
     {
-        for (auto p : m_g.productions())
+        for (auto p : m_g->productions())
         {
             enqueue(p.apply(s));
         }
@@ -41,28 +43,24 @@ class sentence_iterator :
 
     void enqueue(const sequence_list& l)
     {
-        for (auto s : l) { m_q.push(s); }
+        for (auto s : l) { m_q.push_front(s); }
     }
 
 public:
-    sentence_iterator() = default;
+    sentence_iterator() : m_g(nullptr) { }
     sentence_iterator(const grammar& g) : 
-        m_g(g)
+        m_g(&g)
     {
-        m_q.push({g.start_symbol()});
+        m_q.push_front({g.start_symbol()});
         advance();
     }
 
-    bool operator==(const sentence_iterator& other)
+    bool operator==(const sentence_iterator& other) const
     {
-        return
-            m_current == other.m_current &&
-            m_q == other.m_q;
-    }
-
-    bool operator!=(const sentence_iterator& other)
-    {
-        return !(*this == other);
+        return (at_end() && other.at_end()) ||
+            (m_g == other.m_g &&
+             m_current == other.m_current &&
+             m_q == other.m_q);
     }
 
     const sequence& operator*() const
@@ -89,9 +87,14 @@ public:
     }
 
 private:
-    grammar m_g;
+    bool at_end() const
+    {
+        return m_current.empty() && m_q.empty();
+    }
+
+    const grammar* m_g;
     sequence m_current;
-    std::queue<sequence> m_q;
+    std::list<sequence> m_q;
 };
 
 }
