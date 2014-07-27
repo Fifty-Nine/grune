@@ -32,8 +32,8 @@ class grammar_tests : public CppUnit::TestFixture
         return grammar(
             { A, B, C },
             { a, b, c },
-            { p1, p2, p3 },
-            &A
+            { p1, p2, p3 }, 
+            A
         );
     }
 

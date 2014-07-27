@@ -4,18 +4,17 @@
 
 #include "grune/non_terminal.hpp"
 #include "grune/production.hpp"
-#include "grune/terminal.hpp"
 
 using namespace grune;
 
 grammar::grammar(
-    const std::list<non_terminal>& non_terminals,
-    const std::list<terminal>& terminals,
-    const std::list<production>& productions,
-    non_terminal *start
+    const sequence& non_terminals,
+    const sequence& terminals,
+    const production_list& productions,
+    const non_terminal& start
     ) : 
-    m_nonterm(non_terminals), 
-    m_term(terminals),
+    m_non_terminals(non_terminals),
+    m_terminals(terminals),
     m_rules(productions),
     m_start(start)
 {

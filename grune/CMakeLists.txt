@@ -4,5 +4,4 @@ add_library(grune
     non_terminal.cpp
     production.cpp
     symbol.cpp 
-    terminal.cpp 
 )

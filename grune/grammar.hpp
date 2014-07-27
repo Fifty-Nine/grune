@@ -5,6 +5,7 @@
 #include <string>
 
 #include "grune/grune_fwd.hpp"
+#include "grune/symbol.hpp"
 
 namespace grune
 {
@@ -14,10 +15,10 @@ class grammar
 {
 public:
     grammar(
-        const std::list<non_terminal>& non_terminals,
-        const std::list<terminal>& terminals,
-        const std::list<production>& productions,
-        non_terminal *start
+        const sequence& non_terminals,
+        const sequence& terminals,
+        const production_list& productions,
+        const non_terminal& start
     );
     grammar();
     ~grammar();
@@ -25,10 +26,10 @@ public:
     std::string to_string() const;
 
 private:
-    std::list<non_terminal> m_nonterm;
-    std::list<terminal> m_term;
-    std::list<production> m_rules;
-    non_terminal *m_start;
+    sequence m_non_terminals;
+    sequence m_terminals;
+    production_list m_rules;
+    symbol m_start;
 };
 
 }

@@ -7,11 +7,6 @@ literal::literal(const std::string &text) :
 {
 }
 
-literal_ptr literal::create(const std::string& text)
-{
-    return std::make_shared<literal>(text);
-}
-
 std::string literal::text() const
 {
     return m_text;

@@ -2,21 +2,22 @@
 #define GRUNE_LITERAL_H
 
 #include "grune/grune_fwd.hpp"
-#include "grune/terminal.hpp"
+
+#include <string>
 
 namespace grune
 {
 
-class literal : public terminal
+class literal 
 {
 public:
     literal(const std::string &text = "");
-    static literal_ptr create(const std::string& text = "");
 
     std::string text() const;
-    virtual std::string to_string() const;
+    std::string to_string() const;
 
-    virtual bool is_empty() const;
+    bool is_empty() const;
+    bool is_terminal() const { return true; }
 
 private:
     std::string m_text;
