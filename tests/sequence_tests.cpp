@@ -32,6 +32,9 @@ public:
         CPPUNIT_ASSERT_EQUAL(expected, to_string(s2));
         CPPUNIT_ASSERT_EQUAL(expected, to_string(s3));
         CPPUNIT_ASSERT_EQUAL(expected, to_string(s4));
+
+        expected = "\"\"";
+        CPPUNIT_ASSERT_EQUAL(expected, to_string(sequence()));
     }
     
 };
