@@ -27,12 +27,14 @@ public:
         m_model(other.m_model ? other.m_model->copy() : nullptr)
     {
     }
-    
-    symbol& operator=(const symbol& other) 
+
+    symbol& operator=(const symbol& other)
     {
-        return *this = std::move(other); 
+        return *this = std::move(symbol(other));
     }
 
+    symbol& operator=(symbol&&) = default;
+    
     bool operator==(const symbol& other) const
     {
         return m_model->equal(*other.m_model);
