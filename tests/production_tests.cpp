@@ -25,8 +25,8 @@ public:
     {
         non_terminal left("left");
         non_terminal right("right");
-        literal l1("1");
-        literal l2("2");
+        symbol l1("1");
+        symbol l2("2");
 
         production p(left, {{right, l1, l2}});
 

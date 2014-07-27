@@ -1,5 +1,5 @@
 #include "tests/tests.hpp"
-#include "grune/literal.hpp"
+#include "grune/symbol.hpp"
 
 using namespace grune;
 
@@ -12,7 +12,7 @@ class literal_tests : public CppUnit::TestFixture
 public:
     void test_to_string()
     {
-        literal l("literal");
+        symbol l("literal");
         CPPUNIT_ASSERT_EQUAL(std::string("\"literal\""), l.to_string());
     }
     

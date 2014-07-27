@@ -13,8 +13,8 @@ class misc_tests : public CppUnit::TestFixture
 public:
     void test_is_terminal()
     {
-        literal lit("l");
-        literal empty;
+        symbol lit("l");
+        symbol empty;
         non_terminal nt("nt");
         sequence nt_seq { lit, nt };
         sequence t_seq { lit, lit };
@@ -36,8 +36,8 @@ public:
     
     void test_is_empty()
     {
-        literal lit("l");
-        literal empty;
+        symbol lit("l");
+        symbol empty;
         non_terminal nt("nt");
 
         CPPUNIT_ASSERT(!is_empty(lit));

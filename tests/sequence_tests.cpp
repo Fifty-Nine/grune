@@ -1,5 +1,4 @@
 #include "tests/tests.hpp"
-#include "grune/literal.hpp"
 #include "grune/non_terminal.hpp"
 #include "grune/types.hpp"
 
@@ -16,7 +15,7 @@ public:
     {
         non_terminal A("A");
         non_terminal B("B");
-        literal c("c");
+        symbol c("c");
 
         sequence s { A, B, c };
 

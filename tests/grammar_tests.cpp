@@ -15,9 +15,9 @@ class grammar_tests : public CppUnit::TestFixture
         non_terminal B("B");
         non_terminal C("C");
 
-        literal a("a");
-        literal b("b");
-        literal c("c");
+        symbol a("a");
+        symbol b("b");
+        symbol c("c");
 
         production p1(
             A, { { a, B } }

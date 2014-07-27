@@ -7,7 +7,6 @@ namespace grune
 {
 
 class grammar;
-class literal;
 class non_terminal;
 class terminal;
 class production;

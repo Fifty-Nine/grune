@@ -11,16 +11,15 @@ namespace grune
 class symbol 
 {
 public:
-    symbol() :
-        m_model(new model)
-    {
-    }
-
     template<class T>
     symbol(T arg) : 
         m_model(new model_impl<T>(arg))
     {
     }
+
+    symbol(const char * s = "") : 
+        symbol(std::string(s))
+    { }
 
     symbol(const symbol& other) :
         m_model(other.m_model->copy())
@@ -45,16 +44,16 @@ public:
 private:
     struct model
     {
-        virtual bool is_terminal() const { return false; }
-        virtual bool is_empty() const { return false; }
-        virtual std::string to_string() const { return ""; }
-        virtual model* copy() const { return new model(*this); }
+        virtual bool is_terminal() const = 0;
+        virtual bool is_empty() const = 0;
+        virtual std::string to_string() const = 0;
+        virtual model* copy() const = 0;
     };
 
     template<class T>
     struct model_impl : model
     {
-        model_impl(T value) : 
+        model_impl(const T& value) : 
             m_value(value)
         { }
 
@@ -67,6 +66,22 @@ private:
     };
 
     std::unique_ptr<model> m_model;
+};
+
+
+template<>
+struct symbol::model_impl<std::string> : model
+{
+    model_impl(const std::string& value) : 
+        m_value(value)
+    { }
+
+    bool is_terminal() const { return true; }
+    bool is_empty() const { return m_value.empty(); }
+    std::string to_string() const { return "\"" + m_value + "\""; }
+    model* copy() const { return new model_impl(*this); }
+
+    std::string m_value;
 };
 
 typedef std::list<symbol> sequence;
