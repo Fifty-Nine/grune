@@ -80,3 +80,7 @@ bool production::is_terminal() const
     );
 }
 
+sequence_list production::apply(const sequence& s) const
+{
+    return sequence_list();
+}

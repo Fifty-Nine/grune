@@ -22,6 +22,8 @@ public:
     std::string to_string() const;
     bool is_terminal() const;
 
+    sequence_list apply(const sequence& s) const;
+
 private:
     sequence m_from;
     sequence_list m_to;

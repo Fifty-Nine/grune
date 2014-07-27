@@ -18,12 +18,14 @@ public:
         const sequence& non_terminals,
         const sequence& terminals,
         const production_list& productions,
-        const non_terminal& start
+        const symbol& start
     );
     grammar();
     ~grammar();
     
     std::string to_string() const;
+    const symbol& start_symbol() const;
+    const production_list& productions() const;
 
 private:
     sequence m_non_terminals;

@@ -2,4 +2,5 @@
 #include "grune/grammar.hpp"
 #include "grune/non_terminal.hpp"
 #include "grune/production.hpp"
+#include "grune/sentence_iterator.hpp"
 #include "grune/symbol.hpp"

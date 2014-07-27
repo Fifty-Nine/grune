@@ -11,7 +11,7 @@ grammar::grammar(
     const sequence& non_terminals,
     const sequence& terminals,
     const production_list& productions,
-    const non_terminal& start
+    const symbol& start
     ) : 
     m_non_terminals(non_terminals),
     m_terminals(terminals),
@@ -41,3 +41,12 @@ std::string grammar::to_string() const
     return result.str();
 }
 
+const symbol& grammar::start_symbol() const
+{
+    return m_start;
+}
+
+const production_list& grammar::productions() const
+{
+    return m_rules;
+}

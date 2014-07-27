@@ -21,9 +21,19 @@ public:
         symbol(std::string(s))
     { }
 
-    symbol(const symbol& other) :
-        m_model(other.m_model->copy())
+    symbol(const symbol& other) : 
+        m_model(other.m_model ? other.m_model->copy() : nullptr)
     {
+    }
+    
+    symbol& operator=(const symbol& other) 
+    {
+        return *this = std::move(other); 
+    }
+
+    bool operator==(const symbol& other) const
+    {
+        return m_model->equal(*other.m_model);
     }
 
     /*
@@ -48,6 +58,12 @@ private:
         virtual bool is_empty() const = 0;
         virtual std::string to_string() const = 0;
         virtual model* copy() const = 0;
+        virtual bool equal(const model& other) const 
+        {
+            return other.is_terminal() == is_terminal() &&
+                other.is_empty() == is_empty() && 
+                other.to_string() == to_string();
+        }
     };
 
     template<class T>
