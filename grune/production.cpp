@@ -1,6 +1,7 @@
 #include "grune/production.hpp"
 
 #include <algorithm>
+#include <boost/algorithm/string/replace.hpp>
 #include <sstream>
 
 #include "grune/non_terminal.hpp"
@@ -82,5 +83,28 @@ bool production::is_terminal() const
 
 sequence_list production::apply(const sequence& s) const
 {
-    return sequence_list();
+    auto it = s.begin();
+    sequence_list result;
+
+    while (it != s.end())
+    {
+        it = search(it, s.end(), m_from.begin(), m_from.end());
+        if (it == s.end())
+        {
+            break;
+        }
+
+        for (auto replace : m_to)
+        {
+            sequence copy(s.begin(), it);
+
+            copy.insert(copy.end(), replace.begin(), replace.end());
+            copy.insert(copy.end(), next(it, m_from.size()), s.end());
+
+            result.push_back(copy);
+        }
+        ++it;
+    }
+
+    return result;
 }

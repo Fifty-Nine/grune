@@ -8,6 +8,7 @@ class production_test : public CppUnit::TestFixture
     CPPUNIT_TEST_SUITE(production_test);
     CPPUNIT_TEST(test_initialized);
     CPPUNIT_TEST(test_to_string);
+    CPPUNIT_TEST(test_apply);
     CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -53,6 +54,34 @@ public:
 
         expected = "left, right = \"1\", right | left, \"2\"";
         CPPUNIT_ASSERT_EQUAL(expected, p3.to_string());
+    }
+
+    void test_apply()
+    {
+        non_terminal A("A");
+        non_terminal B("B");
+        non_terminal C("C");
+
+        production p1
+        {
+            A,
+            {
+                { "b", "c" },
+                { "d" }
+            }
+        };
+
+        CPPUNIT_ASSERT(p1.apply({}).empty());
+
+        sequence_list result = p1.apply({"x", A, "y"});
+        CPPUNIT_ASSERT(result.size() == 2);
+
+        sequence_list expected = 
+        {
+            { "x", "b", "c", "y" },
+            { "x", "d", "y" }
+        };
+        CPPUNIT_ASSERT(result == expected);
     }
 };
 

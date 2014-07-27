@@ -14,6 +14,6 @@ target_link_libraries(tests grune cppunit)
 add_custom_command(
     TARGET tests 
     POST_BUILD
-    COMMAND ${Grune_BINARY_DIR}/tests/tests
+    COMMAND tests
 )
 
