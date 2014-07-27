@@ -15,6 +15,10 @@ class symbol;
 class terminal;
 class production;
 
+typedef std::list<sequence> sequence_list;
+typedef std::list<sentence> sentence_list;
+typedef std::list<production> production_list;
+
 std::string to_string(const sequence& s);
 std::string to_string(const sentence& s);
 std::string to_string(const symbol& s);

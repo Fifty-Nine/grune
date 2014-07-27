@@ -1,5 +1,6 @@
 add_executable(tests 
     test_main.cpp
+    grammar_tests.cpp
     literal_tests.cpp
     misc_tests.cpp
     non_terminal_tests.cpp

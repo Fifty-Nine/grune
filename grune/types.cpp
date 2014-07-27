@@ -11,6 +11,12 @@
 template<class T>
 std::string list_to_string(const std::list<T*>& l, const std::string& sep)
 {
+    if (l.empty())
+    {
+        /* An empty list is the same as the empty literal. */
+        return "\"\"";
+    }
+
     typedef std::function<std::string(T*)> Converter;
     typedef boost::transform_iterator<Converter, decltype(l.begin())> It;
 
