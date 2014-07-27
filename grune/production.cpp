@@ -4,7 +4,6 @@
 #include <sstream>
 
 #include "grune/non_terminal.hpp"
-#include "grune/types.hpp"
 
 using namespace grune;
 

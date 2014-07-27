@@ -1,6 +1,5 @@
 #include "tests/tests.hpp"
 #include "grune/non_terminal.hpp"
-#include "grune/types.hpp"
 
 using namespace grune;
 

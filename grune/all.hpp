@@ -3,4 +3,3 @@
 #include "grune/non_terminal.hpp"
 #include "grune/production.hpp"
 #include "grune/symbol.hpp"
-#include "grune/types.hpp"
