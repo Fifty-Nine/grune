@@ -6,9 +6,18 @@
 
 using namespace grune;
 
-sentence::sentence(const std::initializer_list<terminal*>& seq) : 
-    base(seq)
+namespace
 {
+
+void convert(const std::list<terminal_ptr>& in, sentence& out)
+{
+    std::transform(
+        in.begin(), in.end(), 
+        std::back_inserter(out),
+        [](terminal_ptr s) { return s.get(); }
+    );
+}
+
 }
 
 sentence::sentence(const std::list<terminal*>& seq) : 
@@ -18,9 +27,15 @@ sentence::sentence(const std::list<terminal*>& seq) :
 
 sentence::sentence(const std::list<terminal_ptr>& seq)
 {
-    std::transform(
-        seq.begin(), seq.end(), 
-        std::back_inserter(*this),
-        [](terminal_ptr s) -> terminal* { return s.get(); }
-    );
+    convert(seq, *this);
+}
+
+sentence::sentence(const std::initializer_list<terminal*>& seq) : 
+    base(seq)
+{
+}
+
+sentence::sentence(const std::initializer_list<terminal_ptr>& seq)
+{
+    convert(seq, *this);
 }

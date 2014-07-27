@@ -8,9 +8,18 @@
 
 using namespace grune;
 
-sequence::sequence(const std::initializer_list<symbol*>& seq) : 
-    base { seq }
+namespace
 {
+
+void convert(const std::list<symbol_ptr>& in, sequence& out)
+{
+    std::transform(
+        in.begin(), in.end(), 
+        std::back_inserter(out),
+        [](symbol_ptr s) { return s.get(); }
+    );
+}
+
 }
 
 sequence::sequence(const std::list<symbol*>& seq) : 
@@ -20,9 +29,16 @@ sequence::sequence(const std::list<symbol*>& seq) :
 
 sequence::sequence(const std::list<symbol_ptr>& seq)
 {
-    std::transform(
-        seq.begin(), seq.end(), 
-        std::back_inserter(*this),
-        [](symbol_ptr s) { return s.get(); }
-    );
+    convert(seq, *this);
+}
+    
+sequence::sequence(const std::initializer_list<symbol*>& seq) :
+    base(seq)
+{
+}
+
+sequence::sequence(const std::initializer_list<symbol_ptr>& seq) : 
+    sequence(std::list<symbol_ptr>(seq))
+{
+    convert(seq, *this);
 }

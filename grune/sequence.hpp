@@ -13,9 +13,10 @@ class sequence : public std::list<symbol*>
 {
     typedef std::list<symbol*> base;
 public:
-    sequence(const std::initializer_list<symbol*>& seq = { });
-    sequence(const std::list<symbol*>& seq);
+    sequence(const std::list<symbol*>& seq = { });
     sequence(const std::list<symbol_ptr>& seq);
+    sequence(const std::initializer_list<symbol*>& seq);
+    sequence(const std::initializer_list<symbol_ptr>& seq);
 };
 
 }
