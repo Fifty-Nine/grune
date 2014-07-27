@@ -37,8 +37,7 @@ sequence::sequence(const std::initializer_list<symbol*>& seq) :
 {
 }
 
-sequence::sequence(const std::initializer_list<symbol_ptr>& seq) : 
-    sequence(std::list<symbol_ptr>(seq))
+sequence::sequence(const std::initializer_list<symbol_ptr>& seq) 
 {
     convert(seq, *this);
 }
