@@ -81,6 +81,12 @@ private:
         bool is_empty() const { return grune::is_empty(m_value); } 
         std::string to_string() const { return grune::to_string(m_value); } 
         model* copy() const { return new model_impl<T>(*this); }
+        virtual bool equal(const model& other)
+        {
+            auto mt = dynamic_cast<const model_impl*>(&other);
+
+            return mt ? mt->m_value == m_value : model::equal(other);
+        }
 
         T m_value;
     };

@@ -17,6 +17,11 @@ public:
     bool is_terminal() const { return false; }
     bool is_empty() const { return false; }
 
+    bool operator==(const non_terminal& other) const
+    {
+        return m_identifier == other.m_identifier;
+    }
+
 private:
     std::string m_identifier;
 };
