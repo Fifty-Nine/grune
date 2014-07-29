@@ -43,17 +43,17 @@ public:
     /*
      * Convert the symbol into a string appropriate for pretty-printing. 
      */
-    virtual std::string to_string() const { return m_model->to_string(); }
+    std::string to_string() const { return m_model->to_string(); }
 
     /* 
      * Test whether this symbol is terminal.
      */
-    virtual bool is_terminal() const { return m_model->is_terminal(); }
+    bool is_terminal() const { return m_model->is_terminal(); }
 
     /* 
      * Test whether this symbol is the empty string.
      */
-    virtual bool is_empty() const { return m_model->is_empty(); }
+    bool is_empty() const { return m_model->is_empty(); }
 
 private:
     struct model
