@@ -6,7 +6,9 @@
 #define ADD_TEST(name) \
     extern void name(std::ostream&);
 
+ADD_TEST(test_anbncn);
 ADD_TEST(test_numbers);
+ADD_TEST(test_numbers_simple);
 ADD_TEST(test_turtle);
 
 typedef void (*test_fcn_t)(std::ostream&);
@@ -23,6 +25,8 @@ int main()
     boost::filesystem::remove_all("./results");
     boost::filesystem::create_directories("./results");
 
+    RUN_TEST(test_anbncn);
+    RUN_TEST(test_numbers_simple);
     RUN_TEST(test_numbers);
     RUN_TEST(test_turtle);
 

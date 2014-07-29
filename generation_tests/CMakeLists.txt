@@ -1,5 +1,6 @@
 add_executable(generate
     main.cpp
+    test_anbncn.cpp
     test_numbers.cpp
     test_turtle.cpp
 )
