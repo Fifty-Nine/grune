@@ -14,6 +14,7 @@ ADD_TEST(test_turtle);
 typedef void (*test_fcn_t)(std::ostream&);
 void run_test(test_fcn_t test, const std::string& name)
 {
+    std::cout << "Running test " << name << "..." << std::endl;
     std::ofstream results("./results/" + name + ".results");
     test(results);
 }
