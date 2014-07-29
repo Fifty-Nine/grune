@@ -20,8 +20,8 @@ class sentence_iterator :
     {
         while (!m_q.empty())
         {
-            sequence s = m_q.back();
-            m_q.pop_back();
+            sequence s = m_q.front();
+            m_q.pop_front();
 
             if (is_terminal(s))
             {
@@ -43,7 +43,7 @@ class sentence_iterator :
 
     void enqueue(const sequence_list& l)
     {
-        for (auto s : l) { m_q.push_front(s); }
+        for (auto s : l) { m_q.push_back(s); }
     }
 
 public:
@@ -51,7 +51,7 @@ public:
     sentence_iterator(const grammar& g) : 
         m_g(&g)
     {
-        m_q.push_front({g.start_symbol()});
+        m_q.push_back({g.start_symbol()});
         advance();
     }
 
