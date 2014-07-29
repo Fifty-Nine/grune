@@ -9,6 +9,7 @@
 ADD_TEST(test_anbncn);
 ADD_TEST(test_numbers);
 ADD_TEST(test_numbers_simple);
+ADD_TEST(test_tdh);
 ADD_TEST(test_turtle);
 
 typedef void (*test_fcn_t)(std::ostream&);
@@ -30,6 +31,7 @@ int main()
     RUN_TEST(test_numbers_simple);
     RUN_TEST(test_numbers);
     RUN_TEST(test_turtle);
+    RUN_TEST(test_tdh);
 
     return 0;
 }

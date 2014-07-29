@@ -5,38 +5,45 @@
 
 grune::grammar grune::grammars::tom_dick_and_harry()
 {
-    non_terminal N("N");
     non_terminal S("S");
     non_terminal L("L");
+    non_terminal LT("N");
+
     return
     {
         /* non-terminals */ 
-        { N, S, L }, 
+        { S, L, LT }, 
         /* terminals */
-        { "tom", "dick", "harry", "and", ", " },
+        { "tom", "dick", "harry", " and ", ", " },
         /* productions */
         {
-            /* Name -> tom | dick | harry */
-            {
-                { N },
-                {
-                    { "tom", "dick", "harry" }
-                }
-            },
-            /* Sentence -> Name | List and Name */
+            /* Sentence -> tom | dick | harry | List */ 
             {
                 { S },
                 {
-                    { N },
-                    { L, "and", N }
+                    { "tom" }, 
+                    { "dick" }, 
+                    { "harry" }, 
+                    { L }
                 }
             },
-            /* List -> Name, List | Name */
+            /* List -> tom ListTail | dick ListTail | harry ListTail */
             {
                 { L },
+                {
+                    { "tom", LT },
+                    { "dick", LT },
+                    { "harry", LT },
+                }
+            },
+            /* ListTail -> , List | and "tom" | and "dick" | and "harry" */
+            {
+                { LT },
                 { 
-                    { N, ", ", L },
-                    { N }
+                    { ", ", L },
+                    { " and ", "tom" },
+                    { " and ", "dick" },
+                    { " and ", "harry" },
                 }
             }
         },

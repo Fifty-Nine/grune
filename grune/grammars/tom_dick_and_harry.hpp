@@ -10,7 +10,7 @@ namespace grammars
 {
 
 /* 
- * A context-free grammar that generates sentences 
+ * A regular grammar that generates sentences 
  * consisting of a list of people named Tom, Dick and Harry.
  * Examples:
  * tom, dick and harry
