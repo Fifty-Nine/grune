@@ -81,6 +81,16 @@ bool production::is_terminal() const
     );
 }
 
+sequence production::lhs() const
+{
+    return m_from;
+}
+
+sequence_list production::rhs() const
+{
+    return m_to;
+}
+
 sequence_list production::apply(const sequence& s) const
 {
     auto it = s.begin();
