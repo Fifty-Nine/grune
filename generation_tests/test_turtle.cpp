@@ -1,38 +1,12 @@
 #include "grune/all.hpp"
 
+#include "grune/grammars/turtle.hpp"
+
 using namespace grune;
 
 void test_turtle(std::ostream& out)
 {
-    non_terminal Move("Move");
-    grammar g
-    {
-        { Move }, 
-        { "north", "south", "east", "west" },
-        {
-            { Move,
-                {
-                    { "north", Move, "south" }, 
-                    { "east", Move, "west" }, 
-                    { }
-                }
-            },
-            { { "north", "east" }, { { "east", "north" } } },
-            { { "north", "south" }, { { "south", "north" } } },
-            { { "north", "west" }, { { "west", "north" } } },
-            { { "east", "north" }, { { "north", "east" } } },
-            { { "east", "south" }, { { "south", "east" } } },
-            { { "east", "west" }, { { "west", "east" } } },
-            { { "south", "north" }, { { "north", "south" } } },
-            { { "south", "east" }, { { "east", "south" } } },
-            { { "south", "west" }, { { "west", "south" } } },
-            { { "west", "north" }, { { "north", "west" } } },
-            { { "west", "east" }, { { "east", "west" } } },
-            { { "west", "south" }, { { "south", "west" } } },
-        },
-        Move
-    };
-
+    auto g = grammars::cyclic_manhattan_turtle();
     sentence_iterator begin(g);
 
     /* An infinite language, so just take 20 sentences. */
