@@ -1,0 +1,13 @@
+SET(PWD ${CMAKE_CURRENT_SOURCE_DIR})
+
+SET(SOURCES
+    ${SOURCES}
+    ${PWD}/anbncn.cpp
+    PARENT_SCOPE
+)
+
+SET(HEADERS
+    ${HEADERS}
+    ${PWD}/anbncn.hpp
+    PARENT_SCOPE
+)

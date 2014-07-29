@@ -16,6 +16,7 @@ SET(HEADERS
     symbol_traits.hpp
 )
 
+add_subdirectory(grammars)
 add_library(grune
     ${SOURCES}
     ${HEADERS}
