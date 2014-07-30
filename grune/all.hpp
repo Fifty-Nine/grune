@@ -1,3 +1,4 @@
+#include "grune/generate.hpp"
 #include "grune/grune_fwd.hpp"
 #include "grune/grammar.hpp"
 #include "grune/non_terminal.hpp"

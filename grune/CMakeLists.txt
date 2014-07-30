@@ -1,4 +1,5 @@
 SET(SOURCES
+    generate.cpp
     grammar.cpp
     non_terminal.cpp
     production.cpp
@@ -7,6 +8,7 @@ SET(SOURCES
 
 SET(HEADERS
     all.hpp
+    generate.hpp
     grammar.hpp
     grune_fwd.hpp
     non_terminal.hpp

@@ -4,6 +4,8 @@
 #include <boost/operators.hpp>
 #include <queue>
 
+#include "grune/grammar.hpp"
+#include "grune/production.hpp"
 #include "grune/symbol.hpp"
 
 namespace grune
