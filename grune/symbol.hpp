@@ -58,6 +58,7 @@ public:
 private:
     struct model
     {
+        virtual ~model() { }
         virtual bool is_terminal() const = 0;
         virtual bool is_empty() const = 0;
         virtual std::string to_string() const = 0;
