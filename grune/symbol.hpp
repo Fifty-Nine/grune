@@ -95,22 +95,6 @@ private:
     std::unique_ptr<model> m_model;
 };
 
-
-template<>
-struct symbol::model_impl<std::string> : model
-{
-    model_impl(const std::string& value) : 
-        m_value(value)
-    { }
-
-    bool is_terminal() const { return true; }
-    bool is_empty() const { return m_value.empty(); }
-    std::string to_string() const { return "\"" + m_value + "\""; }
-    model* copy() const { return new model_impl(*this); }
-
-    std::string m_value;
-};
-
 typedef std::list<symbol> sequence;
 typedef std::list<sequence> sequence_list;
 

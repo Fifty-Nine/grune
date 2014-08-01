@@ -74,6 +74,17 @@ struct symbol_traits<List<T, Rest...>> :
     static std::string separator() { return ", "; }
 };
 
+template<>
+struct symbol_traits<std::string>
+{
+    static bool is_terminal(const std::string&) { return true; }
+    static bool is_empty(const std::string& s) { return s.empty(); }
+    static std::string to_string(const std::string& s)
+    {
+        return "\"" + s + "\"";
+    }
+};
+
 }
 
 #endif /* GRUNE_SYMBOL_TRAITS_H */
