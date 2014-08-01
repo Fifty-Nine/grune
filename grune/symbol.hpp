@@ -55,6 +55,9 @@ public:
      */
     bool is_empty() const { return m_model->is_empty(); }
 
+    std::string identifier() const { return m_model->identifier(); }
+    std::string text() const { return m_model->text(); }
+
 private:
     struct model
     {
@@ -62,6 +65,8 @@ private:
         virtual bool is_terminal() const = 0;
         virtual bool is_empty() const = 0;
         virtual std::string to_string() const = 0;
+        virtual std::string identifier() const = 0;
+        virtual std::string text() const = 0;
         virtual model* copy() const = 0;
         virtual bool equal(const model& other) const 
         {
@@ -81,6 +86,8 @@ private:
         bool is_terminal() const { return grune::is_terminal(m_value); }
         bool is_empty() const { return grune::is_empty(m_value); } 
         std::string to_string() const { return grune::to_string(m_value); } 
+        std::string identifier() const { return grune::identifier(m_value); } 
+        std::string text() const { return grune::text(m_value); } 
         model* copy() const { return new model_impl<T>(*this); }
         virtual bool equal(const model& other) const
         {

@@ -16,3 +16,8 @@ std::string non_terminal::to_string() const
 {
     return m_identifier;
 }
+
+std::string non_terminal::text() const 
+{ 
+    return m_identifier; 
+}

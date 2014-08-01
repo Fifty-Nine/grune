@@ -31,15 +31,47 @@ std::string to_string(const T& t)
 }
 
 template<class T>
+std::string identifier(const T& t)
+{
+    return symbol_traits<T>::identifier(t);
+}
+
+template<class T>
+std::string text(const T& t)
+{
+    return symbol_traits<T>::text(t);
+}
+
+template<class T>
 struct symbol_traits
 {
     static bool is_terminal(const T& t) { return t.is_terminal(); }
     static bool is_empty(const T& t) { return t.is_empty(); }
     static std::string to_string(const T& t) { return t.to_string(); }
+    static std::string identifier(const T& t) { return t.identifier(); }
+    static std::string text(const T& t) { return t.text(); }
+};
+
+template<class T>
+struct basic_symbol_traits
+{
+    static bool is_terminal(const T& t) { return true; }
+    static bool is_empty(const T& t) { return grune::text(t).empty(); }
+    static std::string to_string(const T& t) { return "\"" + grune::text(t) + "\""; }
+    static std::string identifier(const T& t) { return ""; }
+    static std::string text(const T& t) { return ""; }
+};
+
+template<class T>
+struct numeric_symbol_traits : 
+    public basic_symbol_traits<T>
+{
+    static bool is_empty(T) { return false; }
+    static std::string text(T v) { return std::to_string(v); }
 };
 
 template<class List>
-struct symbol_list_traits
+struct symbol_list_traits : public basic_symbol_traits<List>
 {
     typedef typename List::value_type T;
     
@@ -65,6 +97,18 @@ struct symbol_list_traits
         return boost::algorithm::join(result, 
             symbol_traits<List>::separator()); 
     }
+
+    static std::string text(const List& l)
+    {
+        std::string result;
+        for (auto elem : l)
+        {
+            if (!elem.is_terminal()) return "";
+            result += grune::text(elem);
+        }
+        return result;
+    }
+
 };
 
 template<template<class, class...> class List, class T, class... Rest>
@@ -75,25 +119,17 @@ struct symbol_traits<List<T, Rest...>> :
 };
 
 template<>
-struct symbol_traits<std::string>
+struct symbol_traits<std::string> : 
+    public basic_symbol_traits<std::string>
 {
-    static bool is_terminal(const std::string&) { return true; }
     static bool is_empty(const std::string& s) { return s.empty(); }
-    static std::string to_string(const std::string& s)
-    {
-        return "\"" + s + "\"";
-    }
+    static std::string text(const std::string& s) { return s; }
 };
 
 template<>
-struct symbol_traits<int>
+struct symbol_traits<int> : 
+    public numeric_symbol_traits<int>
 {
-    static bool is_terminal(int) { return true; }
-    static bool is_empty(int) { return false; }
-    static std::string to_string(int v)
-    {
-        return "\"" + std::to_string(v) + "\"";
-    }
 };
 
 }

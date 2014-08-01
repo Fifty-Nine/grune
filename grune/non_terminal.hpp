@@ -13,6 +13,7 @@ public:
     non_terminal(const std::string& identifier);
 
     std::string identifier() const;
+    std::string text() const;
     std::string to_string() const;
     bool is_terminal() const { return false; }
     bool is_empty() const { return false; }
