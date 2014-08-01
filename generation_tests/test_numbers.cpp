@@ -4,23 +4,6 @@
 
 using namespace grune;
 
-namespace grune
-{
-    template<>
-    struct symbol_traits<int> 
-    {
-        static std::string to_string(int i) 
-        {
-            std::ostringstream o;
-            o << "\"" << i << "\"";
-            return o.str();
-        }
-
-        static bool is_terminal(int) { return true; }
-        static bool is_empty(int) { return false; }
-    };
-}
-
 sequence digits(int low = 0, int high = 10)
 {
     sequence result;

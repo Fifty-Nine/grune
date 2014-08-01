@@ -85,6 +85,17 @@ struct symbol_traits<std::string>
     }
 };
 
+template<>
+struct symbol_traits<int>
+{
+    static bool is_terminal(int) { return true; }
+    static bool is_empty(int) { return false; }
+    static std::string to_string(int v)
+    {
+        return "\"" + std::to_string(v) + "\"";
+    }
+};
+
 }
 
 #endif /* GRUNE_SYMBOL_TRAITS_H */
