@@ -3,6 +3,7 @@ SET(SOURCES
     grammar.cpp
     non_terminal.cpp
     production.cpp
+    sentence_iterator.cpp
     symbol.cpp
 )
 
