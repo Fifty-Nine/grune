@@ -17,6 +17,7 @@ include_directories(${Grune_SOURCE_DIR} ${Boost_INCLUDE_DIRS})
 add_compile_options("-std=c++11")
 
 add_subdirectory(grune)
+add_subdirectory(grune-yaml)
 add_subdirectory(unit_tests)
 add_subdirectory(generation_tests)
 
