@@ -54,3 +54,13 @@ const production_list& grammar::productions() const
 {
     return m_rules;
 }
+
+const sequence& grammar::non_terminals() const
+{
+    return m_non_terminals;
+}
+
+const sequence& grammar::terminals() const
+{
+    return m_terminals;
+}
