@@ -34,15 +34,7 @@ bool grammar::operator==(const grammar& rhs) const
 
 std::string grammar::to_string() const
 {
-    std::ostringstream result;
-
-    for (auto p : m_rules)
-    {
-        result << grune::to_string(p);
-        result << ";\n";
-    }
-
-    return result.str();
+    return grune::to_string(m_rules);
 }
 
 const symbol& grammar::start_symbol() const

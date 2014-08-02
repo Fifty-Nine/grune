@@ -6,6 +6,8 @@
 #include <list>
 #include <string>
 
+#include "grune/grune_fwd.hpp"
+
 namespace grune
 {
 
@@ -130,6 +132,22 @@ template<>
 struct symbol_traits<int> : 
     public numeric_symbol_traits<int>
 {
+};
+
+template<>
+struct symbol_traits<sequence_list> : public symbol_list_traits<sequence_list>
+{
+    static std::string separator() { return " | "; }
+};
+
+template<>
+struct symbol_traits<production_list>
+{
+    static bool is_terminal(const production_list& t);
+    static bool is_empty(const production_list& t);
+    static std::string to_string(const production_list& t);
+    static std::string identifier(const production_list& t);
+    static std::string text(const production_list& t); 
 };
 
 }

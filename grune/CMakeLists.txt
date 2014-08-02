@@ -5,6 +5,7 @@ SET(SOURCES
     production.cpp
     sentence_iterator.cpp
     symbol.cpp
+    symbol_traits.cpp
 )
 
 SET(HEADERS
