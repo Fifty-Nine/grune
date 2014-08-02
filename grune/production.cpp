@@ -60,16 +60,7 @@ std::string production::to_string() const
     std::ostringstream result;
     result << grune::to_string(m_from);
     result << " = ";
-
-    auto it = m_to.begin();
-
-    while (true)
-    {
-        result << grune::to_string(*it);
-        if (++it == m_to.end()) break;
-        result << " | ";
-    }
-
+    result << grune::to_string(m_to);
     return result.str();
 }
 
