@@ -18,6 +18,7 @@ public:
     production(const sequence& from, const sequence_list& to = {});
 
     bool initialized() const;
+    bool operator==(const production& rhs) const;
 
     std::string to_string() const;
     bool is_terminal() const;
