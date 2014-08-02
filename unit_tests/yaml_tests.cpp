@@ -36,23 +36,12 @@ class yaml_tests : public CppUnit::TestFixture
         return YAML::Load(yaml_doc).as<T>() == value;
     }
 
-    template<class T>
-    void write_file(const std::string& name, const T& value)
-    {
-        std::ofstream out("results/" + name);
-        out << YAML::Node(value) << std::endl;
-    }
-
 public:
     void test_symbol()
     {
         symbol empty;
         symbol asdf("asdf");
         non_terminal A("A");
-
-        write_file("empty.sym", empty);
-        write_file("asdf.sym", asdf);
-        write_file("A.sym", A);
 
         CPPUNIT_ASSERT(equal_end_to_end(empty));
         CPPUNIT_ASSERT(load_equal("{ is_terminal: yes, text: \"\" }", empty));
@@ -79,11 +68,6 @@ public:
         {
             "(", non_terminal("expr"), ")"
         };
-
-        write_file("empty.seq", empty); 
-        write_file("asdf.seq", asdf);
-        write_file("nts.seq", nts);
-        write_file("mixed.seq", mixed);
 
         CPPUNIT_ASSERT(equal_end_to_end(empty));
         CPPUNIT_ASSERT(equal_end_to_end(asdf));
@@ -116,12 +100,6 @@ public:
             { "q", non_terminal("W"), "erty" },
         };
         
-        write_file("empty.seqs", empty);
-        write_file("asdf.seqs", asdf);
-        write_file("bits.seqs", bits);
-        write_file("nested_empty.seqs", nested_empty);
-        write_file("mixed.seqs", mixed);
-
         CPPUNIT_ASSERT(equal_end_to_end(empty));
         CPPUNIT_ASSERT(equal_end_to_end(asdf));
         CPPUNIT_ASSERT(equal_end_to_end(bits));
@@ -158,12 +136,6 @@ public:
             { }
         };
         production_list all { p1, p2, p3 };
-
-        write_file("empty.prod", empty);
-        write_file("p1.prod", p1);
-        write_file("p2.prod", p2);
-        write_file("p3.prod", p3);
-        write_file("all.plist", all);
 
         CPPUNIT_ASSERT(equal_end_to_end(empty));
         CPPUNIT_ASSERT(equal_end_to_end(p1));

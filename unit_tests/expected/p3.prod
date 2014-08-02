@@ -1,7 +1,0 @@
-lhs:
-  - text: B
-    is_terminal: false
-  - text: A
-    is_terminal: false
-rhs:
-  []

@@ -1,6 +1,0 @@
-- text: (
-  is_terminal: true
-- is_terminal: false
-  text: expr
-- text: )
-  is_terminal: true

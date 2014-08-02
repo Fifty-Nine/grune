@@ -13,13 +13,13 @@ add_custom_command(
     TARGET generate 
     POST_BUILD
     COMMAND generate
-    COMMAND diff -r expected results
+    COMMAND diff -r --exclude=.gitignore expected results
     WORKING_DIRECTORY ${Grune_SOURCE_DIR}/generation_tests
 )
 
 add_custom_target(check_generate
     COMMAND generate
-    COMMAND diff -r expected results
+    COMMAND diff -r --exclude=.gitignore expected results
     DEPENDS generate
     WORKING_DIRECTORY ${Grune_SOURCE_DIR}/generation_tests
 )
@@ -28,6 +28,7 @@ add_custom_target(commit_generate
     COMMAND generate
     COMMAND rm -r ./expected
     COMMAND cp -R results expected
+    COMMAND git checkout expected/.gitignore
     DEPENDS generate
     WORKING_DIRECTORY ${Grune_SOURCE_DIR}/generation_tests
 )

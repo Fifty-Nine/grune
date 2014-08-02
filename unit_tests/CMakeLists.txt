@@ -22,7 +22,7 @@ add_custom_command(
 
 add_custom_target(check_unit_tests
     COMMAND unit_tests
-    COMMAND diff -r expected results
+    COMMAND diff -r --exclude=.gitignore expected results
     DEPENDS unit_tests
     WORKING_DIRECTORY ${Grune_SOURCE_DIR}/unit_tests
 )
