@@ -41,24 +41,12 @@ void test_numbers_simple(std::ostream& out)
         { Digit, Nonzero, Number },
         digits(0, 1),
         {
-            { Digit,   
-                { 
-                    { 0 },
-                    { Nonzero }                
-                }
-            },
-            { Nonzero, 
-                { 
-                    to_seq_list(digits(1, 2))
-                } 
-            },
-            { Number,  
-                { 
-                    { Digit }, 
-                    { Nonzero, Digit },
-                    { Nonzero, Nonzero, Digit }
-                }
-            }
+            { Digit, { { 0 } } },
+            { Digit, { { Nonzero } } },
+            { Nonzero, to_seq_list(digits(1, 2)) },
+            { Number, { { Digit } } },
+            { Number, { { Nonzero, Digit } } },
+            { Number, { { Nonzero, Nonzero, Digit } } },
         },
         Number
     };
@@ -88,24 +76,12 @@ void test_numbers(std::ostream& out)
         { Digit, Nonzero, Number },
         digits(0, 10), 
         {
-            { Digit,   
-                { 
-                    { 0 },
-                    { Nonzero }                
-                }
-            },
-            { Nonzero, 
-                { 
-                    to_seq_list(digits(1, 10))
-                } 
-            },
-            { Number,  
-                { 
-                    { Digit }, 
-                    { Nonzero, Digit },
-                    { Nonzero, Nonzero, Digit }
-                }
-            }
+            { Digit, { { 0 } } },
+            { Digit, { { Nonzero } } },
+            { Nonzero, to_seq_list(digits(1, 10)) },
+            { Number, { { Digit } } },
+            { Number, { { Nonzero, Digit } } },
+            { Number, { { Nonzero, Nonzero, Digit } } }
         },
         Number
     };
