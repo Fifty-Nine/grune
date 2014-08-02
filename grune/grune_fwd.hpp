@@ -8,7 +8,6 @@ namespace grune
 
 class grammar;
 class non_terminal;
-class terminal;
 class production;
 class symbol;
 
