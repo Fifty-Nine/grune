@@ -1,0 +1,19 @@
+-
+  - text: a
+    is_terminal: true
+  - text: s
+    is_terminal: true
+-
+  - is_terminal: false
+    text: D
+  - is_terminal: false
+    text: F
+-
+  []
+-
+  - text: q
+    is_terminal: true
+  - text: W
+    is_terminal: false
+  - text: erty
+    is_terminal: true

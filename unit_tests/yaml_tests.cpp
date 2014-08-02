@@ -92,6 +92,40 @@ public:
 
     void test_sequence_list()
     {
+        sequence_list empty { };
+        sequence_list asdf { { "a" }, { "s" }, { "d" }, { "f" } };
+        sequence_list bits 
+        { 
+            { 0, 0 },
+            { 0, 1 },
+            { 1, 0 },
+            { 1, 1 },
+        };
+        sequence_list nested_empty 
+        {
+            { },
+            { },
+            { },
+        };
+        sequence_list mixed
+        {
+            { "a", "s" },
+            { non_terminal("D"), non_terminal("F") },
+            { },
+            { "q", non_terminal("W"), "erty" },
+        };
+        
+        write_file("empty.seqs", empty);
+        write_file("asdf.seqs", asdf);
+        write_file("bits.seqs", bits);
+        write_file("nested_empty.seqs", nested_empty);
+        write_file("mixed.seqs", mixed);
+
+        CPPUNIT_ASSERT(equal_end_to_end(empty));
+        CPPUNIT_ASSERT(equal_end_to_end(asdf));
+        CPPUNIT_ASSERT(equal_end_to_end(bits));
+        CPPUNIT_ASSERT(equal_end_to_end(nested_empty));
+        CPPUNIT_ASSERT(equal_end_to_end(mixed));
     }
 
     void test_production()
