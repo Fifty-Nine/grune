@@ -1,0 +1,6 @@
+- text: (
+  is_terminal: true
+- text: expr
+  is_terminal: false
+- text: )
+  is_terminal: true

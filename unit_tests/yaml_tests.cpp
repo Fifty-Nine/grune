@@ -65,6 +65,29 @@ public:
 
     void test_sequence()
     {
+        sequence empty { };
+        sequence asdf { "a", "s", "d", "f" };
+        sequence nts 
+        { 
+            non_terminal("A"), 
+            non_terminal("B"), 
+            non_terminal("C"),
+        };
+
+        sequence mixed
+        {
+            "(", non_terminal("expr"), ")"
+        };
+
+        write_file("empty.seq", empty); 
+        write_file("asdf.seq", asdf);
+        write_file("nts.seq", nts);
+        write_file("mixed.seq", mixed);
+
+        CPPUNIT_ASSERT(equal_end_to_end(empty));
+        CPPUNIT_ASSERT(equal_end_to_end(asdf));
+        CPPUNIT_ASSERT(equal_end_to_end(nts));
+        CPPUNIT_ASSERT(equal_end_to_end(mixed));
     }
 
     void test_sequence_list()

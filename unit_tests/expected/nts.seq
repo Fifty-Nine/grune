@@ -1,0 +1,6 @@
+- text: A
+  is_terminal: false
+- text: B
+  is_terminal: false
+- text: C
+  is_terminal: false
