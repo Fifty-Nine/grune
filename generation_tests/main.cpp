@@ -24,9 +24,6 @@ void run_test(test_fcn_t test, const std::string& name)
 
 int main()
 {
-    boost::filesystem::remove_all("./results");
-    boost::filesystem::create_directories("./results");
-
     RUN_TEST(test_anbncn);
     RUN_TEST(test_numbers_simple);
     RUN_TEST(test_numbers);

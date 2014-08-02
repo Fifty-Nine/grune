@@ -9,26 +9,4 @@ add_executable(generate
 link_directories(${Grune_BINARY_DIR}/grune)
 target_link_libraries(generate grune ${Boost_LIBRARIES})
 
-add_custom_command(
-    TARGET generate 
-    POST_BUILD
-    COMMAND generate
-    COMMAND diff -r --exclude=.gitignore expected results
-    WORKING_DIRECTORY ${Grune_SOURCE_DIR}/generation_tests
-)
-
-add_custom_target(check_generate
-    COMMAND generate
-    COMMAND diff -r --exclude=.gitignore expected results
-    DEPENDS generate
-    WORKING_DIRECTORY ${Grune_SOURCE_DIR}/generation_tests
-)
-
-add_custom_target(commit_generate
-    COMMAND generate
-    COMMAND rm -r ./expected
-    COMMAND cp -R results expected
-    COMMAND git checkout expected/.gitignore
-    DEPENDS generate
-    WORKING_DIRECTORY ${Grune_SOURCE_DIR}/generation_tests
-)
+add_check_target(generation_tests generate)

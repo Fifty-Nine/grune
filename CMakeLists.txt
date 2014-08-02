@@ -16,17 +16,53 @@ include_directories(${Grune_SOURCE_DIR} ${Boost_INCLUDE_DIRS})
 
 add_compile_options("-std=c++11")
 
+set(CHECK_TARGETS CACHE INTERNAL "")
+set(COMMIT_TARGETS CACHE INTERNAL "")
+
+function(add_check_target subdir target)
+    add_custom_command(
+        TARGET ${target}
+        POST_BUILD
+        COMMAND git clean -xdf ./results
+        COMMAND ${target}
+        COMMAND diff -r --exclude=.gitignore expected results
+        WORKING_DIRECTORY ${Grune_SOURCE_DIR}/${subdir}
+    )
+    add_custom_target(check_${subdir}
+        COMMAND git clean -xdf ./results
+        COMMAND ${target}
+        COMMAND diff -r --exclude=.gitignore expected results
+        WORKING_DIRECTORY ${Grune_SOURCE_DIR}/${subdir}
+    )
+    add_custom_target(commit_${subdir}
+        COMMAND git clean -xdf ./results
+        COMMAND ${target}
+        COMMAND rm -r ./expected
+        COMMAND cp -R results expected
+        COMMAND git checkout expected/.gitignore
+        WORKING_DIRECTORY ${Grune_SOURCE_DIR}/${subdir}
+    )
+    set(CHECK_TARGETS
+        ${CHECK_TARGETS}
+        check_${subdir}
+        CACHE INTERNAL "" FORCE
+    )
+    set(COMMIT_TARGETS
+        ${COMMIT_TARGETS}
+        commit_${subdir}
+        CACHE INTERNAL "" FORCE
+    )
+endfunction(add_check_target)
+
 add_subdirectory(grune)
 add_subdirectory(grune-yaml)
 add_subdirectory(unit_tests)
 add_subdirectory(generation_tests)
 
 add_custom_target(check
-    DEPENDS check_unit_tests
-    DEPENDS check_generate
+    DEPENDS ${CHECK_TARGETS}
 )
 
 add_custom_target(commit
-    DEPENDS commit_unit_tests
-    DEPENDS commit_generate
+    DEPENDS ${COMMIT_TARGETS}
 )
