@@ -46,6 +46,12 @@ bool production::initialized() const
     return !m_from.empty();
 }
 
+bool production::operator==(const production& rhs) const
+{
+    return m_from == rhs.m_from && 
+        m_to == rhs.m_to;
+}
+
 /*
  * Pretty print the production.
  */
