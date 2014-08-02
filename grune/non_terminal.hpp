@@ -7,10 +7,12 @@
 namespace grune 
 {
 
+class symbol;
+
 class non_terminal
 {
 public:
-    non_terminal(const std::string& identifier);
+    non_terminal(const std::string& identifier = "");
 
     std::string identifier() const;
     std::string text() const;
