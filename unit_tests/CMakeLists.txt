@@ -15,6 +15,15 @@ target_link_libraries(unit_tests grune grune-yaml cppunit)
 add_custom_command(
     TARGET unit_tests 
     POST_BUILD
-    COMMAND unit_tests 
+    COMMAND unit_tests
+    COMMAND diff -r expected results
+    WORKING_DIRECTORY ${Grune_SOURCE_DIR}/unit_tests
 )
 
+add_custom_target(commit
+    COMMAND unit_tests
+    COMMAND rm -r ./expected
+    COMMAND cp -R results expected
+    DEPENDS unit_tests
+    WORKING_DIRECTORY ${Grune_SOURCE_DIR}/unit_tests
+)

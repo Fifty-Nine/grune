@@ -4,7 +4,7 @@
 #include "grune/non_terminal.hpp"
 #include "grune/symbol.hpp"
 
-#include <sstream>
+#include <iostream>
 
 using namespace grune;
 
@@ -35,12 +35,23 @@ class yaml_tests : public CppUnit::TestFixture
         CPPUNIT_ASSERT(YAML::Load(yaml_doc).as<T>() == value);
     }
 
+    template<class T>
+    void write_file(const std::string& name, const T& value)
+    {
+        std::ofstream out("results/" + name);
+        out << YAML::Node(value);
+    }
+
 public:
     void test_symbol()
     {
         symbol empty;
         symbol asdf("asdf");
         non_terminal A("A");
+
+        write_file("empty.sym", empty);
+        write_file("asdf.sym", asdf);
+        write_file("A.sym", A);
 
         CPPUNIT_ASSERT(equal_end_to_end(empty));
         CPPUNIT_ASSERT(load_equal("{ is_terminal: yes, text: }", empty));
