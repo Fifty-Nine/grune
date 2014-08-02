@@ -1,6 +1,7 @@
 #ifndef GRUNE_SYMBOL_HPP
 #define GRUNE_SYMBOL_HPP
 
+#include <boost/operators.hpp>
 #include <list>
 #include <memory>
 #include <string>
@@ -10,7 +11,9 @@
 namespace grune 
 {
 
-class symbol 
+class symbol : 
+    boost::less_than_comparable<symbol>,
+    boost::equality_comparable<symbol>
 {
 public:
     template<class T>
@@ -38,6 +41,11 @@ public:
     bool operator==(const symbol& other) const
     {
         return m_model->equal(*other.m_model);
+    }
+
+    bool operator<(const symbol& other) const
+    {
+        return m_model->less(*other.m_model);
     }
 
     /*
@@ -74,6 +82,11 @@ private:
                 other.is_empty() == is_empty() && 
                 other.to_string() == to_string();
         }
+        virtual bool less(const model& other) const
+        {
+            return is_terminal() < other.is_terminal() ||
+                text() < other.text();
+        }
     };
 
     template<class T>
@@ -94,6 +107,12 @@ private:
             auto mt = dynamic_cast<const model_impl*>(&other);
 
             return mt ? mt->m_value == m_value : model::equal(other);
+        }
+        virtual bool less(const model& other) const
+        {
+            auto mt = dynamic_cast<const model_impl*>(&other);
+
+            return mt ? m_value < mt->m_value : model::less(other);
         }
 
         T m_value;
