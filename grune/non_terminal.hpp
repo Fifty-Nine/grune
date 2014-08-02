@@ -9,7 +9,9 @@ namespace grune
 
 class symbol;
 
-class non_terminal
+class non_terminal : 
+    boost::less_than_comparable<non_terminal>,
+    boost::equality_comparable<non_terminal>
 {
 public:
     non_terminal(const std::string& identifier = "");
@@ -23,6 +25,11 @@ public:
     bool operator==(const non_terminal& other) const
     {
         return m_identifier == other.m_identifier;
+    }
+
+    bool operator<(const non_terminal& other) const
+    {
+        return m_identifier < other.m_identifier;
     }
 
 private:
