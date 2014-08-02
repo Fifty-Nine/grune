@@ -24,8 +24,12 @@ grammar::grammar()
 {
 }
 
-grammar::~grammar()
+bool grammar::operator==(const grammar& rhs) const
 {
+    return m_non_terminals == rhs.m_non_terminals && 
+        m_terminals == rhs.m_terminals && 
+        m_rules == rhs.m_rules && 
+        m_start == rhs.m_start;
 }
 
 std::string grammar::to_string() const

@@ -21,8 +21,8 @@ public:
         const symbol& start
     );
     grammar();
-    ~grammar();
-    
+
+    bool operator==(const grammar& rhs) const;    
     std::string to_string() const;
     const symbol& start_symbol() const;
     const production_list& productions() const;
