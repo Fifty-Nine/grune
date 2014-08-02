@@ -1,19 +1,37 @@
 #include "grune-yaml/grune-yaml.hpp"
 
+#include "grune/non_terminal.hpp"
+#include "grune/symbol.hpp"
+
+using namespace grune;
+
 YAML::Node YAML::convert<grune::symbol>::encode(
     const grune::symbol& rhs)
 {
-    return YAML::Node();
+    Node result;
+    result["text"] = rhs.text();
+    result["is_terminal"] = rhs.is_terminal();
+    return result;
 }
 
 bool YAML::convert<grune::symbol>::decode(
     const YAML::Node& node, grune::symbol& rhs)
 {
-    return false;
+    bool is_terminal = node["is_terminal"].as<bool>();
+    std::string text = node["text"].as<std::string>();
+
+    rhs = is_terminal ? 
+        symbol(text) : non_terminal(text);
+    return true;
 }
 
 bool YAML::convert<grune::non_terminal>::decode(
     const YAML::Node& node, grune::non_terminal& rhs)
 { 
-    return false;
+    grune::symbol s = node.as<grune::symbol>();
+
+    if (s.is_terminal()) return false;  
+
+    rhs = grune::non_terminal(s.identifier());
+    return true;
 }

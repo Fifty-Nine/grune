@@ -32,14 +32,14 @@ class yaml_tests : public CppUnit::TestFixture
     bool load_equal(const std::string& yaml_doc, T value)
     {
         YAML::Node node = YAML::Load(yaml_doc);
-        CPPUNIT_ASSERT(YAML::Load(yaml_doc).as<T>() == value);
+        return YAML::Load(yaml_doc).as<T>() == value;
     }
 
     template<class T>
     void write_file(const std::string& name, const T& value)
     {
         std::ofstream out("results/" + name);
-        out << YAML::Node(value);
+        out << YAML::Node(value) << std::endl;
     }
 
 public:
@@ -54,7 +54,7 @@ public:
         write_file("A.sym", A);
 
         CPPUNIT_ASSERT(equal_end_to_end(empty));
-        CPPUNIT_ASSERT(load_equal("{ is_terminal: yes, text: }", empty));
+        CPPUNIT_ASSERT(load_equal("{ is_terminal: yes, text: \"\" }", empty));
 
         CPPUNIT_ASSERT(equal_end_to_end(asdf));
         CPPUNIT_ASSERT(load_equal("{ is_terminal: yes, text: asdf }", asdf));
