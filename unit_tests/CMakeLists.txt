@@ -6,10 +6,11 @@ add_executable(unit_tests
     non_terminal_tests.cpp
     production_tests.cpp
     sequence_tests.cpp
+    yaml_tests.cpp
 )
 
 link_directories(${Grune_BINARY_DIR}/grune)
-target_link_libraries(unit_tests grune cppunit)
+target_link_libraries(unit_tests grune grune-yaml cppunit)
 
 add_custom_command(
     TARGET unit_tests 
