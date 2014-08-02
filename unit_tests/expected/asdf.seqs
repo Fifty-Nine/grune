@@ -2,11 +2,11 @@
   - is_terminal: true
     text: a
 -
-  - text: s
+  - is_terminal: true
+    text: s
+-
+  - text: d
     is_terminal: true
 -
   - is_terminal: true
-    text: d
--
-  - text: f
-    is_terminal: true
+    text: f

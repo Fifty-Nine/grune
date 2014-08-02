@@ -1,0 +1,13 @@
+rhs:
+  -
+    - is_terminal: true
+      text: x
+  -
+    - text: y
+      is_terminal: true
+  -
+    - is_terminal: true
+      text: z
+lhs:
+  - text: A
+    is_terminal: false

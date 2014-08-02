@@ -1,6 +1,6 @@
 - text: A
   is_terminal: false
-- text: B
-  is_terminal: false
+- is_terminal: false
+  text: B
 - text: C
   is_terminal: false

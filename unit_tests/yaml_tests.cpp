@@ -2,6 +2,7 @@
 #include "grune-yaml/grune-yaml.hpp"
 
 #include "grune/non_terminal.hpp"
+#include "grune/production.hpp"
 #include "grune/symbol.hpp"
 
 #include <iostream>
@@ -130,6 +131,45 @@ public:
 
     void test_production()
     {
+        non_terminal A("A");
+        non_terminal B("B");
+
+        production empty;
+        production p1 
+        {
+            A, 
+            { 
+                { "x" }, 
+                { "y" },
+                { "z" } 
+            }
+        };
+        production p2
+        {
+            { A, B },
+            { 
+                { "x", "y", "z" }, 
+                { "z", "y", "x" } 
+            },
+        };
+        production p3
+        {
+            { B, A },
+            { }
+        };
+        production_list all { p1, p2, p3 };
+
+        write_file("empty.prod", empty);
+        write_file("p1.prod", p1);
+        write_file("p2.prod", p2);
+        write_file("p3.prod", p3);
+        write_file("all.plist", all);
+
+        CPPUNIT_ASSERT(equal_end_to_end(empty));
+        CPPUNIT_ASSERT(equal_end_to_end(p1));
+        CPPUNIT_ASSERT(equal_end_to_end(p2));
+        CPPUNIT_ASSERT(equal_end_to_end(p3));
+        CPPUNIT_ASSERT(equal_end_to_end(all));
     }
 
     void test_grammar()
