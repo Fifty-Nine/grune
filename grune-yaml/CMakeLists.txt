@@ -16,3 +16,5 @@ add_library(grune-yaml
     ${HEADERS}
 )
 target_link_libraries(grune-yaml grune yaml-cpp)
+
+add_subdirectory(samples)
