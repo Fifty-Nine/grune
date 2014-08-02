@@ -117,33 +117,24 @@ public:
         non_terminal B("B");
 
         production empty;
-        production p1 
-        {
-            A, 
-            { 
-                { "x" }, 
-                { "y" },
-                { "z" } 
-            }
-        };
-        production p2
-        {
-            { A, B },
-            { 
-                { "x", "y", "z" }, 
-                { "z", "y", "x" } 
-            },
-        };
-        production p3
-        {
-            { B, A },
-            { }
-        };
-        production_list all { p1, p2, p3 };
+        production p1_1 { A, { { "x" } } };
+        production p1_2 { A, { { "y" } } };
+        production p1_3 { A, { { "z" } } };
+        production_list p1 { p1_1, p1_2, p1_3 };
+        production p2_1 { { A, B }, { { "x", "y", "z" } } };
+        production p2_2 { { A, B }, { { "z", "y", "x" } } };
+        production_list p2 { p2_1, p2_2 };
+        production p3 { { B, A }, { } };
+        production_list all { p1_1, p1_2, p1_3, p2_1, p2_2, p3 };
 
         CPPUNIT_ASSERT(equal_end_to_end(empty));
         CPPUNIT_ASSERT(equal_end_to_end(p1));
+        CPPUNIT_ASSERT(equal_end_to_end(p1_1));
+        CPPUNIT_ASSERT(equal_end_to_end(p1_2));
+        CPPUNIT_ASSERT(equal_end_to_end(p1_3));
         CPPUNIT_ASSERT(equal_end_to_end(p2));
+        CPPUNIT_ASSERT(equal_end_to_end(p2_1));
+        CPPUNIT_ASSERT(equal_end_to_end(p2_2));
         CPPUNIT_ASSERT(equal_end_to_end(p3));
         CPPUNIT_ASSERT(equal_end_to_end(all));
     }

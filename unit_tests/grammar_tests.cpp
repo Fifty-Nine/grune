@@ -62,10 +62,10 @@ public:
         sequence first = { "a", "b", "c" };
         sequence second = { "a", "b" };
 
-        CPPUNIT_ASSERT_EQUAL(*it, first);
-        CPPUNIT_ASSERT_EQUAL(*it++, first);
-        CPPUNIT_ASSERT_EQUAL(*it, second);
-        CPPUNIT_ASSERT_EQUAL(++it, end); 
+        CPPUNIT_ASSERT_EQUAL(first, *it);
+        CPPUNIT_ASSERT_EQUAL(first, *it++);
+        CPPUNIT_ASSERT_EQUAL(second, *it);
+        CPPUNIT_ASSERT_EQUAL(end, ++it); 
 
         sequence_list expected 
         {
@@ -74,7 +74,7 @@ public:
         };
 
         sequence_list actual(begin, end);
-        CPPUNIT_ASSERT_EQUAL(actual, expected);
+        CPPUNIT_ASSERT_EQUAL(expected, actual);
     }
 };
 

@@ -47,16 +47,18 @@ public:
         expected = "right = \"1\", \"2\" | left, left;\n";
         CPPUNIT_ASSERT_EQUAL(expected, to_string(p2));
 
-        production p3(
-            { left, right },
-            {
-                { l1, right },
-                { left, l2 }
-            }
-        );
+        production p3_1 { { left, right }, { { l1, right } } };
+        production p3_2 { { left, right }, { { left, l2 } } };
+        production_list p3 { p3_1, p3_2 };
 
-        expected = "left, right = \"1\", right | left, \"2\"";
-        CPPUNIT_ASSERT_EQUAL(expected, p3.to_string());
+        expected = "left, right = \"1\", right";
+        CPPUNIT_ASSERT_EQUAL(expected, to_string(p3_1));
+
+        expected = "left, right = left, \"2\"";
+        CPPUNIT_ASSERT_EQUAL(expected, to_string(p3_2));
+
+        expected = "left, right = \"1\", right | left, \"2\";\n";
+        CPPUNIT_ASSERT_EQUAL(expected, to_string(p3));
     }
 
     void test_apply()
@@ -65,18 +67,15 @@ public:
         non_terminal B("B");
         non_terminal C("C");
 
-        production p1
-        {
-            A,
-            {
-                { "b", "c" },
-                { "d" }
-            }
-        };
+        production p1_1 { A, { { "b", "c" } } };
+        production p1_2 { A, { { "d" } } };
+        production_list p1 { p1_1, p1_2 };
 
-        CPPUNIT_ASSERT(p1.apply({}).empty());
+        CPPUNIT_ASSERT(apply(p1_1, {}).empty());
+        CPPUNIT_ASSERT(apply(p1_2, {}).empty());
+        CPPUNIT_ASSERT(apply(p1, {}).empty());
 
-        sequence_list result = p1.apply({"x", A, "y"});
+        sequence_list result = apply(p1, {"x", A, "y"});
         CPPUNIT_ASSERT_EQUAL((int)result.size(), 2);
 
         sequence_list expected = 
