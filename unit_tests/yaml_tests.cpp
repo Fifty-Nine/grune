@@ -4,6 +4,9 @@
 #include "grune/non_terminal.hpp"
 #include "grune/production.hpp"
 #include "grune/symbol.hpp"
+#include "grune/grammars/anbncn.hpp"
+#include "grune/grammars/turtle.hpp"
+#include "grune/grammars/tom_dick_and_harry.hpp"
 
 #include <iostream>
 
@@ -146,6 +149,13 @@ public:
 
     void test_grammar()
     {
+        auto anbncn = grune::grammars::anbncn();
+        auto turtle = grune::grammars::cyclic_manhattan_turtle();
+        auto tdh = grune::grammars::tom_dick_and_harry();
+
+        CPPUNIT_ASSERT(equal_end_to_end(anbncn));
+        CPPUNIT_ASSERT(equal_end_to_end(turtle));
+        CPPUNIT_ASSERT(equal_end_to_end(tdh));
     }
 
 };
