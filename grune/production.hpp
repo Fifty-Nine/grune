@@ -34,6 +34,8 @@ private:
 
 typedef std::list<production> production_list;
 
+sequence_list apply(const production& p, const sequence& s);
+sequence_list apply(const production_list& p, const sequence& s);
 }
 
 #endif /* GRUNE_PRODUCTION_HPP */

@@ -115,3 +115,19 @@ sequence_list production::apply(const sequence& s) const
 
     return result;
 }
+
+sequence_list grune::apply(const production& p, const sequence& s)
+{
+    return p.apply(s);
+}
+
+sequence_list grune::apply(const production_list& ps, const sequence& s)
+{
+    sequence_list result;
+    for (auto p : ps)
+    {
+        auto tmp = apply(p, s);
+        std::move(tmp.begin(), tmp.end(), std::back_inserter(result));
+    }
+    return result;
+}
