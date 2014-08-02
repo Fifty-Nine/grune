@@ -20,14 +20,14 @@ add_custom_command(
     WORKING_DIRECTORY ${Grune_SOURCE_DIR}/unit_tests
 )
 
-add_custom_target(check
+add_custom_target(check_unit_tests
     COMMAND unit_tests
     COMMAND diff -r expected results
     DEPENDS unit_tests
     WORKING_DIRECTORY ${Grune_SOURCE_DIR}/unit_tests
 )
 
-add_custom_target(commit
+add_custom_target(commit_unit_tests
     COMMAND unit_tests
     COMMAND rm -r ./expected
     COMMAND cp -R results expected
