@@ -1,7 +1,7 @@
 #ifndef GRUNE_GRAMMARS_TOM_DICK_HARRY_H
 #define GRUNE_GRAMMARS_TOM_DICK_HARRY_H
 
-#include "grune/grammar.hpp"
+#include "grune/all.hpp"
 
 namespace grune
 {

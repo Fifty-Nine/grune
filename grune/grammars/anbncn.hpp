@@ -1,7 +1,7 @@
 #ifndef GRUNE_GRAMMARS_ANBNCN_H
 #define GRUNE_GRAMMARS_ANBNCN_H
 
-#include "grune/grammar.hpp"
+#include "grune/all.hpp"
 
 namespace grune
 {
