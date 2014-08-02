@@ -74,14 +74,14 @@ public:
         CPPUNIT_ASSERT(p1.apply({}).empty());
 
         sequence_list result = p1.apply({"x", A, "y"});
-        CPPUNIT_ASSERT(result.size() == 2);
+        CPPUNIT_ASSERT_EQUAL((int)result.size(), 2);
 
         sequence_list expected = 
         {
             { "x", "b", "c", "y" },
             { "x", "d", "y" }
         };
-        CPPUNIT_ASSERT(result == expected);
+        CPPUNIT_ASSERT_EQUAL(result, expected);
     }
 };
 

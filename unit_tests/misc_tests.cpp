@@ -61,7 +61,7 @@ public:
             { "tom", " and ", "dick" }
         };
 
-        CPPUNIT_ASSERT(expected == result);
+        CPPUNIT_ASSERT_EQUAL(expected, result);
 
         non_terminal S("S");
         non_terminal A("A");
@@ -99,7 +99,7 @@ public:
             { "1", "0", "0", "0" }
         };
 
-        CPPUNIT_ASSERT(expected_finite == generate(finite));
+        CPPUNIT_ASSERT_EQUAL(expected_finite, generate(finite));
     }
 };
 
