@@ -12,7 +12,11 @@ find_package(Boost
     REQUIRED
 )
 
-include_directories(${Grune_SOURCE_DIR} ${Boost_INCLUDE_DIRS})
+include_directories(
+    ${Grune_SOURCE_DIR} 
+    ${Boost_INCLUDE_DIRS} 
+    contrib/cpp-flatten
+)
 
 add_compile_options("-std=c++11")
 
