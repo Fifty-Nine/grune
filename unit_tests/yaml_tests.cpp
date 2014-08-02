@@ -20,6 +20,7 @@ class yaml_tests : public CppUnit::TestFixture
     CPPUNIT_TEST(test_sequence_list);
     CPPUNIT_TEST(test_production);
     CPPUNIT_TEST(test_grammar);
+    CPPUNIT_TEST(test_simple_format);
     CPPUNIT_TEST_SUITE_END();
 
     template<class T>
@@ -156,6 +157,14 @@ public:
         CPPUNIT_ASSERT(equal_end_to_end(anbncn));
         CPPUNIT_ASSERT(equal_end_to_end(turtle));
         CPPUNIT_ASSERT(equal_end_to_end(tdh));
+    }
+
+    void test_simple_format()
+    {
+        std::string yaml_doc = "[a, b, c, d]";
+        sequence expected = { "a", "b", "c", "d" };
+        
+        CPPUNIT_ASSERT(load_equal(yaml_doc, expected));
     }
 
 };

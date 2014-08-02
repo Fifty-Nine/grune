@@ -9,19 +9,34 @@ YAML::Node YAML::convert<grune::symbol>::encode(
     const grune::symbol& rhs)
 {
     Node result;
-    result["text"] = rhs.text();
-    result["is_terminal"] = rhs.is_terminal();
+
+    if (rhs.is_terminal())
+    {
+        result = Node(rhs.text());
+    }
+    else
+    {
+        result["text"] = rhs.text();
+        result["is_terminal"] = rhs.is_terminal();
+    }
     return result;
 }
 
 bool YAML::convert<grune::symbol>::decode(
     const YAML::Node& node, grune::symbol& rhs)
 {
-    bool is_terminal = node["is_terminal"].as<bool>();
-    std::string text = node["text"].as<std::string>();
+    if (node.IsScalar() || node.IsNull())
+    {
+        rhs = symbol(node.Scalar());
+    }
+    else if (node.IsMap())
+    {
+        bool is_terminal = node["is_terminal"].as<bool>();
+        std::string text = node["text"].Scalar();
 
-    rhs = is_terminal ? 
-        symbol(text) : non_terminal(text);
+        rhs = is_terminal ? 
+            symbol(text) : non_terminal(text);
+    }
     return true;
 }
 
