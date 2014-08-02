@@ -24,8 +24,11 @@ public:
 
     bool operator==(const grammar& rhs) const;    
     std::string to_string() const;
-    const symbol& start_symbol() const;
+
+    const sequence& non_terminals() const;
+    const sequence& terminals() const;
     const production_list& productions() const;
+    const symbol& start_symbol() const;
 
 private:
     sequence m_non_terminals;
