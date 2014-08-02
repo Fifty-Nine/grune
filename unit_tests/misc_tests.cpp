@@ -2,8 +2,6 @@
 #include "grune/all.hpp"
 #include "grune/grammars/tom_dick_and_harry.hpp"
 
-#include <iostream>
-
 using namespace grune;
 
 class misc_tests : public CppUnit::TestFixture 
