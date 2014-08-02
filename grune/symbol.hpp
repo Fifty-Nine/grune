@@ -105,12 +105,6 @@ private:
 typedef std::list<symbol> sequence;
 typedef std::list<sequence> sequence_list;
 
-template<>
-struct symbol_traits<sequence_list> : public symbol_list_traits<sequence_list>
-{
-    static std::string separator() { return " | "; }
-};
-
 }
 
 #endif /* GRUNE_SYMBOL_HPP */
