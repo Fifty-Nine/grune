@@ -14,7 +14,7 @@ void test_tdh(std::ostream& o)
     auto end = next(begin, 18);
     for (auto it = begin; it != end; ++it)
     {
-        o << to_string(*it) << std::endl;
+        o << text(*it) << std::endl;
     }
 }
 

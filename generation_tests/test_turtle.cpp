@@ -14,6 +14,6 @@ void test_turtle(std::ostream& out)
 
     for (auto it = begin; it != end; ++it)
     {
-        out << to_string(*it) << std::endl;
+        out << text(*it) << std::endl;
     }
 }

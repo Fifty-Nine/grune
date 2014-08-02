@@ -1,18 +1,18 @@
-"tom"
-"dick"
-"harry"
-"tom", " and ", "tom"
-"tom", " and ", "dick"
-"tom", " and ", "harry"
-"dick", " and ", "tom"
-"dick", " and ", "dick"
-"dick", " and ", "harry"
-"harry", " and ", "tom"
-"harry", " and ", "dick"
-"harry", " and ", "harry"
-"tom", ", ", "tom", " and ", "tom"
-"tom", ", ", "tom", " and ", "dick"
-"tom", ", ", "tom", " and ", "harry"
-"tom", ", ", "dick", " and ", "tom"
-"tom", ", ", "dick", " and ", "dick"
-"tom", ", ", "dick", " and ", "harry"
+tom
+dick
+harry
+tom and tom
+tom and dick
+tom and harry
+dick and tom
+dick and dick
+dick and harry
+harry and tom
+harry and dick
+harry and harry
+tom, tom and tom
+tom, tom and dick
+tom, tom and harry
+tom, dick and tom
+tom, dick and dick
+tom, dick and harry

@@ -67,7 +67,7 @@ void test_numbers_simple(std::ostream& out)
     auto end = std::next(begin, 20);
     for (auto it = begin; it != end; ++it)
     {
-        out << to_string(*it) << std::endl;
+        out << text(*it) << std::endl;
     }
 }
 
@@ -114,7 +114,7 @@ void test_numbers(std::ostream& out)
     auto end = std::next(begin, 20);
     for (auto it = begin; it != end; ++it)
     {
-        out << to_string(*it) << std::endl;
+        out << text(*it) << std::endl;
     }
 }
 

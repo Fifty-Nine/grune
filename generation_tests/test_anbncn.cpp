@@ -11,7 +11,7 @@ void test_anbncn(std::ostream& out)
     auto end = next(begin, 3);
     for (auto it = begin; it != end; ++it)
     {
-        out << to_string(*it) << std::endl;
+        out << text(*it) << std::endl;
     }
 }
 
