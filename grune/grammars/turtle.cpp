@@ -15,14 +15,9 @@ grune::grammar grune::grammars::cyclic_manhattan_turtle()
         /* productions */
         {
             /* M -> nMs | eMw | {} */
-            { 
-                M,
-                {
-                    { "n", M, "s" }, 
-                    { "e", M, "w" }, 
-                    { }
-                }
-            },
+            { M, { { "n", M, "s" } } }, 
+            { M, { { "e", M, "w" } } }, 
+            { M, { { } } }, 
             /* ne -> en */
             { { "n", "e" }, { { "e", "n" } } },
             /* ns -> sn */
