@@ -21,6 +21,3 @@ add_subdirectory(grune-yaml)
 add_subdirectory(unit_tests)
 add_subdirectory(generation_tests)
 
-add_custom_target(check
-    COMMAND unit_tests
-)
