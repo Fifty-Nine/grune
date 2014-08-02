@@ -34,15 +34,18 @@ public:
         std::string expected = "left = right, \"1\", \"2\"";
         CPPUNIT_ASSERT_EQUAL(expected, p.to_string());
 
-        production p2(right, 
-            {
-                { l1, l2 },
-                { left, left }
-            }
-        );
+        production p2_1(right, { { l1, l2 } });
+        production p2_2(right, { { left, left } });
+        production_list p2 { p2_1, p2_2 };
 
-        expected = "right = \"1\", \"2\" | left, left";
-        CPPUNIT_ASSERT_EQUAL(expected, p2.to_string());
+        expected = "right = \"1\", \"2\"";
+        CPPUNIT_ASSERT_EQUAL(expected, to_string(p2_1));
+
+        expected = "right = left, left";
+        CPPUNIT_ASSERT_EQUAL(expected, to_string(p2_2));
+
+        expected = "right = \"1\", \"2\" | left, left;\n";
+        CPPUNIT_ASSERT_EQUAL(expected, to_string(p2));
 
         production p3(
             { left, right },
