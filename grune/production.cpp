@@ -33,10 +33,9 @@ production::production(
  */
 production::production(
     const sequence& from, 
-    const sequence_list& to) : 
-    m_from(from), m_to(to.empty() ? sequence() : to.front())
+    const sequence& to) : 
+    m_from(from), m_to(to)
 {
-    assert(to.size() <= 1);
 }
 
 /*

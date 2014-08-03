@@ -28,8 +28,7 @@ bool YAML::convert<grune::production>::decode(
     {
         sequence lhs = node["lhs"].as<sequence>();
         sequence rhs = node["rhs"].as<sequence>();
-        out = production(lhs, 
-            rhs.empty() ? sequence_list { { } } : sequence_list { rhs });
+        out = production(lhs, rhs);
     }
     else
     {
