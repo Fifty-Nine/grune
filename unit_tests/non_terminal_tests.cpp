@@ -3,19 +3,12 @@
 
 using namespace grune;
 
-class non_terminal_tests : public CppUnit::TestFixture 
+BOOST_AUTO_TEST_SUITE(non_terminal_test)
+
+BOOST_AUTO_TEST_CASE(to_string_test)
 {
-    CPPUNIT_TEST_SUITE(non_terminal_tests);
-    CPPUNIT_TEST(test_to_string);
-    CPPUNIT_TEST_SUITE_END();
+    non_terminal nt("non_term");
+    BOOST_CHECK_EQUAL(std::string("non_term"), nt.to_string());
+}
 
-public:
-    void test_to_string()
-    {
-        non_terminal nt("non_term");
-        CPPUNIT_ASSERT_EQUAL(std::string("non_term"), nt.to_string());
-    }
-    
-};
-
-CPPUNIT_TEST_SUITE_REGISTRATION(non_terminal_tests);
+BOOST_AUTO_TEST_SUITE_END()
