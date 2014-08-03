@@ -59,6 +59,10 @@ public:
 
         expected = "left, right = \"1\", right | left, \"2\";\n";
         CPPUNIT_ASSERT_EQUAL(expected, to_string(p3));
+
+        production empty_rhs(left);
+        expected = "left = \"\"";
+        CPPUNIT_ASSERT_EQUAL(expected, to_string(empty_rhs));
     }
 
     void test_apply()
