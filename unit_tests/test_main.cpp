@@ -1,23 +1,3 @@
-#include "grune/all.hpp"
-
-#include "unit_tests/tests.hpp"
-
-using namespace CppUnit;
-
-CompilerOutputter *getOutputter(TestResultCollector& collector)
-{
-    CompilerOutputter *result = 
-        new CompilerOutputter(&collector, std::cerr);
-
-    result->setLocationFormat("%p:%l:");
-
-    return result;
-}
-
-int main() 
-{
-    TextTestRunner runner;
-    runner.addTest(TestFactoryRegistry::getRegistry().makeTest());
-    runner.setOutputter(getOutputter(runner.result()));
-    return !runner.run("", false, true, false);
-}
+#define BOOST_TEST_MAIN
+#define BOOST_TEST_DYN_LINK
+#include <boost/test/unit_test.hpp>

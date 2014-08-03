@@ -8,6 +8,11 @@ set(Boost_USE_STATIC_RUNTIME OFF)
 
 find_package(Boost
     1.49.0
+    COMPONENTS unit_test_framework
+)
+
+find_package(Boost
+    1.49.0
     COMPONENTS filesystem system
     REQUIRED
 )
@@ -60,8 +65,16 @@ endfunction(add_check_target)
 
 add_subdirectory(grune)
 add_subdirectory(grune-yaml)
-add_subdirectory(unit_tests)
 add_subdirectory(generation_tests)
+
+if (Boost_UNIT_TEST_FRAMEWORK_FOUND)
+    add_subdirectory(unit_tests)
+else(Boost_UNIT_TEST_FRAMEWORK_FOUND)
+    message(
+        WARNING 
+        "Boost unit test framework not found. Unit tests will not be built."
+    )
+endif (Boost_UNIT_TEST_FRAMEWORK_FOUND)
 
 add_custom_target(check
     DEPENDS ${CHECK_TARGETS}
