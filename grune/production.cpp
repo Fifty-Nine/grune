@@ -14,7 +14,6 @@ using namespace grune;
 production::production() :
     m_from(), m_to()
 {
-    assert(m_to.size() <= 1);
 }
 
 /*
@@ -24,9 +23,9 @@ production::production() :
 production::production(
     const non_terminal& from, 
     const sequence_list& to) : 
-    m_from { from }, m_to(to)
+    m_from { from }, m_to(to.empty() ? sequence() : to.front())
 {
-    assert(m_to.size() <= 1);
+    assert(to.size() <= 1);
 }
 
 /*
@@ -36,9 +35,9 @@ production::production(
 production::production(
     const sequence& from, 
     const sequence_list& to) : 
-    m_from(from), m_to(to)
+    m_from(from), m_to(to.empty() ? sequence() : to.front())
 {
-    assert(m_to.size() <= 1);
+    assert(to.size() <= 1);
 }
 
 /*
@@ -75,10 +74,7 @@ std::string production::to_string() const
  */
 bool production::is_terminal() const
 {
-    return all_of(
-        m_to.begin(), m_to.end(), 
-        [](const sequence& s) { return grune::is_terminal(s); }
-    );
+    return grune::is_terminal(m_to);
 }
 
 sequence production::lhs() const
@@ -88,7 +84,7 @@ sequence production::lhs() const
 
 sequence production::rhs() const
 {
-    return m_to.empty() ? sequence() : m_to.front();
+    return m_to;
 }
 
 sequence_list production::apply(const sequence& s) const
@@ -104,15 +100,13 @@ sequence_list production::apply(const sequence& s) const
             break;
         }
 
-        for (auto replace : m_to)
-        {
-            sequence copy(s.begin(), it);
+        sequence copy(s.begin(), it);
 
-            copy.insert(copy.end(), replace.begin(), replace.end());
-            copy.insert(copy.end(), next(it, m_from.size()), s.end());
+        copy.insert(copy.end(), m_to.begin(), m_to.end());
+        copy.insert(copy.end(), next(it, m_from.size()), s.end());
 
-            result.push_back(copy);
-        }
+        result.push_back(copy);
+        
         ++it;
     }
 

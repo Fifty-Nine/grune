@@ -29,7 +29,7 @@ public:
 
 private:
     sequence m_from;
-    sequence_list m_to;
+    sequence m_to;
 };
 
 typedef std::list<production> production_list;
