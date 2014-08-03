@@ -31,12 +31,12 @@ void test_numbers_simple(std::ostream& out)
         { Digit, Nonzero, Number },
         digits(0, 1),
         {
-            { Digit, { { 0 } } },
-            { Digit, { { Nonzero } } },
-            { Nonzero, { { 1 } } },
-            { Number, { { Digit } } },
-            { Number, { { Nonzero, Digit } } },
-            { Number, { { Nonzero, Nonzero, Digit } } },
+            { Digit, { 0 } },
+            { Digit, { Nonzero } },
+            { Nonzero, { 1 } },
+            { Number, { Digit } },
+            { Number, { Nonzero, Digit } },
+            { Number, { Nonzero, Nonzero, Digit } },
         },
         Number
     };
@@ -66,20 +66,20 @@ void test_numbers(std::ostream& out)
         { Digit, Nonzero, Number },
         digits(0, 10), 
         {
-            { Digit, { { 0 } } },
-            { Digit, { { Nonzero } } },
-            { Nonzero, { { 1 } } },
-            { Nonzero, { { 2 } } },
-            { Nonzero, { { 3 } } },
-            { Nonzero, { { 4 } } },
-            { Nonzero, { { 5 } } },
-            { Nonzero, { { 6 } } },
-            { Nonzero, { { 7 } } },
-            { Nonzero, { { 8 } } },
-            { Nonzero, { { 9 } } },
-            { Number, { { Digit } } },
-            { Number, { { Nonzero, Digit } } },
-            { Number, { { Nonzero, Nonzero, Digit } } }
+            { Digit, { 0 } },
+            { Digit, { Nonzero } },
+            { Nonzero, { 1 } },
+            { Nonzero, { 2 } },
+            { Nonzero, { 3 } },
+            { Nonzero, { 4 } },
+            { Nonzero, { 5 } },
+            { Nonzero, { 6 } },
+            { Nonzero, { 7 } },
+            { Nonzero, { 8 } },
+            { Nonzero, { 9 } },
+            { Number, { Digit } },
+            { Number, { Nonzero, Digit } },
+            { Number, { Nonzero, Nonzero, Digit } }
         },
         Number
     };

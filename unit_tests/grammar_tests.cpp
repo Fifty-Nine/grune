@@ -20,21 +20,16 @@ class grammar_tests : public CppUnit::TestFixture
         symbol b("b");
         symbol c("c");
 
-        production p1(
-            A, { { a, B } }
-        );        
-        production p2(
-            B, { { b, C } }
-        );
-        production p3(
-            C, { { c } }
-        );
-        production p4(C);
 
         return grammar(
             { A, B, C },
             { a, b, c },
-            { p1, p2, p3, p4 }, 
+            {
+                { A, { a, B } },        
+                { B, { b, C } },
+                { C, { c } },
+                { C },
+            },
             A
         );
     }

@@ -14,12 +14,12 @@ grune::grammar grune::grammars::anbncn()
         { "a", "b", "c" }, /* terminals */
         {
             /* S -> abc | aSQ */
-            { S, { { "a", "b", "c" } } },
-            { S, { { "a", S, Q } } },
+            { S, { "a", "b", "c" } },
+            { S, { "a", S, Q } },
             /* bQc -> bbcc */
-            { { "b", Q, "c" }, { { "b", "b", "c", "c" } } },
+            { { "b", Q, "c" }, { "b", "b", "c", "c" } },
             /* cQ -> Qc */
-            { { "c", Q }, { { Q, "c" } } },
+            { { "c", Q }, { Q, "c" } },
         },
         S /* start */
     };
