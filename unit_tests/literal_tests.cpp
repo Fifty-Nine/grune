@@ -3,19 +3,12 @@
 
 using namespace grune;
 
-class literal_tests : public CppUnit::TestFixture 
+BOOST_AUTO_TEST_SUITE(literal_tests)
+
+BOOST_AUTO_TEST_CASE(to_string_test)
 {
-    CPPUNIT_TEST_SUITE(literal_tests);
-    CPPUNIT_TEST(test_to_string);
-    CPPUNIT_TEST_SUITE_END();
+    symbol l("literal");
+    BOOST_CHECK_EQUAL(std::string("\"literal\""), l.to_string());
+}
 
-public:
-    void test_to_string()
-    {
-        symbol l("literal");
-        CPPUNIT_ASSERT_EQUAL(std::string("\"literal\""), l.to_string());
-    }
-    
-};
-
-CPPUNIT_TEST_SUITE_REGISTRATION(literal_tests);
+BOOST_AUTO_TEST_SUITE_END()
