@@ -1,3 +1,4 @@
+#define GRUNE_ASSERTION_TRAITS_NO_YAML
 #include "unit_tests/tests.hpp"
 #include "grune-yaml/grune-yaml.hpp"
 
@@ -24,20 +25,24 @@ class yaml_tests : public CppUnit::TestFixture
     CPPUNIT_TEST_SUITE_END();
 
     template<class T>
-    bool equal_end_to_end(T value)
+    void assert_equal_end_to_end(T value)
     {
         T first_pass = 
             YAML::Load(YAML::Dump(YAML::Node(value))).as<T>();
+
+        CPPUNIT_ASSERT_EQUAL(value, first_pass);
+
         T second_pass = 
             YAML::Load(YAML::Dump(YAML::Node(first_pass))).as<T>();
-        return first_pass == value && second_pass == value;
+
+        CPPUNIT_ASSERT_EQUAL(value, second_pass);
     }
 
     template<class T>
-    bool load_equal(const std::string& yaml_doc, T value)
+    void assert_load_equal(const std::string& yaml_doc, T value)
     {
         YAML::Node node = YAML::Load(yaml_doc);
-        return YAML::Load(yaml_doc).as<T>() == value;
+        CPPUNIT_ASSERT_EQUAL(value, YAML::Load(yaml_doc).as<T>());
     }
 
 public:
@@ -47,14 +52,14 @@ public:
         symbol asdf("asdf");
         non_terminal A("A");
 
-        CPPUNIT_ASSERT(equal_end_to_end(empty));
-        CPPUNIT_ASSERT(load_equal("{ is_terminal: yes, text: \"\" }", empty));
+        assert_equal_end_to_end(empty);
+        assert_load_equal("{ is_terminal: yes, text: \"\" }", empty);
 
-        CPPUNIT_ASSERT(equal_end_to_end(asdf));
-        CPPUNIT_ASSERT(load_equal("{ is_terminal: yes, text: asdf }", asdf));
+        assert_equal_end_to_end(asdf);
+        assert_load_equal("{ is_terminal: yes, text: asdf }", asdf);
 
-        CPPUNIT_ASSERT(equal_end_to_end(A)); 
-        CPPUNIT_ASSERT(load_equal("{ is_terminal: no, text: A }", A));
+        assert_equal_end_to_end(A); 
+        assert_load_equal("{ is_terminal: no, text: A }", A);
     }
 
     void test_sequence()
@@ -73,10 +78,10 @@ public:
             "(", non_terminal("expr"), ")"
         };
 
-        CPPUNIT_ASSERT(equal_end_to_end(empty));
-        CPPUNIT_ASSERT(equal_end_to_end(asdf));
-        CPPUNIT_ASSERT(equal_end_to_end(nts));
-        CPPUNIT_ASSERT(equal_end_to_end(mixed));
+        assert_equal_end_to_end(empty);
+        assert_equal_end_to_end(asdf);
+        assert_equal_end_to_end(nts);
+        assert_equal_end_to_end(mixed);
     }
 
     void test_sequence_list()
@@ -104,11 +109,11 @@ public:
             { "q", non_terminal("W"), "erty" },
         };
         
-        CPPUNIT_ASSERT(equal_end_to_end(empty));
-        CPPUNIT_ASSERT(equal_end_to_end(asdf));
-        CPPUNIT_ASSERT(equal_end_to_end(bits));
-        CPPUNIT_ASSERT(equal_end_to_end(nested_empty));
-        CPPUNIT_ASSERT(equal_end_to_end(mixed));
+        assert_equal_end_to_end(empty);
+        assert_equal_end_to_end(asdf);
+        assert_equal_end_to_end(bits);
+        assert_equal_end_to_end(nested_empty);
+        assert_equal_end_to_end(mixed);
     }
 
     void test_production()
@@ -117,35 +122,26 @@ public:
         non_terminal B("B");
 
         production empty;
-        production p1 
-        {
-            A, 
-            { 
-                { "x" }, 
-                { "y" },
-                { "z" } 
-            }
-        };
-        production p2
-        {
-            { A, B },
-            { 
-                { "x", "y", "z" }, 
-                { "z", "y", "x" } 
-            },
-        };
-        production p3
-        {
-            { B, A },
-            { }
-        };
-        production_list all { p1, p2, p3 };
+        production p1_1 { A, { "x" } };
+        production p1_2 { A, { "y" } };
+        production p1_3 { A, { "z" } };
+        production_list p1 { p1_1, p1_2, p1_3 };
+        production p2_1 { { A, B }, { "x", "y", "z" } };
+        production p2_2 { { A, B }, { "z", "y", "x" } };
+        production_list p2 { p2_1, p2_2 };
+        production p3 { { B, A }, { } };
+        production_list all { p1_1, p1_2, p1_3, p2_1, p2_2, p3 };
 
-        CPPUNIT_ASSERT(equal_end_to_end(empty));
-        CPPUNIT_ASSERT(equal_end_to_end(p1));
-        CPPUNIT_ASSERT(equal_end_to_end(p2));
-        CPPUNIT_ASSERT(equal_end_to_end(p3));
-        CPPUNIT_ASSERT(equal_end_to_end(all));
+        assert_equal_end_to_end(empty);
+        assert_equal_end_to_end(p1);
+        assert_equal_end_to_end(p1_1);
+        assert_equal_end_to_end(p1_2);
+        assert_equal_end_to_end(p1_3);
+        assert_equal_end_to_end(p2);
+        assert_equal_end_to_end(p2_1);
+        assert_equal_end_to_end(p2_2);
+        assert_equal_end_to_end(p3);
+        assert_equal_end_to_end(all);
     }
 
     void test_grammar()
@@ -154,9 +150,9 @@ public:
         auto turtle = grune::grammars::cyclic_manhattan_turtle();
         auto tdh = grune::grammars::tom_dick_and_harry();
 
-        CPPUNIT_ASSERT(equal_end_to_end(anbncn));
-        CPPUNIT_ASSERT(equal_end_to_end(turtle));
-        CPPUNIT_ASSERT(equal_end_to_end(tdh));
+        assert_equal_end_to_end(anbncn);
+        assert_equal_end_to_end(turtle);
+        assert_equal_end_to_end(tdh);
     }
 
     void test_simple_format()
@@ -164,7 +160,7 @@ public:
         std::string yaml_doc = "[a, b, c, d]";
         sequence expected = { "a", "b", "c", "d" };
         
-        CPPUNIT_ASSERT(load_equal(yaml_doc, expected));
+        assert_load_equal(yaml_doc, expected);
     }
 
 };

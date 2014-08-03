@@ -22,7 +22,11 @@ struct grune_assertion_traits
 
     static std::string toString(const T& x)
     {
+#ifndef GRUNE_ASSERTION_TRAITS_NO_YAML
         return YAML::Dump(YAML::Node(x));
+#else /* GRUNE_ASSERTION_TRAITS_NO_YAML */
+        return grune::to_string(x);
+#endif
     }
 
 };
@@ -35,6 +39,7 @@ struct grune_assertion_traits
 
 namespace CppUnit {
 GRUNE_ASSERTION_TRAITS(grune::symbol);
+GRUNE_ASSERTION_TRAITS(grune::non_terminal);
 GRUNE_ASSERTION_TRAITS(grune::sequence);
 GRUNE_ASSERTION_TRAITS(grune::sequence_list);
 GRUNE_ASSERTION_TRAITS(grune::production);
@@ -55,7 +60,6 @@ struct assertion_traits<grune::sentence_iterator>
         }
         return "<end>";
     }
-
 };
 
 }

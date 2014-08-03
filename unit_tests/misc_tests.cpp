@@ -29,9 +29,13 @@ public:
         CPPUNIT_ASSERT(is_terminal(t_seq));
         CPPUNIT_ASSERT(is_terminal(s));
 
-        production ntp { nt, { nt_seq, t_seq } };
+        production ntp0 { nt, { nt_seq } };
+        production ntp1 { nt, { t_seq } };
+        production_list ntp { ntp0, ntp1 };
         production tp { nt, { t_seq } };
 
+        CPPUNIT_ASSERT(!is_terminal(ntp0));
+        CPPUNIT_ASSERT(is_terminal(ntp1));
         CPPUNIT_ASSERT(!is_terminal(ntp));
         CPPUNIT_ASSERT(is_terminal(tp));
     }
@@ -69,34 +73,30 @@ public:
         grammar finite
         {
             { S, A, B },
-            { "0", "1" },
+            { 0, 1 },
             {
                 /* S -> AB */
-                {
-                    S, { { A, B } }
-                },
+                { S, { A, B } },
                 /* A -> 01 | 10 */
-                {
-                    A, { { "0", "1" }, { "1", "0" } }
-                },
+                { A, { 0, 1 } },
+                { A, { 1, 0 } },
                 /* B -> 11 | 00 */
-                {
-                    B, { { "1", "1" }, { "0", "0" } }
-                }
+                { B, { 1, 1 } },
+                { B, { 0, 0 } }
             },
             S
         };
 
         sequence_list expected_finite 
         {
-            { "0", "1", "1", "1" },
-            { "0", "1", "0", "0" },
-            { "1", "0", "1", "1" },
-            { "1", "0", "0", "0" },
-            { "0", "1", "1", "1" },
-            { "1", "0", "1", "1" },
-            { "0", "1", "0", "0" },
-            { "1", "0", "0", "0" }
+            { 0, 1, 1, 1 },
+            { 0, 1, 0, 0 },
+            { 1, 0, 1, 1 },
+            { 1, 0, 0, 0 },
+            { 0, 1, 1, 1 },
+            { 1, 0, 1, 1 },
+            { 0, 1, 0, 0 },
+            { 1, 0, 0, 0 }
         };
 
         CPPUNIT_ASSERT_EQUAL(expected_finite, generate(finite));

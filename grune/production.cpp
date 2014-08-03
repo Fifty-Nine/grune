@@ -22,7 +22,7 @@ production::production() :
  */
 production::production(
     const non_terminal& from, 
-    const sequence_list& to) : 
+    const sequence& to) : 
     m_from { from }, m_to(to)
 {
 }
@@ -33,7 +33,7 @@ production::production(
  */
 production::production(
     const sequence& from, 
-    const sequence_list& to) : 
+    const sequence& to) : 
     m_from(from), m_to(to)
 {
 }
@@ -60,16 +60,7 @@ std::string production::to_string() const
     std::ostringstream result;
     result << grune::to_string(m_from);
     result << " = ";
-
-    auto it = m_to.begin();
-
-    while (true)
-    {
-        result << grune::to_string(*it);
-        if (++it == m_to.end()) break;
-        result << " | ";
-    }
-
+    result << grune::to_string(m_to);
     return result.str();
 }
 
@@ -81,10 +72,7 @@ std::string production::to_string() const
  */
 bool production::is_terminal() const
 {
-    return all_of(
-        m_to.begin(), m_to.end(), 
-        [](const sequence& s) { return grune::is_terminal(s); }
-    );
+    return grune::is_terminal(m_to);
 }
 
 sequence production::lhs() const
@@ -92,7 +80,7 @@ sequence production::lhs() const
     return m_from;
 }
 
-sequence_list production::rhs() const
+sequence production::rhs() const
 {
     return m_to;
 }
@@ -110,17 +98,31 @@ sequence_list production::apply(const sequence& s) const
             break;
         }
 
-        for (auto replace : m_to)
-        {
-            sequence copy(s.begin(), it);
+        sequence copy(s.begin(), it);
 
-            copy.insert(copy.end(), replace.begin(), replace.end());
-            copy.insert(copy.end(), next(it, m_from.size()), s.end());
+        copy.insert(copy.end(), m_to.begin(), m_to.end());
+        copy.insert(copy.end(), next(it, m_from.size()), s.end());
 
-            result.push_back(copy);
-        }
+        result.push_back(copy);
+        
         ++it;
     }
 
+    return result;
+}
+
+sequence_list grune::apply(const production& p, const sequence& s)
+{
+    return p.apply(s);
+}
+
+sequence_list grune::apply(const production_list& ps, const sequence& s)
+{
+    sequence_list result;
+    for (auto p : ps)
+    {
+        auto tmp = apply(p, s);
+        std::move(tmp.begin(), tmp.end(), std::back_inserter(result));
+    }
     return result;
 }

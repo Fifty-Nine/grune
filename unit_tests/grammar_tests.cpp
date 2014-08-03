@@ -20,20 +20,16 @@ class grammar_tests : public CppUnit::TestFixture
         symbol b("b");
         symbol c("c");
 
-        production p1(
-            A, { { a, B } }
-        );        
-        production p2(
-            B, { { b, C } }
-        );
-        production p3(
-            C, { { c }, { } }
-        );
 
         return grammar(
             { A, B, C },
             { a, b, c },
-            { p1, p2, p3 }, 
+            {
+                { A, { a, B } },        
+                { B, { b, C } },
+                { C, { c } },
+                { C },
+            },
             A
         );
     }
@@ -59,10 +55,10 @@ public:
         sequence first = { "a", "b", "c" };
         sequence second = { "a", "b" };
 
-        CPPUNIT_ASSERT_EQUAL(*it, first);
-        CPPUNIT_ASSERT_EQUAL(*it++, first);
-        CPPUNIT_ASSERT_EQUAL(*it, second);
-        CPPUNIT_ASSERT_EQUAL(++it, end); 
+        CPPUNIT_ASSERT_EQUAL(first, *it);
+        CPPUNIT_ASSERT_EQUAL(first, *it++);
+        CPPUNIT_ASSERT_EQUAL(second, *it);
+        CPPUNIT_ASSERT_EQUAL(end, ++it); 
 
         sequence_list expected 
         {
@@ -71,7 +67,7 @@ public:
         };
 
         sequence_list actual(begin, end);
-        CPPUNIT_ASSERT_EQUAL(actual, expected);
+        CPPUNIT_ASSERT_EQUAL(expected, actual);
     }
 };
 

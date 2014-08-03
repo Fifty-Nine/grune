@@ -14,16 +14,6 @@ sequence digits(int low = 0, int high = 10)
     return result;
 }
 
-sequence_list to_seq_list(const sequence& s)
-{
-    sequence_list result;
-    for (auto sym : s)
-    {
-        result.emplace_back( sequence { sym } );
-    }
-    return result;
-}
-
 void test_numbers_simple(std::ostream& out)
 {
     /*
@@ -41,24 +31,12 @@ void test_numbers_simple(std::ostream& out)
         { Digit, Nonzero, Number },
         digits(0, 1),
         {
-            { Digit,   
-                { 
-                    { 0 },
-                    { Nonzero }                
-                }
-            },
-            { Nonzero, 
-                { 
-                    to_seq_list(digits(1, 2))
-                } 
-            },
-            { Number,  
-                { 
-                    { Digit }, 
-                    { Nonzero, Digit },
-                    { Nonzero, Nonzero, Digit }
-                }
-            }
+            { Digit, { 0 } },
+            { Digit, { Nonzero } },
+            { Nonzero, { 1 } },
+            { Number, { Digit } },
+            { Number, { Nonzero, Digit } },
+            { Number, { Nonzero, Nonzero, Digit } },
         },
         Number
     };
@@ -88,24 +66,20 @@ void test_numbers(std::ostream& out)
         { Digit, Nonzero, Number },
         digits(0, 10), 
         {
-            { Digit,   
-                { 
-                    { 0 },
-                    { Nonzero }                
-                }
-            },
-            { Nonzero, 
-                { 
-                    to_seq_list(digits(1, 10))
-                } 
-            },
-            { Number,  
-                { 
-                    { Digit }, 
-                    { Nonzero, Digit },
-                    { Nonzero, Nonzero, Digit }
-                }
-            }
+            { Digit, { 0 } },
+            { Digit, { Nonzero } },
+            { Nonzero, { 1 } },
+            { Nonzero, { 2 } },
+            { Nonzero, { 3 } },
+            { Nonzero, { 4 } },
+            { Nonzero, { 5 } },
+            { Nonzero, { 6 } },
+            { Nonzero, { 7 } },
+            { Nonzero, { 8 } },
+            { Nonzero, { 9 } },
+            { Number, { Digit } },
+            { Number, { Nonzero, Digit } },
+            { Number, { Nonzero, Nonzero, Digit } }
         },
         Number
     };
