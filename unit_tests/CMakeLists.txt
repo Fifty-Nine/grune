@@ -13,7 +13,6 @@ link_directories(${Grune_BINARY_DIR}/grune)
 target_link_libraries(unit_tests 
     grune 
     grune-yaml 
-    cppunit 
     ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY}
 )
 
