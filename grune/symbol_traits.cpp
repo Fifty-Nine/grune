@@ -22,12 +22,13 @@ bool symbol_traits<production_list>::is_empty(const production_list& p)
 
 std::string symbol_traits<production_list>::to_string(const production_list& ps)
 {
-    typedef std::multimap<sequence, sequence_list> Groups;
+    typedef std::multimap<sequence, sequence> Groups;
     Groups groups;
 
     for (auto it = ps.begin(); it != ps.end(); ++it)
     {
-        groups.insert(make_pair(it->lhs(), it->rhs()));
+        auto rhs = it->rhs();
+        groups.insert(make_pair(it->lhs(), rhs.empty() ? sequence() : rhs.front()));
     }
 
     std::ostringstream out;

@@ -5,19 +5,37 @@
 using namespace grune;
 
 YAML::Node YAML::convert<grune::production>::encode(
-    const grune::production& rhs)
+    const grune::production& in)
 {
     Node result;
-    result["lhs"] = rhs.lhs();
-    result["rhs"] = rhs.rhs();
+
+    if (in.initialized())
+    {
+        auto rhs = in.rhs();
+        result["lhs"] = in.lhs();
+        result["rhs"] = rhs.empty() ? sequence() : rhs.front();
+    }
+    else
+    {
+        result = YAML::Null;
+    }
     return result;
 }
 
 bool YAML::convert<grune::production>::decode(
     const YAML::Node& node, grune::production& out)
 {
-    sequence lhs = node["lhs"].as<sequence>();
-    sequence_list rhs = node["rhs"].as<sequence_list>();
-    out = production(lhs, rhs);
+    if (!node.IsNull() && !node.IsScalar())
+    {
+        sequence lhs = node["lhs"].as<sequence>();
+        sequence rhs = node["rhs"].as<sequence>();
+        out = production(lhs, 
+            rhs.empty() ? sequence_list { { } } : sequence_list { rhs });
+    }
+    else
+    {
+        out = grune::production();
+    }
+
     return true;
 }
