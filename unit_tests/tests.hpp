@@ -33,12 +33,21 @@ struct grune_assertion_traits
 };
 
 #define GRUNE_ASSERTION_TRAITS(t) \
+    namespace CppUnit { \
     template<> \
     struct assertion_traits<t> : \
         public grune_assertion_traits<t> \
-    { };
+    { }; }\
+    namespace boost { namespace test_tools { \
+    template<> \
+    struct print_log_value<t> { \
+        template<class T=void> \
+        void operator()(std::ostream& os, const t& v) { \
+            grune_assertion_traits<t>::toString(v); \
+        } \
+    }; \
+    } }
 
-namespace CppUnit {
 GRUNE_ASSERTION_TRAITS(grune::symbol);
 GRUNE_ASSERTION_TRAITS(grune::non_terminal);
 GRUNE_ASSERTION_TRAITS(grune::sequence);
@@ -47,6 +56,7 @@ GRUNE_ASSERTION_TRAITS(grune::production);
 GRUNE_ASSERTION_TRAITS(grune::production_list);
 GRUNE_ASSERTION_TRAITS(grune::grammar);
 
+namespace CppUnit {
 template<>
 struct assertion_traits<grune::sentence_iterator>
 {
@@ -63,6 +73,19 @@ struct assertion_traits<grune::sentence_iterator>
     }
 };
 
+}
+
+namespace boost { 
+namespace test_tools { 
+    template<>
+    struct print_log_value<grune::sentence_iterator> 
+    {
+        void operator()(std::ostream& os, const grune::sentence_iterator& v) 
+        {
+            os << CppUnit::assertion_traits<grune::sentence_iterator>::toString(v);
+        }
+    };
+} 
 }
 
 #endif /* TESTS_H */
