@@ -29,9 +29,13 @@ public:
         CPPUNIT_ASSERT(is_terminal(t_seq));
         CPPUNIT_ASSERT(is_terminal(s));
 
-        production ntp { nt, { nt_seq, t_seq } };
+        production ntp0 { nt, { nt_seq } };
+        production ntp1 { nt, { t_seq } };
+        production_list ntp { ntp0, ntp1 };
         production tp { nt, { t_seq } };
 
+        CPPUNIT_ASSERT(!is_terminal(ntp0));
+        CPPUNIT_ASSERT(is_terminal(ntp1));
         CPPUNIT_ASSERT(!is_terminal(ntp));
         CPPUNIT_ASSERT(is_terminal(tp));
     }

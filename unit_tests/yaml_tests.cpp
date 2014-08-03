@@ -129,7 +129,7 @@ public:
         production p2_1 { { A, B }, { { "x", "y", "z" } } };
         production p2_2 { { A, B }, { { "z", "y", "x" } } };
         production_list p2 { p2_1, p2_2 };
-        production p3 { { B, A }, { } };
+        production p3 { { B, A }, { { } } };
         production_list all { p1_1, p1_2, p1_3, p2_1, p2_2, p3 };
 
         assert_equal_end_to_end(empty);

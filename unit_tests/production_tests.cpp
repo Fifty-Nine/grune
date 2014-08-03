@@ -16,7 +16,7 @@ public:
     {
         non_terminal nt("S");
         production uninit;
-        production init(nt);
+        production init { nt, { { } } };
 
         CPPUNIT_ASSERT(!uninit.initialized());
         CPPUNIT_ASSERT(init.initialized());
