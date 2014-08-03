@@ -10,6 +10,11 @@ add_executable(unit_tests
 )
 
 link_directories(${Grune_BINARY_DIR}/grune)
-target_link_libraries(unit_tests grune grune-yaml cppunit)
+target_link_libraries(unit_tests 
+    grune 
+    grune-yaml 
+    cppunit 
+    ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY}
+)
 
 add_check_target(unit_tests unit_tests)
