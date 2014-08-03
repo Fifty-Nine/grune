@@ -14,6 +14,7 @@ using namespace grune;
 production::production() :
     m_from(), m_to()
 {
+    assert(m_to.size() <= 1);
 }
 
 /*
@@ -25,6 +26,7 @@ production::production(
     const sequence_list& to) : 
     m_from { from }, m_to(to)
 {
+    assert(m_to.size() <= 1);
 }
 
 /*
@@ -36,6 +38,7 @@ production::production(
     const sequence_list& to) : 
     m_from(from), m_to(to)
 {
+    assert(m_to.size() <= 1);
 }
 
 /*
@@ -83,9 +86,9 @@ sequence production::lhs() const
     return m_from;
 }
 
-sequence_list production::rhs() const
+sequence production::rhs() const
 {
-    return m_to;
+    return m_to.empty() ? sequence() : m_to.front();
 }
 
 sequence_list production::apply(const sequence& s) const

@@ -11,9 +11,8 @@ YAML::Node YAML::convert<grune::production>::encode(
 
     if (in.initialized())
     {
-        auto rhs = in.rhs();
         result["lhs"] = in.lhs();
-        result["rhs"] = rhs.empty() ? sequence() : rhs.front();
+        result["rhs"] = in.rhs();
     }
     else
     {

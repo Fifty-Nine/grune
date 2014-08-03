@@ -27,8 +27,7 @@ std::string symbol_traits<production_list>::to_string(const production_list& ps)
 
     for (auto it = ps.begin(); it != ps.end(); ++it)
     {
-        auto rhs = it->rhs();
-        groups.insert(make_pair(it->lhs(), rhs.empty() ? sequence() : rhs.front()));
+        groups.insert(make_pair(it->lhs(), it->rhs())); 
     }
 
     std::ostringstream out;
