@@ -14,7 +14,7 @@ class production
 {
 public:
     production();
-    production(const non_terminal& from, const sequence_list& to = {});
+    production(const non_terminal& from, const sequence& to = {});
     production(const sequence& from, const sequence_list& to = {});
 
     bool initialized() const;

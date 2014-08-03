@@ -29,9 +29,7 @@ class grammar_tests : public CppUnit::TestFixture
         production p3(
             C, { { c } }
         );
-        production p4(
-            C, { { } }
-        );
+        production p4(C);
 
         return grammar(
             { A, B, C },
