@@ -176,4 +176,18 @@ BOOST_AUTO_TEST_CASE(simple_nonterms)
     assert_load_equal("_", empty_nonterm);
 }
 
+BOOST_AUTO_TEST_CASE(short_production)
+{
+    non_terminal A("A");
+    symbol a("a");
+
+    production p
+    {
+        A, { a }
+    };
+
+    assert_equal_end_to_end(p);
+    assert_load_equal("{ lhs: _A, rhs: a }", p);
+}
+
 BOOST_AUTO_TEST_SUITE_END()

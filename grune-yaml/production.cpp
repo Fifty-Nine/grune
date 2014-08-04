@@ -4,6 +4,25 @@
 
 using namespace grune;
 
+namespace
+{
+
+sequence get(const YAML::Node& n)
+{
+    return 
+        n.IsSequence() ? n.as<sequence>() : 
+        n.IsNull() ? sequence() :
+        sequence { n.as<symbol>() };
+}
+
+void put(YAML::Node n, const sequence& s)
+{
+    if (s.size() == 1) { n = s.front(); }
+    else { n = s; }
+}
+
+}
+
 YAML::Node YAML::convert<grune::production>::encode(
     const grune::production& in)
 {
@@ -11,8 +30,8 @@ YAML::Node YAML::convert<grune::production>::encode(
 
     if (in.initialized())
     {
-        result["lhs"] = in.lhs();
-        result["rhs"] = in.rhs();
+        put(result["lhs"], in.lhs());
+        put(result["rhs"], in.rhs());
     }
     else
     {
@@ -24,16 +43,11 @@ YAML::Node YAML::convert<grune::production>::encode(
 bool YAML::convert<grune::production>::decode(
     const YAML::Node& node, grune::production& out)
 {
-    if (!node.IsNull() && !node.IsScalar())
-    {
-        sequence lhs = node["lhs"].as<sequence>();
-        sequence rhs = node["rhs"].as<sequence>();
-        out = production(lhs, rhs);
-    }
-    else
-    {
-        out = grune::production();
-    }
-
+    out = node.IsNull() || node.IsScalar() ? 
+        production() : 
+        production(
+            get(node["lhs"]),
+            get(node["rhs"])
+        );
     return true;
 }
