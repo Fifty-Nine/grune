@@ -9,7 +9,7 @@ void json_traits<grammar>::encode(const grammar& value, json11::Json& js)
 {
 }
 
-grammar json_traits<grammar>::decode(json11::Json& js)
+grammar json_traits<grammar>::decode(const json11::Json& js)
 {
     return grammar();
 }

@@ -17,7 +17,7 @@ template<>
 struct json_traits<grammar>
 {
     static void encode(const grammar& value, json11::Json& js);
-    static grammar decode(json11::Json& js);
+    static grammar decode(const json11::Json& js);
 };
 
 }

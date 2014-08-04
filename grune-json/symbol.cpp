@@ -9,7 +9,7 @@ void json_traits<symbol>::encode(const symbol& value, json11::Json& js)
 {
 }
 
-symbol json_traits<symbol>::decode(json11::Json& js)
+symbol json_traits<symbol>::decode(const json11::Json& js)
 {
     return symbol();
 }

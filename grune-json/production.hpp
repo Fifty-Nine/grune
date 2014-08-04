@@ -17,7 +17,7 @@ template<>
 struct json_traits<production>
 {
     static void encode(const production& value, json11::Json& js);
-    static production decode(json11::Json& js);
+    static production decode(const json11::Json& js);
 };
 
 }

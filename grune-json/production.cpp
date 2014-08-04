@@ -9,7 +9,7 @@ void json_traits<production>::encode(const production& value, json11::Json& js)
 {
 }
 
-production json_traits<production>::decode(json11::Json& js)
+production json_traits<production>::decode(const json11::Json& js)
 {
     return production();
 }
