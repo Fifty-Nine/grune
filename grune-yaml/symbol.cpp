@@ -8,35 +8,41 @@ using namespace grune;
 YAML::Node YAML::convert<grune::symbol>::encode(
     const grune::symbol& rhs)
 {
-    Node result;
+    std::string prefix = "";
+    if (!rhs.is_terminal())
+    {
+        prefix = "_";
+    }
+    else if (rhs.is_terminal() && !rhs.text().empty() && rhs.text()[0] == '_')
+    {
+        prefix = "\\";
+    }
 
-    if (rhs.is_terminal())
-    {
-        result = Node(rhs.text());
-    }
-    else
-    {
-        result["text"] = rhs.text();
-        result["is_terminal"] = rhs.is_terminal();
-    }
-    return result;
+    return Node(prefix + rhs.text());
 }
 
 bool YAML::convert<grune::symbol>::decode(
     const YAML::Node& node, grune::symbol& rhs)
 {
+    std::string text = "";
+    bool is_terminal = false;
     if (node.IsScalar() || node.IsNull())
     {
-        rhs = symbol(node.Scalar());
+        text = node.Scalar();
+        is_terminal = text.empty() || text[0] != '_';
+
+        if (!is_terminal || (!text.empty() && text[0] == '\\'))
+        {
+            text = text.substr(1);
+        }
     }
     else if (node.IsMap())
     {
-        bool is_terminal = node["is_terminal"].as<bool>();
-        std::string text = node["text"].Scalar();
-
-        rhs = is_terminal ? 
-            symbol(text) : non_terminal(text);
+        is_terminal = node["is_terminal"].as<bool>();
+        text = node["text"].Scalar();
     }
+    rhs = is_terminal ? 
+        symbol(text) : non_terminal(text);
     return true;
 }
 

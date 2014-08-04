@@ -153,4 +153,27 @@ BOOST_AUTO_TEST_CASE(simple_format_test)
     assert_load_equal(yaml_doc, expected);
 }
 
+BOOST_AUTO_TEST_CASE(simple_nonterms)
+{
+    symbol t("_t");
+    non_terminal nt("_nt");
+    symbol empty_term("");
+    non_terminal empty_nonterm("");
+
+    assert_equal_end_to_end(t);
+    assert_equal_end_to_end(nt);
+    assert_equal_end_to_end(empty_term);
+    assert_equal_end_to_end(empty_nonterm);
+
+    assert_load_equal("{ is_terminal: true, text: _t }", t);
+    assert_load_equal("{ is_terminal: false, text: _nt }", nt);
+    assert_load_equal("{ is_terminal: true, text: }", empty_term);
+    assert_load_equal("{ is_terminal: false, text: }", empty_nonterm);
+    
+    assert_load_equal("\\_t", t);
+    assert_load_equal("__nt", nt);
+    assert_load_equal("\"\"", empty_term);
+    assert_load_equal("_", empty_nonterm);
+}
+
 BOOST_AUTO_TEST_SUITE_END()
