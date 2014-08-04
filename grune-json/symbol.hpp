@@ -17,7 +17,7 @@ template<>
 struct json_traits<symbol>
 {
     static void encode(const symbol& value, json11::Json& js);
-    static symbol decode(json11::Json& js);
+    static symbol decode(const json11::Json& js);
 };
 
 }
