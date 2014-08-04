@@ -44,3 +44,7 @@ symbol json_traits<symbol>::decode(const json11::Json& js)
         symbol(text) : non_terminal(text);
 }
 
+non_terminal json_traits<non_terminal>::decode(const json11::Json& js)
+{
+    return grune::non_terminal(json_traits<symbol>::decode(js).identifier());
+}
