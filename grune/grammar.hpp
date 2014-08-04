@@ -4,7 +4,7 @@
 #include <list>
 #include <string>
 
-#include "grune/grune_fwd.hpp"
+#include "grune/production.hpp"
 #include "grune/symbol.hpp"
 
 namespace grune
