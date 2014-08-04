@@ -65,6 +65,7 @@ endfunction(add_check_target)
 
 add_subdirectory(grune)
 add_subdirectory(grune-yaml)
+add_subdirectory(grune-json)
 add_subdirectory(generation_tests)
 
 if (Boost_UNIT_TEST_FRAMEWORK_FOUND)

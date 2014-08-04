@@ -1,6 +1,7 @@
 add_executable(unit_tests
     test_main.cpp
     grammar_tests.cpp
+    json_tests.cpp
     literal_tests.cpp
     misc_tests.cpp
     non_terminal_tests.cpp
@@ -12,6 +13,7 @@ add_executable(unit_tests
 link_directories(${Grune_BINARY_DIR}/grune)
 target_link_libraries(unit_tests 
     grune 
+    grune-json
     grune-yaml 
     ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY}
 )
