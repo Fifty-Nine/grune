@@ -16,7 +16,7 @@ namespace detail
 template<>
 struct json_traits<production>
 {
-    static void encode(const production& value, json11::Json& js);
+    static json11::Json encode(const production& value);
     static production decode(const json11::Json& js);
 };
 

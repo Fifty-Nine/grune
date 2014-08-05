@@ -16,7 +16,7 @@ namespace detail
 template<>
 struct json_traits<grammar>
 {
-    static void encode(const grammar& value, json11::Json& js);
+    static json11::Json encode(const grammar& value);
     static grammar decode(const json11::Json& js);
 };
 

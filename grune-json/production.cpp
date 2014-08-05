@@ -5,12 +5,13 @@
 using namespace grune;
 using namespace grune::json::detail;
 
-void json_traits<production>::encode(const production& value, json11::Json& js)
+json11::Json json_traits<production>::encode(const production& value)
 {
+    return { };
 }
 
 production json_traits<production>::decode(const json11::Json& js)
 {
-    return production();
+    return { };
 }
 

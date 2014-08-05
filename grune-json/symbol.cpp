@@ -6,7 +6,7 @@
 using namespace grune;
 using namespace grune::json::detail;
 
-void json_traits<symbol>::encode(const symbol& v, json11::Json& js)
+json11::Json json_traits<symbol>::encode(const symbol& v)
 {
     std::string prefix = "";
     if (!v.is_terminal())
@@ -17,7 +17,7 @@ void json_traits<symbol>::encode(const symbol& v, json11::Json& js)
     {
         prefix = "\\";
     }
-    js = json11::Json(prefix + v.text());
+    return { prefix + v.text() };
 }
 
 symbol json_traits<symbol>::decode(const json11::Json& js)
