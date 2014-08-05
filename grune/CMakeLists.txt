@@ -25,3 +25,12 @@ add_library(grune
     ${SOURCES}
     ${HEADERS}
 )
+
+set_contrib_project_vars(cpp-flatten)
+ExternalProject_Add(cpp-flatten
+    PREFIX ${cpp-flatten_PREFIX}
+    GIT_REPOSITORY https://github.com/Fifty-Nine/cpp-flatten.git
+    GIT_TAG 02af27986bbc80d3ef2e90af62bd3af0fefee40b
+    INSTALL_COMMAND ""
+)
+target_include_directories(grune PUBLIC ${cpp-flatten_SOURCE_DIR})
