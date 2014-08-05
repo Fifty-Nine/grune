@@ -1,6 +1,3 @@
 [submodule "contrib/cpp-flatten"]
 	path = contrib/cpp-flatten
 	url = git@github.com:Fifty-Nine/cpp-flatten
-[submodule "contrib/json11"]
-	path = contrib/json11
-	url = git@github.com:Fifty-Nine/json11

@@ -16,9 +16,20 @@ add_library(grune-json
     ${HEADERS}
 )
 
+set_contrib_project_vars(json11)
+ExternalProject_Add(json11_build
+    PREFIX ${json11_PREFIX}
+    STAMP_DIR ${json11_STAMP_DIR}
+    SOURCE_DIR ${json11_SOURCE_DIR}
+    BINARY_DIR ${json11_BINARY_DIR}
+    GIT_REPOSITORY https://github.com/Fifty-Nine/json11.git
+    GIT_TAG 77623a420907240d7a8b8cc404e8bd526a0702ea
+    INSTALL_COMMAND ""
+)
+
 add_library(json11 IMPORTED STATIC)
-set_property(TARGET json11 PROPERTY IMPORTED_LOCATION "${Grune_BINARY_DIR}/contrib/json11/libjson11.a")
+set_property(TARGET json11 PROPERTY IMPORTED_LOCATION ${json11_BINARY_DIR}/libjson11.a)
+add_dependencies(json11 json11_build)
 
-target_include_directories(grune-json PUBLIC "${Grune_SOURCE_DIR}/contrib")
-
+target_include_directories(grune-json PUBLIC ${json11_SOURCE_DIR}/..)
 target_link_libraries(grune-json grune json11)
