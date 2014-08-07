@@ -16,7 +16,7 @@ class symbol :
     boost::equality_comparable<symbol>
 {
 public:
-    template<class T>
+    template<class T, class = decltype(sizeof(symbol_traits<T>))>
     symbol(T arg) : 
         m_model(new model_impl<T>(arg))
     {
