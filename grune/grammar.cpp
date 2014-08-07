@@ -56,3 +56,9 @@ const sequence& grammar::terminals() const
 {
     return m_terminals;
 }
+
+template<>
+std::string grune::to_string<grammar>(const grammar& g)
+{
+    return g.to_string();
+}

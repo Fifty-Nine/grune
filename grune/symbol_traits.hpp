@@ -45,7 +45,10 @@ std::string text(const T& t)
 }
 
 template<class T>
-struct symbol_traits
+struct symbol_traits;
+
+template<class T>
+struct default_symbol_traits
 {
     static bool is_terminal(const T& t) { return t.is_terminal(); }
     static bool is_empty(const T& t) { return t.is_empty(); }

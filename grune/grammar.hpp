@@ -37,6 +37,9 @@ private:
     symbol m_start;
 };
 
+template<>
+std::string to_string<grammar>(const grammar& g); 
+
 }
 
 #endif /* GRUNE_GRAMMAR_H */

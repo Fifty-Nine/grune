@@ -21,6 +21,12 @@ public:
         m_model(new model_impl<T>(arg))
     {
     }
+    
+    template<class T>
+    explicit symbol(const std::initializer_list<T>& arg) : 
+        m_model(new model_impl<T>(arg))
+    {
+    }
 
     symbol(const char * s = "") : 
         symbol(std::string(s))
@@ -123,6 +129,11 @@ private:
 
 typedef std::list<symbol> sequence;
 typedef std::list<sequence> sequence_list;
+
+template<>
+struct symbol_traits<symbol> : 
+    default_symbol_traits<symbol>
+{ };
 
 }
 
