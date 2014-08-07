@@ -116,13 +116,6 @@ struct symbol_list_traits : public basic_symbol_traits<List>
 
 };
 
-template<template<class, class...> class List, class T, class... Rest>
-struct symbol_traits<List<T, Rest...>> : 
-    public symbol_list_traits<List<T, Rest...>>
-{
-    static std::string separator() { return ", "; }
-};
-
 template<>
 struct symbol_traits<std::string> : 
     public basic_symbol_traits<std::string>
@@ -135,6 +128,12 @@ template<>
 struct symbol_traits<int> : 
     public numeric_symbol_traits<int>
 {
+};
+
+template<>
+struct symbol_traits<sequence> : public symbol_list_traits<sequence>
+{
+    static std::string separator() { return ", "; }
 };
 
 template<>
