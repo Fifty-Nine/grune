@@ -124,6 +124,10 @@ private:
         T m_value;
     };
 
+    symbol(const sequence&);
+    symbol(const sequence_list&);
+    symbol(const production&);
+
     std::unique_ptr<model> m_model;
 };
 
