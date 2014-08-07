@@ -75,47 +75,6 @@ struct numeric_symbol_traits :
     static std::string text(T v) { return std::to_string(v); }
 };
 
-template<class List>
-struct symbol_list_traits : public basic_symbol_traits<List>
-{
-    typedef typename List::value_type T;
-    
-    static std::string separator() { return ", "; }
-
-    static bool is_terminal(const List& l) 
-    { 
-        return all_of(l.begin(), l.end(), grune::is_terminal<T>);
-    }
-
-    static bool is_empty(const List& l)
-    {
-        return all_of(l.begin(), l.end(), grune::is_empty<T>);
-    }
-
-    static std::string to_string(const List& l)
-    {
-        if (is_empty(l)) { return "\"\""; }
-
-        std::vector<std::string> result(l.size());
-        transform(l.begin(), l.end(), result.begin(), grune::to_string<T>);
-
-        return boost::algorithm::join(result, 
-            symbol_traits<List>::separator()); 
-    }
-
-    static std::string text(const List& l)
-    {
-        std::string result;
-        for (auto elem : l)
-        {
-            if (!elem.is_terminal()) return "";
-            result += grune::text(elem);
-        }
-        return result;
-    }
-
-};
-
 template<>
 struct symbol_traits<std::string> : 
     public basic_symbol_traits<std::string>
@@ -131,26 +90,16 @@ struct symbol_traits<int> :
 };
 
 template<>
-struct symbol_traits<sequence> : public symbol_list_traits<sequence>
-{
-    static std::string separator() { return ", "; }
-};
+std::string to_string<sequence>(const sequence& s);
+template<>
+std::string text<sequence>(const sequence& s);
+template<>
+bool is_terminal<sequence>(const sequence& s);
 
 template<>
-struct symbol_traits<sequence_list> : public symbol_list_traits<sequence_list>
-{
-    static std::string separator() { return " | "; }
-};
-
+std::string to_string<sequence_list>(const sequence_list& s);
 template<>
-struct symbol_traits<production_list>
-{
-    static bool is_terminal(const production_list& t);
-    static bool is_empty(const production_list& t);
-    static std::string to_string(const production_list& t);
-    static std::string identifier(const production_list& t);
-    static std::string text(const production_list& t); 
-};
+std::string to_string<production_list>(const production_list& p);
 
 }
 

@@ -10,17 +10,55 @@
 
 using namespace grune;
 
-bool symbol_traits<production_list>::is_terminal(const production_list& p)
+namespace
 {
-    return all_of(p.begin(), p.end(), &grune::is_terminal<production>);
+
+template<class List>
+std::string list_to_string(const List& l, const std::string& separator)
+{
+    typedef typename List::value_type T;
+    if (l.empty()) { return "\"\""; }
+
+    std::vector<std::string> result(l.size());
+    transform(l.begin(), l.end(), result.begin(), grune::to_string<T>);
+
+    return boost::algorithm::join(result, separator);
 }
 
-bool symbol_traits<production_list>::is_empty(const production_list& p)
-{
-    return p.empty();
 }
 
-std::string symbol_traits<production_list>::to_string(const production_list& ps)
+template<>
+std::string grune::to_string<sequence>(const sequence& s)
+{
+    return list_to_string(s, ", ");
+}
+
+template<>
+bool grune::is_terminal<sequence>(const sequence& s)
+{
+    return all_of(s.begin(), s.end(), grune::is_terminal<symbol>);
+}
+
+template<>
+std::string grune::text<sequence>(const sequence& s)
+{
+    std::string result;
+    for (auto elem : s)
+    {
+        if (!elem.is_terminal()) return "";
+        result += grune::text(elem);
+    }
+    return result;
+}
+
+template<>
+std::string grune::to_string<sequence_list>(const sequence_list& s)
+{
+    return list_to_string(s, " | ");
+}
+
+template<>
+std::string grune::to_string<production_list>(const production_list& ps)
 {
     typedef std::multimap<sequence, sequence> Groups;
     Groups groups;
