@@ -4,8 +4,9 @@
 #include "grune/symbol.hpp"
 
 using namespace grune;
+using namespace json11;
 
-json11::Json grune::to_json(const symbol& v)
+Json grune::to_json(const symbol& v)
 {
     std::string prefix = "";
     if (!v.is_terminal())
@@ -19,12 +20,18 @@ json11::Json grune::to_json(const symbol& v)
     return { prefix + v.text() };
 }
 
-json11::Json grune::to_json(const non_terminal& nt)
+Json grune::to_json(const non_terminal& nt)
 {
     return grune::to_json(symbol(nt));
 }
 
-bool grune::from_json(const json11::Json& js, symbol& s)
+Json grune::to_json(const sequence& v)
+{
+    return v.size() == 1 ? 
+        (Json)v.front() : Json::array(v.begin(), v.end());
+}
+
+bool grune::from_json(const Json& js, symbol& s)
 {
     std::string text = "";
     bool is_terminal = false;
@@ -49,7 +56,7 @@ bool grune::from_json(const json11::Json& js, symbol& s)
     return true;
 }
 
-bool grune::from_json(const json11::Json& js, non_terminal& nt)
+bool grune::from_json(const Json& js, non_terminal& nt)
 {
     symbol result;
     if (from_json(js, result) && !result.is_terminal())
@@ -58,4 +65,22 @@ bool grune::from_json(const json11::Json& js, non_terminal& nt)
         return true;
     }
     return false;
+}
+
+bool grune::from_json(const Json& js, sequence& s)
+{
+    if (js.is_array())
+    {
+        sequence result;
+        transform(js.array_items().begin(), js.array_items().end(), 
+            std::back_inserter(result),
+            [](const Json& js) { return js.as<symbol>(); }
+        );
+        swap(result, s);
+    }
+    else
+    {
+        s = { js.as<symbol>() };
+    }
+    return true;
 }
