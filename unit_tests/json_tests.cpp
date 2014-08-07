@@ -54,13 +54,13 @@ BOOST_AUTO_TEST_CASE(symbol_test)
     non_terminal A("A");
 
     ASSERT_EQUAL_END_TO_END(empty);
-    ASSERT_LOAD_EQUAL("{ \"is_terminal\": \"yes\", \"text\": \"\" }", empty);
+    ASSERT_LOAD_EQUAL("{ \"is_terminal\": true, \"text\": \"\" }", empty);
 
     ASSERT_EQUAL_END_TO_END(asdf);
-    ASSERT_LOAD_EQUAL("{ is_terminal: yes, text: asdf }", asdf);
+    ASSERT_LOAD_EQUAL("{ \"is_terminal\": true, \"text\": \"asdf\" }", asdf);
 
     ASSERT_EQUAL_END_TO_END(A); 
-    ASSERT_LOAD_EQUAL("{ is_terminal: no, text: A }", A);
+    ASSERT_LOAD_EQUAL("{ \"is_terminal\": false, \"text\": \"A\" }", A);
 }
 
 BOOST_AUTO_TEST_CASE(sequence_test)
@@ -176,10 +176,10 @@ BOOST_AUTO_TEST_CASE(simple_nonterms)
     ASSERT_EQUAL_END_TO_END(empty_term);
     ASSERT_EQUAL_END_TO_END(empty_nonterm);
 
-    ASSERT_LOAD_EQUAL("{ is_terminal: true, text: _t }", t);
-    ASSERT_LOAD_EQUAL("{ is_terminal: false, text: _nt }", nt);
-    ASSERT_LOAD_EQUAL("{ is_terminal: true, text: }", empty_term);
-    ASSERT_LOAD_EQUAL("{ is_terminal: false, text: }", empty_nonterm);
+    ASSERT_LOAD_EQUAL("{ \"is_terminal\": true, \"text\": \"_t\" }", t);
+    ASSERT_LOAD_EQUAL("{ \"is_terminal\": false, \"text\": \"_nt\" }", nt);
+    ASSERT_LOAD_EQUAL("{ \"is_terminal\": true, \"text\": \"\" }", empty_term);
+    ASSERT_LOAD_EQUAL("{ \"is_terminal\": false, \"text\": \"\" }", empty_nonterm);
     
     ASSERT_LOAD_EQUAL("\\_t", t);
     ASSERT_LOAD_EQUAL("__nt", nt);
@@ -198,7 +198,7 @@ BOOST_AUTO_TEST_CASE(short_production)
     };
 
     ASSERT_EQUAL_END_TO_END(p);
-    ASSERT_LOAD_EQUAL("{ lhs: _A, rhs: a }", p);
+    ASSERT_LOAD_EQUAL("{ \"lhs\": \"_A\", \"rhs\": \"a\" }", p);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
