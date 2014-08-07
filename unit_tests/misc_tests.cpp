@@ -24,12 +24,10 @@ BOOST_AUTO_TEST_CASE(is_terminal_test)
 
     production ntp0 { nt, { nt_seq } };
     production ntp1 { nt, { t_seq } };
-    production_list ntp { ntp0, ntp1 };
     production tp { nt, { t_seq } };
 
     BOOST_CHECK(!is_terminal(ntp0));
     BOOST_CHECK(is_terminal(ntp1));
-    BOOST_CHECK(!is_terminal(ntp));
     BOOST_CHECK(is_terminal(tp));
 }
 
