@@ -21,7 +21,7 @@ grammar test_grammar()
             { A, { a, B } },        
             { B, { b, C } },
             { C, { c } },
-            { C },
+            { C, { } },
         },
         A
     );

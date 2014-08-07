@@ -14,8 +14,8 @@ class production
 {
 public:
     production();
-    production(const non_terminal& from, const sequence& to = {});
-    production(const sequence& from, const sequence& to = {});
+    production(const non_terminal& from, const sequence& to);
+    production(const sequence& from, const sequence& to);
 
     bool initialized() const;
     bool operator==(const production& rhs) const;
@@ -36,6 +36,12 @@ typedef std::list<production> production_list;
 
 sequence_list apply(const production& p, const sequence& s);
 sequence_list apply(const production_list& p, const sequence& s);
+
+template<>
+struct symbol_traits<production> : 
+    default_symbol_traits<production> 
+{ };
+
 }
 
 #endif /* GRUNE_PRODUCTION_HPP */

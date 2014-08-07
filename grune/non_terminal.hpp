@@ -36,6 +36,11 @@ private:
     std::string m_identifier;
 };
 
+template<>
+struct symbol_traits<non_terminal> : 
+    default_symbol_traits<non_terminal> 
+{ };
+
 } 
 
 #endif /* GRUNE_NON_TERMINAL_HPP */

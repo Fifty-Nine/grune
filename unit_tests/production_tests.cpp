@@ -9,7 +9,7 @@ BOOST_AUTO_TEST_CASE(initialized_test)
 {
     non_terminal nt("S");
     production uninit;
-    production init { nt };
+    production init { nt, { } };
 
     BOOST_CHECK(!uninit.initialized());
     BOOST_CHECK(init.initialized());
@@ -53,7 +53,7 @@ BOOST_AUTO_TEST_CASE(to_string_test)
     expected = "left, right = \"1\", right | left, \"2\";\n";
     BOOST_CHECK_EQUAL(expected, to_string(p3));
 
-    production empty_rhs(left);
+    production empty_rhs(left, { });
     expected = "left = \"\"";
     BOOST_CHECK_EQUAL(expected, to_string(empty_rhs));
 }
