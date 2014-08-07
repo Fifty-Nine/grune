@@ -15,24 +15,33 @@ using namespace grune;
 namespace
 {
 
-template<class T>
-void assert_equal_end_to_end(T value)
-{
-    T first_pass = json11::Json(value).as<T>();
-    BOOST_CHECK_EQUAL(value, first_pass);
+#define ASSERT_EQUAL_END_TO_END(value) \
+    do { \
+        std::string err; \
+        auto first_pass = \
+            json11::Json::parse( \
+                json11::Json(value).dump(), \
+                err\
+            ).as<decltype(value)>(); \
+        BOOST_CHECK_EQUAL(err, std::string()); \
+        BOOST_CHECK_EQUAL(first_pass, value); \
+        auto second_pass = \
+            json11::Json::parse( \
+                json11::Json(first_pass).dump(), \
+                err\
+            ).as<decltype(value)>(); \
+        BOOST_CHECK_EQUAL(err, std::string()); \
+        BOOST_CHECK_EQUAL(second_pass, value); \
+    } while (0)
 
-    T second_pass = json11::Json(first_pass).as<T>();
-    BOOST_CHECK_EQUAL(value, second_pass);
-}
-
-template<class T>
-void assert_load_equal(const std::string& json_doc, T value)
-{
-    std::string err;
-    T new_value = json11::Json::parse(json_doc, err).as<T>();
-    BOOST_CHECK_EQUAL(err, std::string());
-    BOOST_CHECK_EQUAL(value, new_value); 
-}
+#define ASSERT_LOAD_EQUAL(document, value) \
+    do { \
+        std::string err; \
+        auto new_value = \
+            json11::Json::parse(document, err).as<decltype(value)>(); \
+        BOOST_CHECK_EQUAL(err, std::string()); \
+        BOOST_CHECK_EQUAL(value, new_value); \
+    } while (0)
 
 }
 
@@ -44,14 +53,14 @@ BOOST_AUTO_TEST_CASE(symbol_test)
     symbol asdf("asdf");
     non_terminal A("A");
 
-    assert_equal_end_to_end(empty);
-    assert_load_equal("{ is_terminal: yes, text: \"\" }", empty);
+    ASSERT_EQUAL_END_TO_END(empty);
+    ASSERT_LOAD_EQUAL("{ \"is_terminal\": \"yes\", \"text\": \"\" }", empty);
 
-    assert_equal_end_to_end(asdf);
-    assert_load_equal("{ is_terminal: yes, text: asdf }", asdf);
+    ASSERT_EQUAL_END_TO_END(asdf);
+    ASSERT_LOAD_EQUAL("{ is_terminal: yes, text: asdf }", asdf);
 
-    assert_equal_end_to_end(A); 
-    assert_load_equal("{ is_terminal: no, text: A }", A);
+    ASSERT_EQUAL_END_TO_END(A); 
+    ASSERT_LOAD_EQUAL("{ is_terminal: no, text: A }", A);
 }
 
 BOOST_AUTO_TEST_CASE(sequence_test)
@@ -70,10 +79,10 @@ BOOST_AUTO_TEST_CASE(sequence_test)
         "(", non_terminal("expr"), ")"
     };
 
-    assert_equal_end_to_end(empty);
-    assert_equal_end_to_end(asdf);
-    assert_equal_end_to_end(nts);
-    assert_equal_end_to_end(mixed);
+    ASSERT_EQUAL_END_TO_END(empty);
+    ASSERT_EQUAL_END_TO_END(asdf);
+    ASSERT_EQUAL_END_TO_END(nts);
+    ASSERT_EQUAL_END_TO_END(mixed);
 }
 
 BOOST_AUTO_TEST_CASE(sequence_list_test)
@@ -101,11 +110,11 @@ BOOST_AUTO_TEST_CASE(sequence_list_test)
         { "q", non_terminal("W"), "erty" },
     };
     
-    assert_equal_end_to_end(empty);
-    assert_equal_end_to_end(asdf);
-    assert_equal_end_to_end(bits);
-    assert_equal_end_to_end(nested_empty);
-    assert_equal_end_to_end(mixed);
+    ASSERT_EQUAL_END_TO_END(empty);
+    ASSERT_EQUAL_END_TO_END(asdf);
+    ASSERT_EQUAL_END_TO_END(bits);
+    ASSERT_EQUAL_END_TO_END(nested_empty);
+    ASSERT_EQUAL_END_TO_END(mixed);
 }
 
 BOOST_AUTO_TEST_CASE(production_test)
@@ -124,16 +133,16 @@ BOOST_AUTO_TEST_CASE(production_test)
     production p3 { { B, A }, { } };
     production_list all { p1_1, p1_2, p1_3, p2_1, p2_2, p3 };
 
-    assert_equal_end_to_end(empty);
-    assert_equal_end_to_end(p1);
-    assert_equal_end_to_end(p1_1);
-    assert_equal_end_to_end(p1_2);
-    assert_equal_end_to_end(p1_3);
-    assert_equal_end_to_end(p2);
-    assert_equal_end_to_end(p2_1);
-    assert_equal_end_to_end(p2_2);
-    assert_equal_end_to_end(p3);
-    assert_equal_end_to_end(all);
+    ASSERT_EQUAL_END_TO_END(empty);
+    ASSERT_EQUAL_END_TO_END(p1);
+    ASSERT_EQUAL_END_TO_END(p1_1);
+    ASSERT_EQUAL_END_TO_END(p1_2);
+    ASSERT_EQUAL_END_TO_END(p1_3);
+    ASSERT_EQUAL_END_TO_END(p2);
+    ASSERT_EQUAL_END_TO_END(p2_1);
+    ASSERT_EQUAL_END_TO_END(p2_2);
+    ASSERT_EQUAL_END_TO_END(p3);
+    ASSERT_EQUAL_END_TO_END(all);
 }
 
 BOOST_AUTO_TEST_CASE(grammar_test)
@@ -142,9 +151,9 @@ BOOST_AUTO_TEST_CASE(grammar_test)
     auto turtle = grune::grammars::cyclic_manhattan_turtle();
     auto tdh = grune::grammars::tom_dick_and_harry();
 
-    assert_equal_end_to_end(anbncn);
-    assert_equal_end_to_end(turtle);
-    assert_equal_end_to_end(tdh);
+    ASSERT_EQUAL_END_TO_END(anbncn);
+    ASSERT_EQUAL_END_TO_END(turtle);
+    ASSERT_EQUAL_END_TO_END(tdh);
 }
 
 BOOST_AUTO_TEST_CASE(simple_format_test)
@@ -152,7 +161,7 @@ BOOST_AUTO_TEST_CASE(simple_format_test)
     std::string json_doc = "[a, b, c, d]";
     sequence expected = { "a", "b", "c", "d" };
     
-    assert_load_equal(json_doc, expected);
+    ASSERT_LOAD_EQUAL(json_doc, expected);
 }
 
 BOOST_AUTO_TEST_CASE(simple_nonterms)
@@ -162,20 +171,20 @@ BOOST_AUTO_TEST_CASE(simple_nonterms)
     symbol empty_term("");
     non_terminal empty_nonterm("");
 
-    assert_equal_end_to_end(t);
-    assert_equal_end_to_end(nt);
-    assert_equal_end_to_end(empty_term);
-    assert_equal_end_to_end(empty_nonterm);
+    ASSERT_EQUAL_END_TO_END(t);
+    ASSERT_EQUAL_END_TO_END(nt);
+    ASSERT_EQUAL_END_TO_END(empty_term);
+    ASSERT_EQUAL_END_TO_END(empty_nonterm);
 
-    assert_load_equal("{ is_terminal: true, text: _t }", t);
-    assert_load_equal("{ is_terminal: false, text: _nt }", nt);
-    assert_load_equal("{ is_terminal: true, text: }", empty_term);
-    assert_load_equal("{ is_terminal: false, text: }", empty_nonterm);
+    ASSERT_LOAD_EQUAL("{ is_terminal: true, text: _t }", t);
+    ASSERT_LOAD_EQUAL("{ is_terminal: false, text: _nt }", nt);
+    ASSERT_LOAD_EQUAL("{ is_terminal: true, text: }", empty_term);
+    ASSERT_LOAD_EQUAL("{ is_terminal: false, text: }", empty_nonterm);
     
-    assert_load_equal("\\_t", t);
-    assert_load_equal("__nt", nt);
-    assert_load_equal("\"\"", empty_term);
-    assert_load_equal("_", empty_nonterm);
+    ASSERT_LOAD_EQUAL("\\_t", t);
+    ASSERT_LOAD_EQUAL("__nt", nt);
+    ASSERT_LOAD_EQUAL("\"\"", empty_term);
+    ASSERT_LOAD_EQUAL("_", empty_nonterm);
 }
 
 BOOST_AUTO_TEST_CASE(short_production)
@@ -188,8 +197,8 @@ BOOST_AUTO_TEST_CASE(short_production)
         A, { a }
     };
 
-    assert_equal_end_to_end(p);
-    assert_load_equal("{ lhs: _A, rhs: a }", p);
+    ASSERT_EQUAL_END_TO_END(p);
+    ASSERT_LOAD_EQUAL("{ lhs: _A, rhs: a }", p);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
