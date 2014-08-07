@@ -9,25 +9,11 @@ namespace grune
 class non_terminal;
 class symbol;
 
-namespace json
-{
-namespace detail
-{
+json11::Json to_json(const symbol& s);
+json11::Json to_json(const non_terminal& s);
+bool from_json(const json11::Json& js, symbol& s);
+bool from_json(const json11::Json& js, non_terminal& nt);
 
-template<>
-struct json_traits<symbol>
-{
-    static json11::Json encode(const symbol& value);
-    static symbol decode(const json11::Json& js);
-};
-template<>
-struct json_traits<non_terminal> : public json_traits<symbol>
-{
-    static non_terminal decode(const json11::Json& js);
-};
-
-}
-}
 }
 
 #endif /* GRUNE_JSON_SYMBOL_HPP */

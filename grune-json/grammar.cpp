@@ -3,15 +3,14 @@
 #include "grune/grammar.hpp"
 
 using namespace grune;
-using namespace grune::json::detail;
 
-json11::Json json_traits<grammar>::encode(const grammar& value)
+json11::Json grune::to_json(const grammar& value)
 {
     return { };
 }
 
-grammar json_traits<grammar>::decode(const json11::Json& js)
+bool grune::from_json(const json11::Json& js, grammar& )
 {
-    return { };
+    return false;
 }
 

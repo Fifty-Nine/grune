@@ -4,9 +4,8 @@
 #include "grune/symbol.hpp"
 
 using namespace grune;
-using namespace grune::json::detail;
 
-json11::Json json_traits<symbol>::encode(const symbol& v)
+json11::Json grune::to_json(const symbol& v)
 {
     std::string prefix = "";
     if (!v.is_terminal())
@@ -20,7 +19,12 @@ json11::Json json_traits<symbol>::encode(const symbol& v)
     return { prefix + v.text() };
 }
 
-symbol json_traits<symbol>::decode(const json11::Json& js)
+json11::Json grune::to_json(const non_terminal& nt)
+{
+    return grune::to_json(symbol(nt));
+}
+
+bool grune::from_json(const json11::Json& js, symbol& s)
 {
     std::string text = "";
     bool is_terminal = false;
@@ -40,11 +44,18 @@ symbol json_traits<symbol>::decode(const json11::Json& js)
         is_terminal = obj["is_terminal"].bool_value();
         text = obj["text"].string_value();
     }
-    return is_terminal ? 
+    s = is_terminal ? 
         symbol(text) : non_terminal(text);
+    return true;
 }
 
-non_terminal json_traits<non_terminal>::decode(const json11::Json& js)
+bool grune::from_json(const json11::Json& js, non_terminal& nt)
 {
-    return grune::non_terminal(json_traits<symbol>::decode(js).identifier());
+    symbol result;
+    if (from_json(js, result) && !result.is_terminal())
+    {
+        nt = result.identifier();
+        return true;
+    }
+    return false;
 }

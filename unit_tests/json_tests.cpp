@@ -18,19 +18,20 @@ namespace
 template<class T>
 void assert_equal_end_to_end(T value)
 {
-    T first_pass = 
-        json::from_json<T>(json::to_json(value));
+    T first_pass = json11::Json(value).as<T>();
     BOOST_CHECK_EQUAL(value, first_pass);
 
-    T second_pass = 
-        json::from_json<T>(json::to_json(value));
+    T second_pass = json11::Json(first_pass).as<T>();
     BOOST_CHECK_EQUAL(value, second_pass);
 }
 
 template<class T>
 void assert_load_equal(const std::string& json_doc, T value)
 {
-    BOOST_CHECK_EQUAL(value, json::from_json<T>(json_doc));
+    std::string err;
+    T new_value = json11::Json::parse(json_doc, err).as<T>();
+    BOOST_CHECK_EQUAL(err, std::string());
+    BOOST_CHECK_EQUAL(value, new_value); 
 }
 
 }

@@ -8,20 +8,9 @@ namespace grune
 
 class production;
 
-namespace json
-{
-namespace detail
-{
+json11::Json to_json(const production& p);
+bool from_json(const json11::Json& js, production& p);
 
-template<>
-struct json_traits<production>
-{
-    static json11::Json encode(const production& value);
-    static production decode(const json11::Json& js);
-};
-
-}
-}
 }
 
 #endif /* GRUNE_JSON_PRODUCTION_HPP */

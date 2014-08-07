@@ -3,15 +3,14 @@
 #include "grune/production.hpp"
 
 using namespace grune;
-using namespace grune::json::detail;
 
-json11::Json json_traits<production>::encode(const production& value)
+json11::Json grune::to_json(const production& value)
 {
     return { };
 }
 
-production json_traits<production>::decode(const json11::Json& js)
+bool grune::from_json(const json11::Json& js, production& p)
 {
-    return { };
+    return false;
 }
 

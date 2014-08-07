@@ -23,7 +23,7 @@ ExternalProject_Add(json11_build
     SOURCE_DIR ${json11_SOURCE_DIR}
     BINARY_DIR ${json11_BINARY_DIR}
     GIT_REPOSITORY https://github.com/Fifty-Nine/json11.git
-    GIT_TAG 77623a420907240d7a8b8cc404e8bd526a0702ea
+    GIT_TAG master 
     INSTALL_COMMAND ""
 )
 
