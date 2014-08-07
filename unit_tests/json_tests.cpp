@@ -158,7 +158,7 @@ BOOST_AUTO_TEST_CASE(grammar_test)
 
 BOOST_AUTO_TEST_CASE(simple_format_test)
 {
-    std::string json_doc = "[a, b, c, d]";
+    std::string json_doc = "[\"a\",\"b\", \"c\", \"d\"]";
     sequence expected = { "a", "b", "c", "d" };
     
     ASSERT_LOAD_EQUAL(json_doc, expected);
@@ -181,10 +181,10 @@ BOOST_AUTO_TEST_CASE(simple_nonterms)
     ASSERT_LOAD_EQUAL("{ \"is_terminal\": true, \"text\": \"\" }", empty_term);
     ASSERT_LOAD_EQUAL("{ \"is_terminal\": false, \"text\": \"\" }", empty_nonterm);
     
-    ASSERT_LOAD_EQUAL("\\_t", t);
-    ASSERT_LOAD_EQUAL("__nt", nt);
+    ASSERT_LOAD_EQUAL("\"\\\\_t\"", t);
+    ASSERT_LOAD_EQUAL("\"__nt\"", nt);
     ASSERT_LOAD_EQUAL("\"\"", empty_term);
-    ASSERT_LOAD_EQUAL("_", empty_nonterm);
+    ASSERT_LOAD_EQUAL("\"_\"", empty_nonterm);
 }
 
 BOOST_AUTO_TEST_CASE(short_production)
