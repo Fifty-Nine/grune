@@ -34,9 +34,9 @@ void assert_load_equal(const std::string& yaml_doc, T value)
     BOOST_CHECK_EQUAL(value, YAML::Load(yaml_doc).as<T>());
 }
 
-BOOST_AUTO_TEST_SUITE(yaml_tests)
+GRUNE_TEST_SUITE(yaml_tests)
 
-BOOST_AUTO_TEST_CASE(symbol_test)
+GRUNE_TEST_CASE(yaml_tests, symbol_test)
 {
     symbol empty;
     symbol asdf("asdf");
@@ -51,8 +51,9 @@ BOOST_AUTO_TEST_CASE(symbol_test)
     assert_equal_end_to_end(A); 
     assert_load_equal("{ is_terminal: no, text: A }", A);
 }
+GRUNE_TEST_CASE_END()
 
-BOOST_AUTO_TEST_CASE(sequence_test)
+GRUNE_TEST_CASE(yaml_tests, sequence_test)
 {
     sequence empty { };
     sequence asdf { "a", "s", "d", "f" };
@@ -73,8 +74,9 @@ BOOST_AUTO_TEST_CASE(sequence_test)
     assert_equal_end_to_end(nts);
     assert_equal_end_to_end(mixed);
 }
+GRUNE_TEST_CASE_END()
 
-BOOST_AUTO_TEST_CASE(sequence_list_test)
+GRUNE_TEST_CASE(yaml_tests, sequence_list_test)
 {
     sequence_list empty { };
     sequence_list asdf { { "a" }, { "s" }, { "d" }, { "f" } };
@@ -105,8 +107,9 @@ BOOST_AUTO_TEST_CASE(sequence_list_test)
     assert_equal_end_to_end(nested_empty);
     assert_equal_end_to_end(mixed);
 }
+GRUNE_TEST_CASE_END()
 
-BOOST_AUTO_TEST_CASE(production_test)
+GRUNE_TEST_CASE(yaml_tests, production_test)
 {
     non_terminal A("A");
     non_terminal B("B");
@@ -133,8 +136,9 @@ BOOST_AUTO_TEST_CASE(production_test)
     assert_equal_end_to_end(p3);
     assert_equal_end_to_end(all);
 }
+GRUNE_TEST_CASE_END()
 
-BOOST_AUTO_TEST_CASE(grammar_test)
+GRUNE_TEST_CASE(yaml_tests, grammar_test)
 {
     auto anbncn = grune::grammars::anbncn();
     auto turtle = grune::grammars::cyclic_manhattan_turtle();
@@ -144,16 +148,18 @@ BOOST_AUTO_TEST_CASE(grammar_test)
     assert_equal_end_to_end(turtle);
     assert_equal_end_to_end(tdh);
 }
+GRUNE_TEST_CASE_END()
 
-BOOST_AUTO_TEST_CASE(simple_format_test)
+GRUNE_TEST_CASE(yaml_tests, simple_format_test)
 {
     std::string yaml_doc = "[a, b, c, d]";
     sequence expected = { "a", "b", "c", "d" };
     
     assert_load_equal(yaml_doc, expected);
 }
+GRUNE_TEST_CASE_END()
 
-BOOST_AUTO_TEST_CASE(simple_nonterms)
+GRUNE_TEST_CASE(yaml_tests, simple_nonterms)
 {
     symbol t("_t");
     non_terminal nt("_nt");
@@ -175,8 +181,9 @@ BOOST_AUTO_TEST_CASE(simple_nonterms)
     assert_load_equal("\"\"", empty_term);
     assert_load_equal("_", empty_nonterm);
 }
+GRUNE_TEST_CASE_END()
 
-BOOST_AUTO_TEST_CASE(short_production)
+GRUNE_TEST_CASE(yaml_tests, short_production)
 {
     non_terminal A("A");
     symbol a("a");
@@ -189,5 +196,6 @@ BOOST_AUTO_TEST_CASE(short_production)
     assert_equal_end_to_end(p);
     assert_load_equal("{ lhs: _A, rhs: a }", p);
 }
+GRUNE_TEST_CASE_END()
 
-BOOST_AUTO_TEST_SUITE_END()
+GRUNE_TEST_SUITE_END()

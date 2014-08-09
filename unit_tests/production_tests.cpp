@@ -3,9 +3,9 @@
 
 using namespace grune;
 
-BOOST_AUTO_TEST_SUITE(production_test)
+GRUNE_TEST_SUITE(production_tests)
 
-BOOST_AUTO_TEST_CASE(initialized_test)
+GRUNE_TEST_CASE(production_tests, initialized_test)
 {
     non_terminal nt("S");
     production uninit;
@@ -14,8 +14,9 @@ BOOST_AUTO_TEST_CASE(initialized_test)
     BOOST_CHECK(!uninit.initialized());
     BOOST_CHECK(init.initialized());
 }
+GRUNE_TEST_CASE_END()
 
-BOOST_AUTO_TEST_CASE(to_string_test)
+GRUNE_TEST_CASE(production_tests, to_string_test)
 {
     non_terminal left("left");
     non_terminal right("right");
@@ -57,8 +58,9 @@ BOOST_AUTO_TEST_CASE(to_string_test)
     expected = "left = \"\"";
     BOOST_CHECK_EQUAL(expected, to_string(empty_rhs));
 }
+GRUNE_TEST_CASE_END()
 
-BOOST_AUTO_TEST_CASE(apply_test)
+GRUNE_TEST_CASE(production_tests, apply_test)
 {
     non_terminal A("A");
     non_terminal B("B");
@@ -82,4 +84,6 @@ BOOST_AUTO_TEST_CASE(apply_test)
     };
     BOOST_CHECK_EQUAL(result, expected);
 }
-BOOST_AUTO_TEST_SUITE_END()
+GRUNE_TEST_CASE_END()
+
+GRUNE_TEST_SUITE_END()

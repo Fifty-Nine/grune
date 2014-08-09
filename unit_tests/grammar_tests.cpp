@@ -27,9 +27,9 @@ grammar test_grammar()
     );
 }
 
-BOOST_AUTO_TEST_SUITE(grammar_tests)
+GRUNE_TEST_SUITE(grammar_tests)
 
-BOOST_AUTO_TEST_CASE(to_string_test)
+GRUNE_TEST_CASE(grammar_tests, to_string_test)
 {
     std::string expected = 
         "A = \"a\", B;\n"
@@ -37,8 +37,9 @@ BOOST_AUTO_TEST_CASE(to_string_test)
         "C = \"c\" | \"\";\n";
     BOOST_CHECK_EQUAL(expected, test_grammar().to_string());
 }
+GRUNE_TEST_CASE_END()
 
-BOOST_AUTO_TEST_CASE(generate_test)
+GRUNE_TEST_CASE(grammar_tests, generate_test)
 {
     grammar g = test_grammar();
 
@@ -63,5 +64,6 @@ BOOST_AUTO_TEST_CASE(generate_test)
     sequence_list actual(begin, end);
     BOOST_CHECK_EQUAL(expected, actual);
 }
+GRUNE_TEST_CASE_END()
 
-BOOST_AUTO_TEST_SUITE_END()
+GRUNE_TEST_SUITE_END()

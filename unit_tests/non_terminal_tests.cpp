@@ -3,12 +3,13 @@
 
 using namespace grune;
 
-BOOST_AUTO_TEST_SUITE(non_terminal_test)
+GRUNE_TEST_SUITE(non_terminal_test)
 
-BOOST_AUTO_TEST_CASE(to_string_test)
+GRUNE_TEST_CASE(non_terminal_tests, to_string_test)
 {
     non_terminal nt("non_term");
     BOOST_CHECK_EQUAL(std::string("non_term"), nt.to_string());
 }
+GRUNE_TEST_CASE_END()
 
-BOOST_AUTO_TEST_SUITE_END()
+GRUNE_TEST_SUITE_END()

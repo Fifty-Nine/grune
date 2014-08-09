@@ -46,6 +46,12 @@ namespace test_tools {
         }
     };
 } 
+
+#define GRUNE_TEST_SUITE(suite) BOOST_AUTO_TEST_SUITE(suite)
+#define GRUNE_TEST_SUITE_END() BOOST_AUTO_TEST_SUITE_END()
+#define GRUNE_TEST_CASE(suite, name) BOOST_AUTO_TEST_CASE(name)
+#define GRUNE_TEST_CASE_END() 
+
 }
 
 #endif /* TESTS_H */

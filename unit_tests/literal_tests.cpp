@@ -3,12 +3,13 @@
 
 using namespace grune;
 
-BOOST_AUTO_TEST_SUITE(literal_tests)
+GRUNE_TEST_SUITE(literal_tests)
 
-BOOST_AUTO_TEST_CASE(to_string_test)
+GRUNE_TEST_CASE(literal_tests, to_string_test)
 {
     symbol l("literal");
     BOOST_CHECK_EQUAL(std::string("\"literal\""), l.to_string());
 }
+GRUNE_TEST_CASE_END()
 
-BOOST_AUTO_TEST_SUITE_END()
+GRUNE_TEST_SUITE_END()

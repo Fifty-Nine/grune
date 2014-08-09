@@ -3,9 +3,9 @@
 
 using namespace grune;
 
-BOOST_AUTO_TEST_SUITE(sequence_tests)
+GRUNE_TEST_SUITE(sequence_tests)
 
-void test_to_string()
+GRUNE_TEST_CASE(sequence_tests, test_to_string)
 {
     non_terminal A("A");
     non_terminal B("B");
@@ -26,5 +26,6 @@ void test_to_string()
     expected = "\"\"";
     BOOST_CHECK_EQUAL(expected, to_string(sequence_list()));
 }
+GRUNE_TEST_CASE_END()
 
-BOOST_AUTO_TEST_SUITE_END()
+GRUNE_TEST_SUITE_END()

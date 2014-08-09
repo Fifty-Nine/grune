@@ -45,9 +45,9 @@ namespace
 
 }
 
-BOOST_AUTO_TEST_SUITE(json_tests)
+GRUNE_TEST_SUITE(json_tests)
 
-BOOST_AUTO_TEST_CASE(symbol_test)
+GRUNE_TEST_CASE(json_tests, symbol_test)
 {
     symbol empty;
     symbol asdf("asdf");
@@ -62,8 +62,9 @@ BOOST_AUTO_TEST_CASE(symbol_test)
     ASSERT_EQUAL_END_TO_END(A); 
     ASSERT_LOAD_EQUAL("{ \"is_terminal\": false, \"text\": \"A\" }", A);
 }
+GRUNE_TEST_CASE_END()
 
-BOOST_AUTO_TEST_CASE(sequence_test)
+GRUNE_TEST_CASE(json_tests, sequence_test)
 {
     sequence empty { };
     sequence asdf { "a", "s", "d", "f" };
@@ -84,8 +85,9 @@ BOOST_AUTO_TEST_CASE(sequence_test)
     ASSERT_EQUAL_END_TO_END(nts);
     ASSERT_EQUAL_END_TO_END(mixed);
 }
+GRUNE_TEST_CASE_END()
 
-BOOST_AUTO_TEST_CASE(sequence_list_test)
+GRUNE_TEST_CASE(json_tests, sequence_list_test)
 {
     sequence_list empty { };
     sequence_list asdf { { "a" }, { "s" }, { "d" }, { "f" } };
@@ -116,8 +118,9 @@ BOOST_AUTO_TEST_CASE(sequence_list_test)
     ASSERT_EQUAL_END_TO_END(nested_empty);
     ASSERT_EQUAL_END_TO_END(mixed);
 }
+GRUNE_TEST_CASE_END()
 
-BOOST_AUTO_TEST_CASE(production_test)
+GRUNE_TEST_CASE(json_tests, production_test)
 {
     non_terminal A("A");
     non_terminal B("B");
@@ -144,8 +147,9 @@ BOOST_AUTO_TEST_CASE(production_test)
     ASSERT_EQUAL_END_TO_END(p3);
     ASSERT_EQUAL_END_TO_END(all);
 }
+GRUNE_TEST_CASE_END()
 
-BOOST_AUTO_TEST_CASE(grammar_test)
+GRUNE_TEST_CASE(json_tests, grammar_test)
 {
     auto anbncn = grune::grammars::anbncn();
     auto turtle = grune::grammars::cyclic_manhattan_turtle();
@@ -155,16 +159,18 @@ BOOST_AUTO_TEST_CASE(grammar_test)
     ASSERT_EQUAL_END_TO_END(turtle);
     ASSERT_EQUAL_END_TO_END(tdh);
 }
+GRUNE_TEST_CASE_END()
 
-BOOST_AUTO_TEST_CASE(simple_format_test)
+GRUNE_TEST_CASE(json_tests, simple_format_test)
 {
     std::string json_doc = "[\"a\",\"b\", \"c\", \"d\"]";
     sequence expected = { "a", "b", "c", "d" };
     
     ASSERT_LOAD_EQUAL(json_doc, expected);
 }
+GRUNE_TEST_CASE_END()
 
-BOOST_AUTO_TEST_CASE(simple_nonterms)
+GRUNE_TEST_CASE(json_tests, simple_nonterms)
 {
     symbol t("_t");
     non_terminal nt("_nt");
@@ -186,8 +192,9 @@ BOOST_AUTO_TEST_CASE(simple_nonterms)
     ASSERT_LOAD_EQUAL("\"\"", empty_term);
     ASSERT_LOAD_EQUAL("\"_\"", empty_nonterm);
 }
+GRUNE_TEST_CASE_END()
 
-BOOST_AUTO_TEST_CASE(short_production)
+GRUNE_TEST_CASE(json_tests, short_production)
 {
     non_terminal A("A");
     symbol a("a");
@@ -200,5 +207,6 @@ BOOST_AUTO_TEST_CASE(short_production)
     ASSERT_EQUAL_END_TO_END(p);
     ASSERT_LOAD_EQUAL("{ \"lhs\": \"_A\", \"rhs\": \"a\" }", p);
 }
+GRUNE_TEST_CASE_END()
 
-BOOST_AUTO_TEST_SUITE_END()
+GRUNE_TEST_SUITE_END()

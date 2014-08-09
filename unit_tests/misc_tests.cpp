@@ -4,9 +4,9 @@
 
 using namespace grune;
 
-BOOST_AUTO_TEST_SUITE(misc_tests)
+GRUNE_TEST_SUITE(misc_tests)
 
-BOOST_AUTO_TEST_CASE(is_terminal_test)
+GRUNE_TEST_CASE(misc_tests, is_terminal_test)
 {
     symbol lit("l");
     symbol empty;
@@ -30,8 +30,9 @@ BOOST_AUTO_TEST_CASE(is_terminal_test)
     BOOST_CHECK(is_terminal(ntp1));
     BOOST_CHECK(is_terminal(tp));
 }
+GRUNE_TEST_CASE_END()
 
-BOOST_AUTO_TEST_CASE(is_empty_test)
+GRUNE_TEST_CASE(misc_tests, is_empty_test)
 {
     symbol lit("l");
     symbol empty;
@@ -41,8 +42,9 @@ BOOST_AUTO_TEST_CASE(is_empty_test)
     BOOST_CHECK(is_empty(empty));
     BOOST_CHECK(!is_empty(nt));
 }
+GRUNE_TEST_CASE_END()
 
-BOOST_AUTO_TEST_CASE(generate_test)
+GRUNE_TEST_CASE(misc_tests, generate_test)
 {
     sequence_list result = generate(grammars::tom_dick_and_harry(), 5);
 
@@ -92,5 +94,6 @@ BOOST_AUTO_TEST_CASE(generate_test)
 
     BOOST_CHECK_EQUAL(expected_finite, generate(finite));
 }
+GRUNE_TEST_CASE_END()
 
-BOOST_AUTO_TEST_SUITE_END()
+GRUNE_TEST_SUITE_END()
