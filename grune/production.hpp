@@ -106,12 +106,14 @@ sequence_list apply(const production& p, const sequence& s);
 sequence_list apply(const production_list& p, const sequence& s);
 
 /*
- * A specialization of symbol_traits for productions.
+ * Convert this production to a human-readable string.
  */
-template<>
-struct symbol_traits<production> : 
-    default_symbol_traits<production> 
-{ };
+std::string to_string(const production& p);
+
+/*
+ * Test whether the given production is terminal.
+ */
+bool is_terminal(const production& p);
 
 }
 

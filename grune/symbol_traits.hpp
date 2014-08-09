@@ -17,7 +17,7 @@ class symbol_traits;
 /* 
  * Determine whether the given symbol is a terminal. 
  */
-template<class T>
+template<class T, class = decltype(sizeof(symbol_traits<T>))>
 bool is_terminal(const T& t)
 {
     return symbol_traits<T>::is_terminal(t);
@@ -26,7 +26,7 @@ bool is_terminal(const T& t)
 /* 
  * Determine whether the given symbol is the empty symbol. 
  */
-template<class T>
+template<class T, class = decltype(sizeof(symbol_traits<T>))>
 bool is_empty(const T& t)
 {
     return symbol_traits<T>::is_empty(t);
@@ -35,7 +35,7 @@ bool is_empty(const T& t)
 /* 
  * Convert the given symbol to a string. 
  */
-template<class T>
+template<class T, class = decltype(sizeof(symbol_traits<T>))>
 std::string to_string(const T& t)
 {
     return symbol_traits<T>::to_string(t);
@@ -45,7 +45,7 @@ std::string to_string(const T& t)
  * Get the identifier for the given non-terminal, or
  * if the symbol is terminal, return the empty string.
  */
-template<class T>
+template<class T, class = decltype(sizeof(symbol_traits<T>))>
 std::string identifier(const T& t)
 {
     return symbol_traits<T>::identifier(t);
@@ -57,7 +57,7 @@ std::string identifier(const T& t)
  * wrapped in quotes. For non-terminals, this just 
  * returns the identifier.
  */
-template<class T>
+template<class T, class = decltype(sizeof(symbol_traits<T>))>
 std::string text(const T& t)
 {
     return symbol_traits<T>::text(t);

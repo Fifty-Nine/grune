@@ -126,3 +126,13 @@ sequence_list grune::apply(const production_list& ps, const sequence& s)
     }
     return result;
 }
+
+std::string grune::to_string(const production& p)
+{
+    return p.to_string();
+}
+
+bool grune::is_terminal(const production& p)
+{
+    return p.is_terminal();
+}

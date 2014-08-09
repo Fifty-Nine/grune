@@ -8,6 +8,7 @@ add_executable(unit_tests
     production_tests.cpp
     sequence_tests.cpp
     yaml_tests.cpp
+    tests.cpp
 )
 
 link_directories(${Grune_BINARY_DIR}/grune)
