@@ -153,13 +153,11 @@ typedef std::list<symbol> sequence;
  */
 typedef std::list<sequence> sequence_list;
 
-/* 
- * A specialization of symbol traits for symbols. 
- */
-template<>
-struct symbol_traits<symbol> : 
-    default_symbol_traits<symbol>
-{ };
+inline std::string to_string(const symbol& s) { return s.to_string(); }
+inline std::string identifier(const symbol& s) { return s.identifier(); }
+inline std::string text(const symbol& s) { return s.text(); }
+inline bool is_terminal(const symbol& s) { return s.is_terminal(); }
+inline bool is_empty(const symbol& s) { return s.is_empty(); }
 
 }
 

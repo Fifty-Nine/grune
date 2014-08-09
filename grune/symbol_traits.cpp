@@ -35,7 +35,9 @@ std::string grune::to_string(const sequence& s)
 
 bool grune::is_terminal(const sequence& s)
 {
-    return all_of(s.begin(), s.end(), grune::is_terminal<symbol>);
+    return all_of(s.begin(), s.end(), 
+        [](const symbol& s) { return grune::is_terminal(s); }
+    );
 }
 
 std::string grune::text(const sequence& s)
