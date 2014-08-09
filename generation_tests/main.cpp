@@ -6,6 +6,7 @@
 #define ADD_TEST(name) \
     extern void name(std::ostream&);
 
+
 ADD_TEST(test_anbncn);
 ADD_TEST(test_numbers);
 ADD_TEST(test_numbers_simple);
@@ -20,10 +21,23 @@ void run_test(test_fcn_t test, const std::string& name)
     test(results);
 }
 
+#ifndef COVERITY_BUILD
 #define RUN_TEST(name) run_test(name, #name)
+#else 
+#include <coverity-test-separation.h>
+#define RUN_TEST(name) \
+    do { \
+        COVERITY_TS_START_TEST(#name); \
+        run_test(name, #name); \
+        COVERITY_TS_END_TEST(); \
+    } while (0)
+#endif 
 
 int main()
 {
+#ifdef COVERITY_BUILD
+    COVERITY_TS_SET_SUITE_NAME("generation_tests");
+#endif
     RUN_TEST(test_anbncn);
     RUN_TEST(test_numbers_simple);
     RUN_TEST(test_numbers);
