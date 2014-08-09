@@ -19,28 +19,26 @@ std::string list_to_string(const List& l, const std::string& separator)
     typedef typename List::value_type T;
     if (l.empty()) { return "\"\""; }
 
+    std::string (*to_str_fcn)(const T&) = grune::to_string;
     std::vector<std::string> result(l.size());
-    transform(l.begin(), l.end(), result.begin(), grune::to_string<T>);
+    transform(l.begin(), l.end(), result.begin(), to_str_fcn);
 
     return boost::algorithm::join(result, separator);
 }
 
 }
 
-template<>
-std::string grune::to_string<sequence>(const sequence& s)
+std::string grune::to_string(const sequence& s)
 {
     return list_to_string(s, ", ");
 }
 
-template<>
-bool grune::is_terminal<sequence>(const sequence& s)
+bool grune::is_terminal(const sequence& s)
 {
     return all_of(s.begin(), s.end(), grune::is_terminal<symbol>);
 }
 
-template<>
-std::string grune::text<sequence>(const sequence& s)
+std::string grune::text(const sequence& s)
 {
     std::string result;
     for (auto elem : s)
@@ -51,14 +49,12 @@ std::string grune::text<sequence>(const sequence& s)
     return result;
 }
 
-template<>
-std::string grune::to_string<sequence_list>(const sequence_list& s)
+std::string grune::to_string(const sequence_list& s)
 {
     return list_to_string(s, " | ");
 }
 
-template<>
-std::string grune::to_string<production_list>(const production_list& ps)
+std::string grune::to_string(const production_list& ps)
 {
     typedef std::multimap<sequence, sequence> Groups;
     Groups groups;

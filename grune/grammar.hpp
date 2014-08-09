@@ -73,8 +73,7 @@ private:
 /*
  * Convert the given grammar to a human-readable string representation.
  */
-template<>
-std::string to_string<grammar>(const grammar& g); 
+std::string to_string(const grammar& g); 
 
 }
 

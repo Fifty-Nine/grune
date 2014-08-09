@@ -135,17 +135,12 @@ struct symbol_traits<int> :
 {
 };
 
-template<>
-std::string to_string<sequence>(const sequence& s);
-template<>
-std::string text<sequence>(const sequence& s);
-template<>
-bool is_terminal<sequence>(const sequence& s);
+std::string to_string(const sequence& s);
+std::string text(const sequence& s);
+bool is_terminal(const sequence& s);
 
-template<>
-std::string to_string<sequence_list>(const sequence_list& s);
-template<>
-std::string to_string<production_list>(const production_list& p);
+std::string to_string(const sequence_list& s);
+std::string to_string(const production_list& p);
 
 }
 
