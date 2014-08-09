@@ -76,6 +76,13 @@ endfunction(set_contrib_project_vars target)
 
 include(ExternalProject)
 
+option(COVERITY_DIR "Configure for building with Coverity Static Analysis tools" OFF)
+if(COVERITY_DIR)
+    include_directories(SYSTEM "${COVERITY_DIR}/library")
+    add_definitions(-DCOVERITY_BUILD=1)
+    message(STATUS "Configuring for Coverity coverage build")
+endif(COVERITY_DIR)
+
 add_subdirectory(grune)
 add_subdirectory(grune-yaml)
 add_subdirectory(grune-json)
