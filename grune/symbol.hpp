@@ -11,6 +11,11 @@
 namespace grune 
 {
 
+/*
+ * Represents a symbol in a grammar.
+ * Symbols use value semantics and can contain objects of any class
+ * that has an appropriate symbol_traits<> specialization.
+ */
 class symbol : 
     boost::less_than_comparable<symbol>,
     boost::equality_comparable<symbol>
@@ -69,7 +74,17 @@ public:
      */
     bool is_empty() const { return m_model->is_empty(); }
 
+    /* 
+     * If this is a non-terminal, get the identifier. Otherwise,
+     * return the empty string.
+     */
     std::string identifier() const { return m_model->identifier(); }
+
+    /*
+     * Get the text of this symbol. If this is a non-terminal, this
+     * is the same as identifier(). If this is a terminal, this returns
+     * the same as to_string() without any quoting.
+     */
     std::string text() const { return m_model->text(); }
 
 private:
@@ -127,9 +142,20 @@ private:
     std::unique_ptr<model> m_model;
 };
 
+/*
+ * A list of symbols. Can be used to represent a sentence if everything in the 
+ * sequence is non-terminal, or the left- or right-hand side of a production.
+ */
 typedef std::list<symbol> sequence;
+
+/*
+ * A list of sequences.
+ */
 typedef std::list<sequence> sequence_list;
 
+/* 
+ * A specialization of symbol traits for symbols. 
+ */
 template<>
 struct symbol_traits<symbol> : 
     default_symbol_traits<symbol>
