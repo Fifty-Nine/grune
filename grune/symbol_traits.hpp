@@ -64,7 +64,6 @@ struct basic_symbol_traits
     static bool is_empty(const T& t) { return grune::text(t).empty(); }
     static std::string to_string(const T& t) { return "\"" + grune::text(t) + "\""; }
     static std::string identifier(const T& t) { return ""; }
-    static std::string text(const T& t) { return ""; }
 };
 
 template<class T>
