@@ -58,7 +58,7 @@ struct default_symbol_traits
 };
 
 template<class T>
-struct basic_symbol_traits
+struct simple_terminal_traits
 {
     static bool is_terminal(const T& t) { return true; }
     static bool is_empty(const T& t) { return grune::text(t).empty(); }
@@ -68,7 +68,7 @@ struct basic_symbol_traits
 
 template<class T>
 struct numeric_symbol_traits : 
-    public basic_symbol_traits<T>
+    public simple_terminal_traits<T>
 {
     static bool is_empty(T) { return false; }
     static std::string text(T v) { return std::to_string(v); }
@@ -76,7 +76,7 @@ struct numeric_symbol_traits :
 
 template<>
 struct symbol_traits<std::string> : 
-    public basic_symbol_traits<std::string>
+    public simple_terminal_traits<std::string>
 {
     static bool is_empty(const std::string& s) { return s.empty(); }
     static std::string text(const std::string& s) { return s; }
