@@ -1,4 +1,5 @@
 SET(SOURCES
+    check.cpp
     generate.cpp
     grammar.cpp
     non_terminal.cpp
